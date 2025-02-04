@@ -10,6 +10,8 @@ import PrimeVue from 'primevue/config'
 
 import Noir from './presets/Noir'
 
+import Layout from '~/layouts/Default.vue'
+
 const appName = import.meta.env.VITE_APP_NAME || 'AdonisJS'
 
 createInertiaApp({
@@ -17,11 +19,14 @@ createInertiaApp({
 
   title: (title) => `${title} - ${appName}`,
 
-  resolve: (name) => {
-    return resolvePageComponent(
+  resolve: async (name) => {
+    const page = await resolvePageComponent(
       `../pages/${name}.vue`,
       import.meta.glob<DefineComponent>('../pages/**/*.vue'),
     )
+
+    page.default.layout = page.default.layout || Layout
+    return page
   },
 
   setup({ el, App, props, plugin }) {
