@@ -1,5 +1,4 @@
 <template>
-  {{ $t('hello') }}
   <EditorContent :editor="editor" class="flex flex-col w-full h-screen p-4 mx-auto prose prose-2xl border-dashed md:border-x dark:prose-invert" />
 
   <BubbleMenu
@@ -27,14 +26,17 @@
   </BubbleMenu>
 </template>
 
-<script setup>
+<script setup lang="ts">
   import { ref, onMounted, onUnmounted } from 'vue'
   import { BubbleMenu, Editor, EditorContent } from '@tiptap/vue-3'
   import StarterKit from '@tiptap/starter-kit'
   import BulletList from '@tiptap/extension-bullet-list'
   import ListKeymap from '@tiptap/extension-list-keymap'
+  import Layout from '~/layouts/Notes.vue'
 
-  const editor = ref(null)
+  defineOptions({ layout: Layout })
+
+  const editor = ref<Editor | null>(null)
 
   onMounted(() => {
     editor.value = new Editor({
@@ -52,7 +54,7 @@
   })
 
   onUnmounted(() => {
-    editor.value.destroy()
+    editor.value?.destroy()
   })
 </script>
 

@@ -22,10 +22,28 @@ const i18n = createI18n({
   fallbackLocale: 'en',
   messages: {
     en: {
-      hello: 'hello'
+      nav: {
+        apps: 'Applications',
+        home: 'Home',
+        notes: 'Notes',
+        videos: 'Videos',
+        chat: 'Chat',
+        notifications: 'Notifications',
+        uploads: 'Downloads',
+        settings: 'Settings'
+      }
     },
     fr: {
-      hello: 'Bonjour'
+      nav: {
+        apps: 'Applications',
+        home: 'Accueil',
+        notes: 'Notes',
+        videos: 'Vidéos',
+        chat: 'Chat',
+        notifications: 'Notifications',
+        uploads: 'Téléchargements',
+        settings: 'Paramètres'
+      }
     }
   }
 })
