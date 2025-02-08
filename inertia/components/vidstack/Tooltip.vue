@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { TooltipPlacement } from 'vidstack';
+import type { TooltipPlacement } from 'vidstack'
 
 const { placement } = defineProps<{
-  placement: TooltipPlacement;
-}>();
+  placement: TooltipPlacement
+}>()
 </script>
 
 <template>

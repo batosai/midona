@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import SliderChapters from './SliderChapters.vue';
-import SliderPreview from './SliderPreview.vue';
-import SliderThumb from './SliderThumb.vue';
+import SliderChapters from './SliderChapters.vue'
+import SliderPreview from './SliderPreview.vue'
+import SliderThumb from './SliderThumb.vue'
 
 const { thumbnails } = defineProps<{
-  thumbnails?: string;
-}>();
+  thumbnails?: string
+}>()
 </script>
 
 <template>

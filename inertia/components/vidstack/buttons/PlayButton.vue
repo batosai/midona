@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { TooltipPlacement } from 'vidstack';
+import type { TooltipPlacement } from 'vidstack'
 
-import Tooltip from '../Tooltip.vue';
+import Tooltip from '../Tooltip.vue'
 
 const { tooltipPlacement } = defineProps<{
-  tooltipPlacement: TooltipPlacement;
-}>();
+  tooltipPlacement: TooltipPlacement
+}>()
 </script>
 
 <template>

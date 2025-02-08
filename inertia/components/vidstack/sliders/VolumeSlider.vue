@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import SliderPreview from './SliderPreview.vue';
-import SliderThumb from './SliderThumb.vue';
+import SliderPreview from './SliderPreview.vue'
+import SliderThumb from './SliderThumb.vue'
 </script>
 
 <template>

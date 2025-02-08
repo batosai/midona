@@ -8,7 +8,11 @@
       <div class="grid grid-cols-1 mt-6 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
         <div class="cursor-pointer">
           <div class="relative aspect-[259/174.5] rounded-lg overflow-hidden">
-            <img class="object-cover w-full h-full" src="https://www.primefaces.org/cdn/primevue/images/landing/apps/movie-cover7.png" alt="Popular Movie Cover" />
+            <img
+              class="object-cover w-full h-full"
+              src="https://www.primefaces.org/cdn/primevue/images/landing/apps/movie-cover7.png"
+              alt="Popular Movie Cover"
+            />
             <Tag class="absolute z-10 top-2 right-2" severity="secondary" value="4.6" />
           </div>
           <div class="flex items-start justify-between gap-1 mt-2">
@@ -16,13 +20,23 @@
               <div class="font-medium leading-6 text-color line-clamp-1">Basic Tee</div>
               <div class="mt-1 text-sm leading-5 text-muted-color">Drama</div>
             </div>
-            <Button icon="pi pi-bookmark" severity="secondary" variant="text" rounded aria-label="Bookmark" />
+            <Button
+              icon="pi pi-bookmark"
+              severity="secondary"
+              variant="text"
+              rounded
+              aria-label="Bookmark"
+            />
           </div>
         </div>
 
         <div class="cursor-pointer">
           <div class="relative aspect-[259/174.5] rounded-lg overflow-hidden">
-            <img class="object-cover w-full h-full" src="https://www.primefaces.org/cdn/primevue/images/landing/apps/movie-cover8.png" alt="Popular Movie Cover" />
+            <img
+              class="object-cover w-full h-full"
+              src="https://www.primefaces.org/cdn/primevue/images/landing/apps/movie-cover8.png"
+              alt="Popular Movie Cover"
+            />
             <Tag class="absolute z-10 top-2 right-2" severity="secondary" value="3.2" />
           </div>
           <div class="flex items-start justify-between gap-1 mt-2">
@@ -30,14 +44,23 @@
               <div class="font-medium leading-6 text-color line-clamp-1">Saving Private Ryan</div>
               <div class="mt-1 text-sm leading-5 text-muted-color">Drama, War</div>
             </div>
-            <Button icon="pi pi-bookmark-fill" severity="secondary" variant="text" rounded aria-label="Bookmark" />
+            <Button
+              icon="pi pi-bookmark-fill"
+              severity="secondary"
+              variant="text"
+              rounded
+              aria-label="Bookmark"
+            />
           </div>
         </div>
 
-
         <div class="cursor-pointer">
           <div class="relative aspect-[259/174.5] rounded-lg overflow-hidden">
-            <img class="object-cover w-full h-full" src="https://www.primefaces.org/cdn/primevue/images/landing/apps/movie-cover8.png" alt="Popular Movie Cover" />
+            <img
+              class="object-cover w-full h-full"
+              src="https://www.primefaces.org/cdn/primevue/images/landing/apps/movie-cover8.png"
+              alt="Popular Movie Cover"
+            />
             <Tag class="absolute z-10 top-2 right-2" severity="secondary" value="3.2" />
           </div>
           <div class="flex items-start justify-between gap-1 mt-2">
@@ -45,14 +68,23 @@
               <div class="font-medium leading-6 text-color line-clamp-1">Saving Private Ryan</div>
               <div class="mt-1 text-sm leading-5 text-muted-color">Drama, War</div>
             </div>
-            <Button icon="pi pi-bookmark-fill" severity="secondary" variant="text" rounded aria-label="Bookmark" />
+            <Button
+              icon="pi pi-bookmark-fill"
+              severity="secondary"
+              variant="text"
+              rounded
+              aria-label="Bookmark"
+            />
           </div>
         </div>
 
-
         <div class="cursor-pointer">
           <div class="relative aspect-[259/174.5] rounded-lg overflow-hidden">
-            <img class="object-cover w-full h-full" src="https://www.primefaces.org/cdn/primevue/images/landing/apps/movie-cover8.png" alt="Popular Movie Cover" />
+            <img
+              class="object-cover w-full h-full"
+              src="https://www.primefaces.org/cdn/primevue/images/landing/apps/movie-cover8.png"
+              alt="Popular Movie Cover"
+            />
             <Tag class="absolute z-10 top-2 right-2" severity="secondary" value="3.2" />
           </div>
           <div class="flex items-start justify-between gap-1 mt-2">
@@ -60,10 +92,15 @@
               <div class="font-medium leading-6 text-color line-clamp-1">Saving Private Ryan</div>
               <div class="mt-1 text-sm leading-5 text-muted-color">Drama, War</div>
             </div>
-            <Button icon="pi pi-bookmark-fill" severity="secondary" variant="text" rounded aria-label="Bookmark" />
+            <Button
+              icon="pi pi-bookmark-fill"
+              severity="secondary"
+              variant="text"
+              rounded
+              aria-label="Bookmark"
+            />
           </div>
         </div>
-
       </div>
     </div>
   </div>

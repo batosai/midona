@@ -7,9 +7,9 @@
     "jsxImportSource": "vue",
     "paths": {
       "~/*": ["./*"],
-      "@/*": ["./components/*"],
+      "@/*": ["./components/*"]
     },
     "types": ["vidstack/vue"]
   },
-  "include": ["./**/*.ts", "./**/*.vue"],
+  "include": ["./**/*.ts", "./**/*.vue"]
 }

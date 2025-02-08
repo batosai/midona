@@ -12,7 +12,8 @@ import { vite as vidstack } from 'vidstack/plugins'
 export default defineConfig({
   plugins: [
     inertia({ ssr: { enabled: false } }),
-    vue({ // vidstack webcomponents
+    vue({
+      // vidstack webcomponents
       template: {
         compilerOptions: {
           isCustomElement: (tag) => tag.startsWith('media-'),
@@ -23,11 +24,9 @@ export default defineConfig({
     svgLoader(),
     vidstack(),
     Components({
-      resolvers: [
-        PrimeVueResolver()
-      ]
+      resolvers: [PrimeVueResolver()],
     }),
-    adonisjs({ entrypoints: ['inertia/app/app.ts'], reload: ['resources/views/**/*.edge'] })
+    adonisjs({ entrypoints: ['inertia/app/app.ts'], reload: ['resources/views/**/*.edge'] }),
   ],
 
   /**

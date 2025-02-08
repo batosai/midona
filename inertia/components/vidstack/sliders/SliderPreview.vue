@@ -1,8 +1,8 @@
 <script setup lang="ts">
 const { thumbnails, noClamp = false } = defineProps<{
-  thumbnails?: string;
-  noClamp?: boolean;
-}>();
+  thumbnails?: string
+  noClamp?: boolean
+}>()
 </script>
 
 <template>

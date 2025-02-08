@@ -30,8 +30,8 @@ const i18n = createI18n({
         chat: 'Chat',
         notifications: 'Notifications',
         uploads: 'Downloads',
-        settings: 'Settings'
-      }
+        settings: 'Settings',
+      },
     },
     fr: {
       nav: {
@@ -42,10 +42,10 @@ const i18n = createI18n({
         chat: 'Chat',
         notifications: 'Notifications',
         uploads: 'Téléchargements',
-        settings: 'Paramètres'
-      }
-    }
-  }
+        settings: 'Paramètres',
+      },
+    },
+  },
 })
 
 createInertiaApp({
@@ -56,7 +56,7 @@ createInertiaApp({
   resolve: async (name) => {
     const page = await resolvePageComponent(
       `../pages/${name}.vue`,
-      import.meta.glob<DefineComponent>('../pages/**/*.vue'),
+      import.meta.glob<DefineComponent>('../pages/**/*.vue')
     )
 
     page.default.layout = page.default.layout || Layout
@@ -64,7 +64,6 @@ createInertiaApp({
   },
 
   setup({ el, App, props, plugin }) {
-
     const app = createApp({ render: () => h(App, props) })
       .use(plugin)
       .use(i18n)
@@ -82,7 +81,6 @@ createInertiaApp({
           },
         },
       })
-
 
     app.config.globalProperties.$tuyau = tuyau
 
