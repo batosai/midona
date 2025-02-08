@@ -6,12 +6,14 @@ import adonisjs from '@adonisjs/vite/client'
 import tailwindcss from '@tailwindcss/vite'
 import Components from 'unplugin-vue-components/vite'
 import { PrimeVueResolver } from '@primevue/auto-import-resolver'
+import svgLoader from 'vite-svg-loader'
 
 export default defineConfig({
   plugins: [
     inertia({ ssr: { enabled: false } }),
     vue(),
     tailwindcss(),
+    svgLoader(),
     Components({
       resolvers: [
         PrimeVueResolver()
