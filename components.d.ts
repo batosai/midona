@@ -16,6 +16,7 @@ declare module 'vue' {
     InputText: typeof import('primevue/inputtext')['default']
     Menubar: typeof import('primevue/menubar')['default']
     OverlayBadge: typeof import('primevue/overlaybadge')['default']
+    Paginator: typeof import('primevue/paginator')['default']
     Popover: typeof import('primevue/popover')['default']
     SpeedDial: typeof import('primevue/speeddial')['default']
     Tag: typeof import('primevue/tag')['default']

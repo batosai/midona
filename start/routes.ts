@@ -12,5 +12,7 @@ router.on('/').renderInertia('home').as('home')
 router.on('/notes').renderInertia('notes').as('notes')
 router.on('/videos').renderInertia('videos/index').as('videos')
 router.on('/videos/:id').renderInertia('videos/show').as('videos.show')
+router.on('/documents').renderInertia('documents/index').as('documents')
+router.on('/documents/:id').renderInertia('documents/show').as('documents.show')
 router.on('/settings').renderInertia('settings').as('settings')
 
