@@ -11,11 +11,11 @@
       </div>
       <div class="flex flex-col gap-2 mt-10">
         <Button @click="toggle" variant="text" as="a" href="/comment" icon="pi pi-th-large" severity="secondary" aria-label="th-large" v-tooltip="'Large'" />
-        <Link :url="tuyau.$route('home').path" label="home" icon="pi pi-home" />
-        <Link :url="tuyau.$route('notes').path" label="notes" icon="pi pi-clipboard" />
+        <Link :url="tuyau.$route('home').path" :label="$t('nav.home')" icon="pi pi-home" />
+        <Link :url="tuyau.$route('notes').path" :label="$t('nav.notes')" icon="pi pi-clipboard" />
         <Button variant="text" as="a" href="/comment" icon="pi pi-inbox" severity="secondary" aria-label="Inbox" v-tooltip="'Inbox'" />
         <Button variant="text" as="a" href="/mediatheque" icon="pi pi-images" severity="secondary" aria-label="Médiathèque" v-tooltip="'Médiathèque'" />
-        <Link :url="tuyau.$route('videos').path" label="Videos" icon="pi pi-video" />
+        <Link :url="tuyau.$route('videos').path" :label="$t('nav.videos')" icon="pi pi-video" />
       </div>
     </div>
     <div class="flex flex-col items-center w-12">
@@ -47,7 +47,7 @@
 
         <Button variant="text" as="a" href="/chat" icon="pi pi-comment" severity="secondary" aria-label="Chat" v-tooltip="'Chat'" />
 
-        <Link :url="tuyau.$route('settings').path" label="Settings" icon="pi pi-cog" />
+        <Link :url="tuyau.$route('settings').path" :label="$t('nav.settings')" icon="pi pi-cog" />
 
       </div>
       <Divider />

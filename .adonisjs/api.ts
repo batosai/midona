@@ -32,6 +32,13 @@ const routes = [
     types: {} as unknown,
   },
   {
+    params: ["id"],
+    name: 'videos.show',
+    path: '/videos/:id',
+    method: ["GET","HEAD"],
+    types: {} as unknown,
+  },
+  {
     params: [],
     name: 'settings',
     path: '/settings',

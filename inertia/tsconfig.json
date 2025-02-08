@@ -9,6 +9,7 @@
       "~/*": ["./*"],
       "@/*": ["./components/*"],
     },
+    "types": ["vidstack/vue"]
   },
   "include": ["./**/*.ts", "./**/*.vue"],
 }

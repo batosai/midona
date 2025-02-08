@@ -7,13 +7,21 @@ import tailwindcss from '@tailwindcss/vite'
 import Components from 'unplugin-vue-components/vite'
 import { PrimeVueResolver } from '@primevue/auto-import-resolver'
 import svgLoader from 'vite-svg-loader'
+import { vite as vidstack } from 'vidstack/plugins'
 
 export default defineConfig({
   plugins: [
     inertia({ ssr: { enabled: false } }),
-    vue(),
+    vue({ // vidstack webcomponents
+      template: {
+        compilerOptions: {
+          isCustomElement: (tag) => tag.startsWith('media-'),
+        },
+      },
+    }),
     tailwindcss(),
     svgLoader(),
+    vidstack(),
     Components({
       resolvers: [
         PrimeVueResolver()

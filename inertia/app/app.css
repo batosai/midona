@@ -5,4 +5,18 @@
 
 @plugin 'tailwindcss-primeui';
 @plugin '@tailwindcss/typography';
+@plugin './tailwind-plugins/vidstack.js';
+@plugin './tailwind-plugins/customVariants.js';
+@plugin 'tailwindcss-animate';
 
+
+:root {
+  --media-brand: 245 245 245;
+  --media-focus: 78 156 246;
+}
+
+
+@theme {
+  --color-media-brand: rbg(var(--media-brand));
+  --color-media-focus: rbg(var(--media-focus));
+}
