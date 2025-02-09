@@ -46,45 +46,48 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
-import { BubbleMenu, Editor, EditorContent } from '@tiptap/vue-3'
-import StarterKit from '@tiptap/starter-kit'
-import BulletList from '@tiptap/extension-bullet-list'
-import ListKeymap from '@tiptap/extension-list-keymap'
-import Layout from '~/layouts/Notes.vue'
+  import { ref, onMounted, onUnmounted } from 'vue'
+  import { BubbleMenu, Editor, EditorContent } from '@tiptap/vue-3'
+  import StarterKit from '@tiptap/starter-kit'
+  import BulletList from '@tiptap/extension-bullet-list'
+  import ListKeymap from '@tiptap/extension-list-keymap'
+  import Layout from '~/layouts/Default.vue'
+  import NotesLayout from '~/layouts/Notes.vue'
 
-defineOptions({ layout: Layout })
+  defineOptions({ layout: [Layout, NotesLayout] })
 
-const editor = ref<Editor | null>(null)
 
-onMounted(() => {
-  editor.value = new Editor({
-    extensions: [BulletList, ListKeymap, StarterKit],
-    content: `
-        <p>
-          J'ai une <strong>expérience</strong> variée dans la réalisation de missions multiples, comprenant notamment l'analyse préalable des besoins, la réalisation d'audits techniques approfondis, ainsi que la coordination des équipes en collaboration directe avec le directeur de projet et les chefs de projet. Ma responsabilité principale consiste à superviser et à encadrer efficacement une équipe de développeurs, généralement constituée d'une dizaine de membres.
-        </p>
-      `,
+
+  const editor = ref<Editor | null>(null)
+
+  onMounted(() => {
+    editor.value = new Editor({
+      extensions: [BulletList, ListKeymap, StarterKit],
+      content: `
+          <p>
+            J'ai une <strong>expérience</strong> variée dans la réalisation de missions multiples, comprenant notamment l'analyse préalable des besoins, la réalisation d'audits techniques approfondis, ainsi que la coordination des équipes en collaboration directe avec le directeur de projet et les chefs de projet. Ma responsabilité principale consiste à superviser et à encadrer efficacement une équipe de développeurs, généralement constituée d'une dizaine de membres.
+          </p>
+        `,
+    })
   })
-})
 
-onUnmounted(() => {
-  editor.value?.destroy()
-})
+  onUnmounted(() => {
+    editor.value?.destroy()
+  })
 </script>
 
 <style>
-@reference "../app/app.css";
+  @reference "../../app/app.css";
 
-.tiptap {
-  @apply h-full;
-}
+  .tiptap {
+    @apply h-full;
+  }
 
-.tiptap:focus-visible {
-  @apply outline-none;
-}
+  .tiptap:focus-visible {
+    @apply outline-none;
+  }
 
-.bubble-menu {
-  @apply bg-white dark:bg-primary-800 rounded-md p-2 flex gap-2 ring ring-slate-200 dark:ring-primary-800;
-}
+  .bubble-menu {
+    @apply bg-white dark:bg-primary-800 rounded-md p-2 flex gap-2 ring ring-slate-200 dark:ring-primary-800;
+  }
 </style>
