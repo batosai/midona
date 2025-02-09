@@ -76,7 +76,7 @@
           />
         </OverlayBadge>
 
-        <DrawerCustom v-model:visible="drawer" header="Downloads" position="right" class="!w-full md:!w-80 lg:!w-[30rem]">
+        <DrawerCustom v-model:visible="drawer" header="Downloads" position="right" class="!w-full md:!w-[30rem]">
           <FilePond
             name="test"
             ref="pond"
