@@ -66,7 +66,7 @@
 
         <OverlayBadge value="4" size="small" severity="danger">
           <Button
-            @click="toggle"
+            @click="uploads"
             variant="text"
             as="a"
             icon="pi pi-upload"
@@ -75,6 +75,18 @@
             v-tooltip="'Uploads'"
           />
         </OverlayBadge>
+
+        <DrawerCustom v-model:visible="drawer" header="Downloads" position="right" class="!w-full md:!w-80 lg:!w-[30rem]">
+          <FilePond
+            name="test"
+            ref="pond"
+            label-idle="Drop files here..."
+            :allow-multiple="true"
+            accepted-file-types="image/jpeg, image/png"
+            server="/api"
+            credits=""
+          />
+        </DrawerCustom>
 
         <Popover ref="op">
           <div class="flex flex-col gap-4">
@@ -128,41 +140,51 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { tuyau } from '~/settings/tuyau'
-import Link from './Link.vue'
-import Triforce from '~/images/triforce.svg'
+  import { ref } from 'vue'
+  import vueFilePond from "vue-filepond"
+  import { tuyau } from '~/settings/tuyau'
+  import Link from './Link.vue'
+  import DrawerCustom from '@/primevue/drawer/Drawer.vue'
+  import Triforce from '~/images/triforce.svg'
 
-const items = ref([
-  { label: 'Comment', url: '/', icon: 'pi pi-comment' },
-  { label: 'Médiathèque', url: '/mediatheque', icon: 'pi pi-images' },
-  { label: 'Inbox', url: '/inbox', icon: 'pi pi-inbox' },
-  { label: 'User', url: '/user', icon: 'pi pi-user' },
-  { label: 'Video', url: '/video', icon: 'pi pi-video' },
-  { label: 'Large', url: '/', icon: 'pi pi-th-large' },
-  { label: 'Cog', url: '/cog', icon: 'pi pi-cog' },
-])
+  const FilePond = vueFilePond()
 
-const op = ref()
-const selectedMember = ref(null)
-const members = ref([
-  { name: 'Amy Elsner', image: 'amyelsner.png', email: 'amy@email.com', role: 'Owner' },
-  {
-    name: 'Bernardo Dominic',
-    image: 'bernardodominic.png',
-    email: 'bernardo@email.com',
-    role: 'Editor',
-  },
-  { name: 'Ioni Bowcher', image: 'ionibowcher.png', email: 'ioni@email.com', role: 'Viewer' },
-])
+  const items = ref([
+    { label: 'Comment', url: '/', icon: 'pi pi-comment' },
+    { label: 'Médiathèque', url: '/mediatheque', icon: 'pi pi-images' },
+    { label: 'Inbox', url: '/inbox', icon: 'pi pi-inbox' },
+    { label: 'User', url: '/user', icon: 'pi pi-user' },
+    { label: 'Video', url: '/video', icon: 'pi pi-video' },
+    { label: 'Large', url: '/', icon: 'pi pi-th-large' },
+    { label: 'Cog', url: '/cog', icon: 'pi pi-cog' },
+  ])
 
-const toggle = (event: any) => {
-  event.preventDefault()
-  op.value.toggle(event)
-}
+  const op = ref()
+  const drawer = ref(false)
+  const selectedMember = ref(null)
+  const members = ref([
+    { name: 'Amy Elsner', image: 'amyelsner.png', email: 'amy@email.com', role: 'Owner' },
+    {
+      name: 'Bernardo Dominic',
+      image: 'bernardodominic.png',
+      email: 'bernardo@email.com',
+      role: 'Editor',
+    },
+    { name: 'Ioni Bowcher', image: 'ionibowcher.png', email: 'ioni@email.com', role: 'Viewer' },
+  ])
 
-const selectMember = (member: any) => {
-  selectedMember.value = member
-  op.value.hide()
-}
+  const toggle = (event: any) => {
+    event.preventDefault()
+    op.value.toggle(event)
+  }
+
+  const uploads = (event: any) => {
+    event.preventDefault()
+    drawer.value = true
+  }
+
+  const selectMember = (member: any) => {
+    selectedMember.value = member
+    op.value.hide()
+  }
 </script>
