@@ -11,6 +11,7 @@ declare module 'vue' {
     Button: typeof import('primevue/button')['default']
     ButtonGroup: typeof import('primevue/buttongroup')['default']
     Divider: typeof import('primevue/divider')['default']
+    Drawer: typeof import('primevue/drawer')['default']
     IconField: typeof import('primevue/iconfield')['default']
     InputIcon: typeof import('primevue/inputicon')['default']
     InputText: typeof import('primevue/inputtext')['default']
@@ -22,6 +23,7 @@ declare module 'vue' {
     Tag: typeof import('primevue/tag')['default']
   }
   export interface ComponentCustomProperties {
+    FocusTrap: typeof import('primevue/focustrap')['default']
     Tooltip: typeof import('primevue/tooltip')['default']
   }
 }
