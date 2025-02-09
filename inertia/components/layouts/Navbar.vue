@@ -76,7 +76,12 @@
           />
         </OverlayBadge>
 
-        <DrawerCustom v-model:visible="drawer" header="Downloads" position="right" class="!w-full md:!w-[30rem]">
+        <DrawerCustom
+          v-model:visible="drawer"
+          header="Downloads"
+          position="right"
+          class="!w-full md:!w-[30rem]"
+        >
           <FilePond
             name="test"
             ref="pond"
@@ -140,51 +145,51 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue'
-  import vueFilePond from "vue-filepond"
-  import { tuyau } from '~/settings/tuyau'
-  import Link from './Link.vue'
-  import DrawerCustom from '@/primevue/drawer/Drawer.vue'
-  import Triforce from '~/images/triforce.svg'
+import { ref } from 'vue'
+import vueFilePond from 'vue-filepond'
+import { tuyau } from '~/settings/tuyau'
+import Link from './Link.vue'
+import DrawerCustom from '@/primevue/drawer/Drawer.vue'
+import Triforce from '~/images/triforce.svg'
 
-  const FilePond = vueFilePond()
+const FilePond = vueFilePond()
 
-  const items = ref([
-    { label: 'Comment', url: '/', icon: 'pi pi-comment' },
-    { label: 'Médiathèque', url: '/mediatheque', icon: 'pi pi-images' },
-    { label: 'Inbox', url: '/inbox', icon: 'pi pi-inbox' },
-    { label: 'User', url: '/user', icon: 'pi pi-user' },
-    { label: 'Video', url: '/video', icon: 'pi pi-video' },
-    { label: 'Large', url: '/', icon: 'pi pi-th-large' },
-    { label: 'Cog', url: '/cog', icon: 'pi pi-cog' },
-  ])
+const items = ref([
+  { label: 'Comment', url: '/', icon: 'pi pi-comment' },
+  { label: 'Médiathèque', url: '/mediatheque', icon: 'pi pi-images' },
+  { label: 'Inbox', url: '/inbox', icon: 'pi pi-inbox' },
+  { label: 'User', url: '/user', icon: 'pi pi-user' },
+  { label: 'Video', url: '/video', icon: 'pi pi-video' },
+  { label: 'Large', url: '/', icon: 'pi pi-th-large' },
+  { label: 'Cog', url: '/cog', icon: 'pi pi-cog' },
+])
 
-  const op = ref()
-  const drawer = ref(false)
-  const selectedMember = ref(null)
-  const members = ref([
-    { name: 'Amy Elsner', image: 'amyelsner.png', email: 'amy@email.com', role: 'Owner' },
-    {
-      name: 'Bernardo Dominic',
-      image: 'bernardodominic.png',
-      email: 'bernardo@email.com',
-      role: 'Editor',
-    },
-    { name: 'Ioni Bowcher', image: 'ionibowcher.png', email: 'ioni@email.com', role: 'Viewer' },
-  ])
+const op = ref()
+const drawer = ref(false)
+const selectedMember = ref(null)
+const members = ref([
+  { name: 'Amy Elsner', image: 'amyelsner.png', email: 'amy@email.com', role: 'Owner' },
+  {
+    name: 'Bernardo Dominic',
+    image: 'bernardodominic.png',
+    email: 'bernardo@email.com',
+    role: 'Editor',
+  },
+  { name: 'Ioni Bowcher', image: 'ionibowcher.png', email: 'ioni@email.com', role: 'Viewer' },
+])
 
-  const toggle = (event: any) => {
-    event.preventDefault()
-    op.value.toggle(event)
-  }
+const toggle = (event: any) => {
+  event.preventDefault()
+  op.value.toggle(event)
+}
 
-  const uploads = (event: any) => {
-    event.preventDefault()
-    drawer.value = true
-  }
+const uploads = (event: any) => {
+  event.preventDefault()
+  drawer.value = true
+}
 
-  const selectMember = (member: any) => {
-    selectedMember.value = member
-    op.value.hide()
-  }
+const selectMember = (member: any) => {
+  selectedMember.value = member
+  op.value.hide()
+}
 </script>
