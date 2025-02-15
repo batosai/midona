@@ -24,6 +24,13 @@ const routes = [
     types: {} as unknown,
   },
   {
+    params: ['id'],
+    name: 'notes.show',
+    path: '/notes/:id',
+    method: ['GET', 'HEAD'],
+    types: {} as unknown,
+  },
+  {
     params: [],
     name: 'videos',
     path: '/videos',
@@ -39,8 +46,29 @@ const routes = [
   },
   {
     params: [],
+    name: 'documents',
+    path: '/documents',
+    method: ['GET', 'HEAD'],
+    types: {} as unknown,
+  },
+  {
+    params: ['id'],
+    name: 'documents.show',
+    path: '/documents/:id',
+    method: ['GET', 'HEAD'],
+    types: {} as unknown,
+  },
+  {
+    params: [],
     name: 'settings',
     path: '/settings',
+    method: ['GET', 'HEAD'],
+    types: {} as unknown,
+  },
+  {
+    params: [],
+    name: 'drive',
+    path: '/drive',
     method: ['GET', 'HEAD'],
     types: {} as unknown,
   },

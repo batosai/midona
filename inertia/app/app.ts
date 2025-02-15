@@ -25,6 +25,7 @@ const i18n = createI18n({
       nav: {
         apps: 'Applications',
         home: 'Home',
+        drive: 'Drive',
         notes: 'Notes',
         videos: 'Videos',
         chat: 'Chat',
@@ -37,6 +38,7 @@ const i18n = createI18n({
       nav: {
         apps: 'Applications',
         home: 'Accueil',
+        drive: 'Drive',
         notes: 'Notes',
         videos: 'Vidéos',
         chat: 'Chat',

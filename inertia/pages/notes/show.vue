@@ -62,10 +62,10 @@ onMounted(() => {
   editor.value = new Editor({
     extensions: [BulletList, ListKeymap, StarterKit],
     content: `
-          <p>
-            J'ai une <strong>expérience</strong> variée dans la réalisation de missions multiples, comprenant notamment l'analyse préalable des besoins, la réalisation d'audits techniques approfondis, ainsi que la coordination des équipes en collaboration directe avec le directeur de projet et les chefs de projet. Ma responsabilité principale consiste à superviser et à encadrer efficacement une équipe de développeurs, généralement constituée d'une dizaine de membres.
-          </p>
-        `,
+            <p>
+              J'ai une <strong>expérience</strong> variée dans la réalisation de missions multiples, comprenant notamment l'analyse préalable des besoins, la réalisation d'audits techniques approfondis, ainsi que la coordination des équipes en collaboration directe avec le directeur de projet et les chefs de projet. Ma responsabilité principale consiste à superviser et à encadrer efficacement une équipe de développeurs, généralement constituée d'une dizaine de membres.
+            </p>
+          `,
   })
 })
 

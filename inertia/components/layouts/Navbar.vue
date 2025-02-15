@@ -28,6 +28,7 @@
           v-tooltip="'Large'"
         />
         <Link :url="tuyau.$route('home').path" :label="$t('nav.home')" icon="pi pi-home" />
+        <Link :url="tuyau.$route('drive').path" :label="$t('nav.drive')" icon="pi pi-folder-open" />
         <Link :url="tuyau.$route('notes').path" :label="$t('nav.notes')" icon="pi pi-clipboard" />
         <Button
           variant="text"
