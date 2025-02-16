@@ -40,6 +40,14 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import File from '@/drive/file.vue'
+import { useActionsStore } from '~/stores/actions'
+
+const store = useActionsStore()
+store.set([{
+  label: 'Add',
+  icon: 'pi pi-plus',
+  href: '/'
+}])
 
 const home = ref({
   icon: 'pi pi-home',

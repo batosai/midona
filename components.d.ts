@@ -13,6 +13,7 @@ declare module 'vue' {
     ButtonGroup: typeof import('primevue/buttongroup')['default']
     ConfirmDialog: typeof import('primevue/confirmdialog')['default']
     ContextMenu: typeof import('primevue/contextmenu')['default']
+    Dialog: typeof import('primevue/dialog')['default']
     Divider: typeof import('primevue/divider')['default']
     Drawer: typeof import('primevue/drawer')['default']
     IconField: typeof import('primevue/iconfield')['default']
@@ -23,14 +24,10 @@ declare module 'vue' {
     Paginator: typeof import('primevue/paginator')['default']
     Popover: typeof import('primevue/popover')['default']
     SpeedDial: typeof import('primevue/speeddial')['default']
-    Tab: typeof import('primevue/tab')['default']
-    TabList: typeof import('primevue/tablist')['default']
-    TabPanel: typeof import('primevue/tabpanel')['default']
-    TabPanels: typeof import('primevue/tabpanels')['default']
-    Tabs: typeof import('primevue/tabs')['default']
     Tag: typeof import('primevue/tag')['default']
     TieredMenu: typeof import('primevue/tieredmenu')['default']
     Toast: typeof import('primevue/toast')['default']
+    Tree: typeof import('primevue/tree')['default']
   }
   export interface ComponentCustomProperties {
     FocusTrap: typeof import('primevue/focustrap')['default']

@@ -1,10 +1,47 @@
 <template>
-  <SpeedDial
-    :model="items"
-    :radius="180"
-    direction="up"
-    class="fixed! lg:hidden! bottom-4 left-4 z-2!"
-  />
+
+  <div class="lg:hidden! fixed! bottom-4 left-4 z-2!">
+    <OverlayBadge value="4" size="small" severity="danger" v-if="4===4">
+      <Button
+        @click="visibleBottom = true"
+        rounded
+        href="/comment"
+        icon="pi pi-th-large"
+        aria-label="th-large"
+      />
+    </OverlayBadge>
+    <Button
+      v-else
+      @click="visibleBottom = true"
+      rounded
+      href="/comment"
+      icon="pi pi-th-large"
+      aria-label="th-large"
+    />
+
+    <Drawer v-model:visible="visibleBottom" header="Bottom Drawer" position="bottom" style="height: auto" class="p-0">
+      <template #header>
+        <div class="grid grid-cols-5 gap-8 pt-3">
+          <Link v-for="item in store.items" :href="item.href" :label="item.label" :icon="item.icon" variant="outlined" />
+        </div>
+      </template>
+      <div class="grid grid-cols-5 gap-8 pt-3">
+        <Link :href="tuyau.$route('home').path" @click="visibleBottom=false" :label="$t('nav.home')" icon="pi pi-home" />
+        <Link :href="tuyau.$route('drive').path" @click="visibleBottom=false" :label="$t('nav.drive')" icon="pi pi-folder-open" />
+        <Link :href="tuyau.$route('notes').path" @click="visibleBottom=false" :label="$t('nav.notes')" icon="pi pi-clipboard" />
+        <Link :href="tuyau.$route('videos').path" @click="visibleBottom=false" :label="$t('nav.videos')" icon="pi pi-video" />
+
+        <OverlayBadge value="4" class="w-10" size="small" severity="danger">
+          <Link
+            @click="uploads"
+            icon="pi pi-upload"
+            label="bell"
+            v-tooltip="'Uploads'"
+          />
+        </OverlayBadge>
+      </div>
+    </Drawer>
+  </div>
 
   <div
     class="sticky top-0 flex flex-col justify-between hidden w-auto h-screen p-5 lg:flex bg-surface-50 dark:bg-surface-900"
@@ -120,18 +157,13 @@ import { tuyau } from '~/settings/tuyau'
 import Link from './Link.vue'
 import DrawerCustom from '@/primevue/drawer/Drawer.vue'
 import Triforce from '~/images/triforce.svg'
+import { useActionsStore } from '~/stores/actions'
+
+const store = useActionsStore()
 
 const FilePond = vueFilePond()
 
-const items = ref([
-  { label: 'Comment', url: '/', icon: 'pi pi-comment' },
-  { label: 'Médiathèque', url: '/mediatheque', icon: 'pi pi-images' },
-  { label: 'Inbox', url: '/inbox', icon: 'pi pi-inbox' },
-  { label: 'User', url: '/user', icon: 'pi pi-user' },
-  { label: 'Video', url: '/video', icon: 'pi pi-video' },
-  { label: 'Large', url: '/', icon: 'pi pi-th-large' },
-  { label: 'Cog', url: '/cog', icon: 'pi pi-cog' },
-])
+const visibleBottom = ref(false)
 
 const op = ref()
 const drawer = ref(false)

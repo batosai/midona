@@ -4,6 +4,7 @@
     :severity="$page.url === href ? '' : 'secondary'"
     :variant="variant"
     :icon="icon"
+    :size="size"
     :aria-label="label"
     v-tooltip="label"
     :unstyled="unstyled"
@@ -21,15 +22,16 @@ const props = defineProps<{
   href?: string
   label: string
   icon?: string
+  size?: 'small' | 'large'
   variant?: 'outlined' | 'text' | 'link'
   unstyled?: boolean
 }>()
 
 const handleClick = (event: MouseEvent) => {
+  emit('click', event)
+
   if (props.href) {
     router.visit(props.href)
-  } else {
-    emit('click', event)
   }
 }
 </script>

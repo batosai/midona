@@ -43,6 +43,10 @@
       <TieredMenu ref="menu" id="overlay_tmenu" :model="items" popup />
     </div>
   </div>
+
+  <Dialog v-model:visible="displayFinder" header="Finder" :breakpoints="{ '960px': '50vw' }" :style="{ width: '40vw' }" :maximizable="true">
+    <Tree :value="samples" />
+  </Dialog>
 </template>
 
 <script setup lang="ts">
@@ -59,6 +63,7 @@ defineProps<{
 
 const confirm = useConfirm()
 const toast = useToast()
+const displayFinder = ref(false)
 
 const deleteConfirm = () => {
   confirm.require({
@@ -98,6 +103,7 @@ const items = ref([
   {
     label: 'Move',
     icon: 'pi pi-file-export',
+    command: () => displayFinder.value = true
   },
   {
     separator: true,
@@ -110,6 +116,45 @@ const items = ref([
     label: 'Info',
     icon: 'pi pi-info-circle',
   },
+])
+
+const samples = ref([
+{
+                    key: '0',
+                    label: 'Documents',
+                    data: 'Documents Folder',
+                    icon: 'pi pi-fw pi-inbox',
+                    children: [
+                        {
+                            key: '0-0',
+                            label: 'Work',
+                            data: 'Work Folder',
+                            icon: 'pi pi-fw pi-cog',
+                            children: [
+                                { key: '0-0-0', label: 'Expenses.doc', icon: 'pi pi-fw pi-file', data: 'Expenses Document' },
+                                { key: '0-0-1', label: 'Resume.doc', icon: 'pi pi-fw pi-file', data: 'Resume Document' }
+                            ]
+                        },
+                        {
+                            key: '0-1',
+                            label: 'Home',
+                            data: 'Home Folder',
+                            icon: 'pi pi-fw pi-home',
+                            children: [{ key: '0-1-0', label: 'Invoices.txt', icon: 'pi pi-fw pi-file', data: 'Invoices for this month' }]
+                        }
+                    ]
+                },
+                {
+                    key: '1',
+                    label: 'Events',
+                    data: 'Events Folder',
+                    icon: 'pi pi-fw pi-calendar',
+                    children: [
+                        { key: '1-0', label: 'Meeting', icon: 'pi pi-fw pi-calendar-plus', data: 'Meeting' },
+                        { key: '1-1', label: 'Product Launch', icon: 'pi pi-fw pi-calendar-plus', data: 'Product Launch' },
+                        { key: '1-2', label: 'Report Review', icon: 'pi pi-fw pi-calendar-plus', data: 'Report Review' }
+                    ]
+                },
 ])
 
 const toggle = (event: any) => {
