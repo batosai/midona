@@ -9,6 +9,8 @@ import { createInertiaApp } from '@inertiajs/vue3'
 import { createI18n } from 'vue-i18n'
 import { resolvePageComponent } from '@adonisjs/inertia/helpers'
 import PrimeVue from 'primevue/config'
+import ConfirmationService from 'primevue/confirmationservice'
+import ToastService from 'primevue/toastservice'
 import { TuyauPlugin } from '@tuyau/inertia/vue'
 
 import Noir from './presets/Noir'
@@ -83,6 +85,8 @@ createInertiaApp({
           },
         },
       })
+      .use(ConfirmationService)
+      .use(ToastService)
 
     app.config.globalProperties.$tuyau = tuyau
 

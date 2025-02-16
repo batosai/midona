@@ -47,6 +47,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useConfirm } from "primevue/useconfirm"
+import { useToast } from "primevue/usetoast"
 
 defineProps<{
   name?: string
@@ -55,74 +57,58 @@ defineProps<{
   image?: string
 }>()
 
+const confirm = useConfirm()
+const toast = useToast()
+
+const deleteConfirm = () => {
+  confirm.require({
+    message: 'Do you want to delete this record?',
+    header: 'Danger Zone',
+    icon: 'pi pi-info-circle',
+    rejectLabel: 'Cancel',
+    rejectProps: {
+      label: 'Cancel',
+      severity: 'secondary',
+      outlined: true
+    },
+    acceptProps: {
+      label: 'Delete',
+      severity: 'danger'
+    },
+    accept: () => {
+      toast.add({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted', life: 3000 });
+    },
+    reject: () => {
+      toast.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
+    }
+  });
+}
+
 const menu = ref()
 const items = ref([
   {
-    label: 'File',
-    icon: 'pi pi-file',
-    items: [
-      {
-        label: 'New',
-        icon: 'pi pi-plus',
-        items: [
-          {
-            label: 'Document',
-            icon: 'pi pi-file',
-          },
-          {
-            label: 'Image',
-            icon: 'pi pi-image',
-          },
-          {
-            label: 'Video',
-            icon: 'pi pi-video',
-          },
-        ],
-      },
-      {
-        label: 'Open',
-        icon: 'pi pi-folder-open',
-      },
-      {
-        label: 'Print',
-        icon: 'pi pi-print',
-      },
-    ],
+    label: 'Open',
+    icon: 'pi pi-folder-open',
   },
   {
-    label: 'Edit',
-    icon: 'pi pi-file-edit',
-    items: [
-      {
-        label: 'Copy',
-        icon: 'pi pi-copy',
-      },
-      {
-        label: 'Delete',
-        icon: 'pi pi-times',
-      },
-    ],
+    label: 'Delete',
+    icon: 'pi pi-trash',
+    command: () => deleteConfirm()
   },
   {
-    label: 'Search',
-    icon: 'pi pi-search',
+    label: 'Move',
+    icon: 'pi pi-file-export',
   },
   {
     separator: true,
   },
   {
     label: 'Share',
-    icon: 'pi pi-share-alt',
-    items: [
-      {
-        label: 'Slack',
-        icon: 'pi pi-slack',
-      },
-      {
-        label: 'Whatsapp',
-        icon: 'pi pi-whatsapp',
-      },
-    ],
+    icon: 'pi pi-link',
+  },
+  {
+    label: 'Info',
+    icon: 'pi pi-info-circle',
   },
 ])
 
@@ -134,4 +120,6 @@ const onImageRightClick = (event: any) => {
   event.stopPropagation()
   menu.value.show(event)
 }
+
+
 </script>

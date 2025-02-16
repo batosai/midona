@@ -53,7 +53,6 @@ const items = ref([
 ])
 
 const itemsMenu = ref([
-  { label: 'Copy', icon: 'pi pi-copy' },
-  { label: 'Rename', icon: 'pi pi-file-edit' },
+  { label: 'Add', icon: 'pi pi-plus' },
 ])
 </script>
