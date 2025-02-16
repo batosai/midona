@@ -27,52 +27,32 @@
           aria-label="th-large"
           v-tooltip="'Large'"
         />
-        <Link :url="tuyau.$route('home').path" :label="$t('nav.home')" icon="pi pi-home" />
-        <Link :url="tuyau.$route('drive').path" :label="$t('nav.drive')" icon="pi pi-folder-open" />
-        <Link :url="tuyau.$route('notes').path" :label="$t('nav.notes')" icon="pi pi-clipboard" />
-        <Button
-          variant="text"
-          as="a"
-          href="/comment"
-          icon="pi pi-inbox"
-          severity="secondary"
-          aria-label="Inbox"
-          v-tooltip="'Inbox'"
-        />
-        <Button
-          variant="text"
-          as="a"
-          href="/mediatheque"
-          icon="pi pi-images"
-          severity="secondary"
-          aria-label="Médiathèque"
-          v-tooltip="'Médiathèque'"
-        />
-        <Link :url="tuyau.$route('videos').path" :label="$t('nav.videos')" icon="pi pi-video" />
+        <Link :href="tuyau.$route('home').path" :label="$t('nav.home')" icon="pi pi-home" />
+        <Link :href="tuyau.$route('drive').path" :label="$t('nav.drive')" icon="pi pi-folder-open" />
+        <Link :href="tuyau.$route('notes').path" :label="$t('nav.notes')" icon="pi pi-clipboard" />
+        <Link :href="tuyau.$route('videos').path" :label="$t('nav.videos')" icon="pi pi-video" />
       </div>
     </div>
     <div class="flex flex-col items-center w-12">
       <div class="flex flex-col gap-2 mt-10">
         <OverlayBadge value="4" size="small" severity="danger">
-          <Button
+          <Link
             @click="toggle"
             variant="text"
-            as="a"
             icon="pi pi-bell"
             severity="secondary"
-            aria-label="bell"
+            label="bell"
             v-tooltip="'Notifications'"
           />
         </OverlayBadge>
 
         <OverlayBadge value="4" size="small" severity="danger">
-          <Button
+          <Link
             @click="uploads"
             variant="text"
-            as="a"
             icon="pi pi-upload"
             severity="secondary"
-            aria-label="bell"
+            label="bell"
             v-tooltip="'Uploads'"
           />
         </OverlayBadge>
@@ -120,27 +100,15 @@
             </div>
           </div>
         </Popover>
-
-        <Button
-          variant="text"
-          as="a"
-          href="/chat"
-          icon="pi pi-comment"
-          severity="secondary"
-          aria-label="Chat"
-          v-tooltip="'Chat'"
-        />
-
-        <Link :url="tuyau.$route('settings').path" :label="$t('nav.settings')" icon="pi pi-cog" />
       </div>
       <Divider />
-      <div class="flex items-center justify-center">
+      <Link :href="tuyau.$route('settings').path" :label="$t('nav.settings')" :unstyled="true" class="flex items-center justify-center">
         <Avatar
           image="https://www.primefaces.org/cdn/primevue/images/landing/apps/main-avatar.png"
           size="large"
           shape="circle"
         />
-      </div>
+      </Link>
     </div>
   </div>
 </template>
