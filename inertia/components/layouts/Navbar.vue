@@ -21,8 +21,18 @@
 
     <Drawer v-model:visible="visibleBottom" header="Bottom Drawer" position="bottom" style="height: auto" class="p-0">
       <template #header>
-        <div class="grid grid-cols-5 gap-8 pt-3">
-          <Link v-for="item in store.items" :href="item.href" :label="item.label" :icon="item.icon" variant="outlined" />
+        <div>
+          <Link @click="toggleAccount" :label="$t('nav.settings')" :unstyled="true">
+            <Avatar
+              image="https://www.primefaces.org/cdn/primevue/images/landing/apps/main-avatar.png"
+              shape="circle"
+              size="large"
+            />
+          </Link>
+        </div>
+        <Divider layout="vertical" v-if="store.items.length" />
+        <div class="grid grid-cols-5 gap-8">
+          <Link v-for="item in store.items" rounded :href="item.href" size="small" :label="item.label" :icon="item.icon" variant="outlined" />
         </div>
       </template>
       <div class="grid grid-cols-5 gap-8 pt-3">
@@ -78,8 +88,7 @@
             variant="text"
             icon="pi pi-bell"
             severity="secondary"
-            label="bell"
-            v-tooltip="'Notifications'"
+            label="Notifications"
           />
         </OverlayBadge>
 
@@ -89,8 +98,7 @@
             variant="text"
             icon="pi pi-upload"
             severity="secondary"
-            label="bell"
-            v-tooltip="'Uploads'"
+            label="Uploads"
           />
         </OverlayBadge>
 
@@ -139,25 +147,29 @@
         </Popover>
       </div>
       <Divider />
-      <Link :href="tuyau.$route('settings').path" :label="$t('nav.settings')" :unstyled="true" class="flex items-center justify-center">
+      <Link @click="toggleAccount" :label="$t('nav.settings')" :unstyled="true" class="flex items-center justify-center">
         <Avatar
           image="https://www.primefaces.org/cdn/primevue/images/landing/apps/main-avatar.png"
           size="large"
           shape="circle"
         />
       </Link>
+
+      <Menu ref="menu" :model="items" :popup="true" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { router } from '@inertiajs/vue3'
 import vueFilePond from 'vue-filepond'
 import { tuyau } from '~/settings/tuyau'
 import Link from './Link.vue'
 import DrawerCustom from '@/primevue/drawer/Drawer.vue'
 import Triforce from '~/images/triforce.svg'
 import { useActionsStore } from '~/stores/actions'
+import Divider from 'primevue/divider'
 
 const store = useActionsStore()
 
@@ -178,6 +190,44 @@ const members = ref([
   },
   { name: 'Ioni Bowcher', image: 'ionibowcher.png', email: 'ioni@email.com', role: 'Viewer' },
 ])
+
+const menu = ref()
+const items = ref([
+  {
+    label: 'Administrator',
+    items: [
+      {
+        label: 'Users',
+        icon: 'pi pi-users'
+      },
+    ]
+  },
+  {
+    label: 'Profile',
+    items: [
+      {
+        label: 'Informations',
+        icon: 'pi pi-user'
+      },
+      {
+        label: 'Settings',
+        icon: 'pi pi-cog',
+        // url: tuyau.$route('settings').path
+        command: () => router.visit(tuyau.$route('settings').path)
+      },
+      {
+        separator: true
+      },
+      {
+        label: 'Logout',
+        icon: 'pi pi-sign-out'
+      }
+    ]
+    }
+])
+const toggleAccount = (event) => {
+    menu.value.toggle(event);
+}
 
 const toggle = (event: any) => {
   event.preventDefault()

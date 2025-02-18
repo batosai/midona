@@ -9,6 +9,7 @@
 
 import router from '@adonisjs/core/services/router'
 router.on('/').renderInertia('home').as('home')
+router.on('/login').renderInertia('login').as('login')
 router.on('/notes').renderInertia('notes/index').as('notes')
 router.on('/notes/:id').renderInertia('notes/show').as('notes.show')
 router.on('/videos').renderInertia('videos/index').as('videos')
