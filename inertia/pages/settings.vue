@@ -1,12 +1,13 @@
 <template>
 
   <Splitter class="bg-transparent border-0 size-full">
-    <SplitterPanel :size="20" class="flex items-center justify-center">
-      <Menu :model="items" class="bg-transparent border-0 size-full" />
+    <SplitterPanel :size="25" class="bg-surface-100 dark:bg-surface-900">
+      <h1 class="p-4 mt-24 text-2xl">Settings</h1>
+      <Menu :model="items" class="w-full text-xl bg-transparent border-0" />
     </SplitterPanel>
-    <SplitterPanel :size="80" class="flex items-center justify-center">
+    <SplitterPanel :size="75" class="flex items-center justify-center">
       <div class="flex items-center justify-center w-full min-h-screen">
-        <Fieldset legend="Profile" pt:content:class="flex justify-center">
+        <Fieldset legend="Profile" pt:content:class="flex justify-center" class="w-2/3 p-8 bg-surface-50 dark:bg-surface-950">
           <Form :initialValues :resolver @submit="onFormSubmit" class="flex flex-col w-full gap-4 sm:w-80">
             <FormField v-slot="$field" name="email" initialValue="" class="flex flex-col gap-1">
               <InputText type="email" placeholder="Email" />
@@ -61,19 +62,35 @@ const onFormSubmit = ({ valid }) => {
 
 const items = ref([
   {
-    label: 'Router Link',
-    icon: 'pi pi-palette',
-    url: '/'
+    label: 'Administrator',
+    items: [
+      {
+        label: 'Users',
+        icon: 'pi pi-users'
+      },
+    ]
   },
   {
-    label: 'Programmatic',
-    icon: 'pi pi-link',
-    command: () => {}
-  },
-  {
-    label: 'External',
-    icon: 'pi pi-home',
-    url: 'https://vuejs.org/'
-  }
+    label: 'Profile',
+    items: [
+      {
+        label: 'Informations',
+        icon: 'pi pi-user'
+      },
+      {
+        label: 'Settings',
+        icon: 'pi pi-cog',
+        // url: tuyau.$route('settings').path
+        command: () => router.visit(tuyau.$route('settings').path)
+      },
+      {
+        separator: true
+      },
+      {
+        label: 'Logout',
+        icon: 'pi pi-sign-out'
+      }
+    ]
+    }
 ])
 </script>
