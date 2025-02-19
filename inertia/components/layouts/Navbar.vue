@@ -54,7 +54,7 @@
   </div>
 
   <div
-    class="sticky top-0 flex flex-col justify-between hidden w-auto h-screen p-5 lg:flex bg-surface-50 dark:bg-surface-900"
+    class="sticky top-0 flex flex-col justify-between hidden w-auto h-screen p-5 lg:flex bg-surface-50 dark:bg-surface-950"
   >
     <div class="flex flex-col items-center w-12">
       <div class="flex items-center gap-3">
@@ -63,17 +63,8 @@
         </div>
         <div class="hidden">Midona</div>
       </div>
-      <div class="flex flex-col gap-2 mt-10">
-        <Button
-          @click="toggle"
-          variant="text"
-          as="a"
-          href="/comment"
-          icon="pi pi-th-large"
-          severity="secondary"
-          aria-label="th-large"
-          v-tooltip="'Large'"
-        />
+      <div class="flex flex-col gap-6 mt-10">
+        <Link @click="toggle" :label="$t('nav.apps')" icon="pi pi-th-large" />
         <Link :href="tuyau.$route('home').path" :label="$t('nav.home')" icon="pi pi-home" />
         <Link :href="tuyau.$route('drive').path" :label="$t('nav.drive')" icon="pi pi-folder-open" />
         <Link :href="tuyau.$route('notes').path" :label="$t('nav.notes')" icon="pi pi-clipboard" />
