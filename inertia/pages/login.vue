@@ -1,19 +1,22 @@
 <template>
   <div class="flex items-center justify-center w-full min-h-screen">
     <Card>
-      <template #header><h1>Login</h1></template>
+      <template #title><h1>Login</h1></template>
       <template #content>
         <Form :resolver @submit="onFormSubmit" class="flex flex-col w-full gap-4 sm:w-80">
           <FormField v-slot="$field" name="email" initialValue="" class="flex flex-col gap-1">
-            <InputText type="email" placeholder="Email" />
+            <InputText type="email" size="large" placeholder="Email" />
             <Message v-if="$field?.invalid" severity="error" size="small" variant="simple">{{ $field.error?.message }}</Message>
           </FormField>
           <FormField v-slot="$field" name="password" initialValue="" class="flex flex-col gap-1">
-            <Password type="text" placeholder="Password" :feedback="false" toggleMask fluid />
+            <Password type="text" size="large" placeholder="Password" :feedback="false" toggleMask fluid />
             <Message v-if="$field?.invalid" severity="error" size="small" variant="simple">{{ $field.error?.message }}</Message>
           </FormField>
-          <Button type="submit" severity="secondary" label="Submit" />
+          <Button type="submit" label="Submit" />
         </Form>
+      </template>
+      <template #footer>
+        <a href="#">Mot de passe oublié</a>
       </template>
     </Card>
   </div>

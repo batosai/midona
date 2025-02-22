@@ -1,48 +1,53 @@
 <template>
-  <div
-    class="hover:cursor-pointer hover:dark:bg-primary-800 hover:bg-primary-100"
-    @contextmenu.prevent="onImageRightClick"
-  >
-    <div
-      class="relative aspect-[259/174.5] rounded-lg overflow-hidden flex items-center justify-center"
-    >
-      <template v-if="image">
-        <img class="object-cover w-full h-full" :src="image" :alt="name" />
-      </template>
 
-      <template v-else>
-        <span class="text-blue-300 text-8xl pi pi-folder" v-if="type == 'folder'"></span>
-        <span class="text-8xl pi pi-image" v-if="type == 'image'"></span>
-        <span class="text-red-600 text-8xl pi pi-video" v-if="type == 'video'"></span>
-        <span class="text-red-500 text-8xl pi pi-file-pdf" v-if="type == 'pdf'"></span>
-        <span class="text-blue-500 text-8xl pi pi-file-word" v-if="type == 'word'"></span>
-        <span class="text-8xl pi pi-file" v-if="type == 'file'"></span>
-        <span class="text-green-500 text-8xl pi pi-file-excel" v-if="type == 'excel'"></span>
+  <Card class="hover:bg-surface-100 hover:dark:bg-surface-800" @contextmenu.prevent="onImageRightClick" pt:body:class="p-0">
+    <template #header>
+      <div
+        class="cursor-pointer relative aspect-[259/174.5] overflow-hidden flex items-center justify-center"
+      >
+        <template v-if="image">
+          <img class="object-cover w-full h-full" :src="image" :alt="name" />
+        </template>
 
-        <span class="text-8xl! text-yellow-300 material-icons" v-if="type == 'zip' || type == 'rar'"
-          >folder_zip</span
-        >
-        <span class="text-8xl! text-pink-300 material-icons" v-if="type == 'audio'"
-          >audiotrack</span
-        >
-      </template>
-    </div>
-    <div class="flex items-start justify-between gap-1 mt-2">
-      <div class="flex-1 px-2">
-        <div class="font-medium leading-6 text-color line-clamp-1">{{ name }}</div>
-        <div class="mt-1 text-sm leading-5 text-muted-color">{{ details }}</div>
+        <template v-else>
+          <span class="text-blue-300 text-8xl pi pi-folder" v-if="type == 'folder'"></span>
+          <span class="text-8xl pi pi-image" v-if="type == 'image'"></span>
+          <span class="text-red-600 text-8xl pi pi-video" v-if="type == 'video'"></span>
+          <span class="text-red-500 text-8xl pi pi-file-pdf" v-if="type == 'pdf'"></span>
+          <span class="text-blue-500 text-8xl pi pi-file-word" v-if="type == 'word'"></span>
+          <span class="text-8xl pi pi-file" v-if="type == 'file'"></span>
+          <span class="text-green-500 text-8xl pi pi-file-excel" v-if="type == 'excel'"></span>
+
+          <span class="text-8xl! text-yellow-300 material-icons" v-if="type == 'zip' || type == 'rar'"
+            >folder_zip</span
+          >
+          <span class="text-8xl! text-pink-300 material-icons" v-if="type == 'audio'"
+            >audiotrack</span
+          >
+        </template>
+
+        <Tag class="absolute z-10 top-2 right-2" severity="secondary" :value="type" />
+        <a href="#" class="absolute inset-0"></a>
       </div>
-      <Button
-        icon="pi pi-ellipsis-v"
-        severity="secondary"
-        variant="text"
-        rounded
-        @click="toggle"
-        aria-label="Bookmark"
-      />
-      <TieredMenu ref="menu" id="overlay_tmenu" :model="items" popup />
-    </div>
-  </div>
+    </template>
+    <template #content>
+      <div class="flex items-start justify-between gap-1 p-2">
+        <div class="flex-1 px-2">
+          <div class="font-medium leading-6 text-color line-clamp-1">{{ name }}</div>
+          <div class="mt-1 text-sm leading-5 text-muted-color">{{ details }}</div>
+        </div>
+        <Button
+          icon="pi pi-ellipsis-v"
+          severity="secondary"
+          variant="text"
+          rounded
+          @click="toggle"
+          aria-label="Bookmark"
+        />
+        <TieredMenu ref="menu" id="overlay_tmenu" :model="items" popup />
+      </div>
+    </template>
+  </Card>
 
   <Dialog v-model:visible="displayFinder" header="Finder" :breakpoints="{ '960px': '50vw' }" :style="{ width: '40vw' }" :maximizable="true">
     <Tree :value="samples" />

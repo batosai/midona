@@ -21,7 +21,7 @@ const Noir = definePreset(Aura, {
         primary: {
           color: '{zinc.950}',
           inverseColor: '#ffffff',
-          hoverColor: '{zinc.900}',
+          hoverColor: '{zinc.800}',
           activeColor: '{zinc.800}',
         },
         highlight: {
@@ -33,10 +33,9 @@ const Noir = definePreset(Aura, {
       },
       dark: {
         primary: {
-          // color: '{yellow.500}' : demander avis
           color: '{zinc.50}',
           inverseColor: '{zinc.950}',
-          hoverColor: '{zinc.100}',
+          hoverColor: '{zinc.200}',
           activeColor: '{zinc.200}',
         },
         highlight: {
@@ -48,6 +47,44 @@ const Noir = definePreset(Aura, {
       },
     },
   },
+  components: {
+    card: {
+      colorScheme: {
+        light: {
+          root: {
+            // background: '{surface.50}',
+            // shadow: 'none'
+          },
+          body: {
+            padding: '2rem'
+          }
+        },
+        // dark: {
+        //   root: {
+        //     background: '{surface.950}',
+        //   },
+        // }
+      }
+    },
+    // inputtext: {
+    //   colorScheme: {
+    //     dark: {
+    //       root: {
+    //         background: '{surface.700}',
+    //       },
+    //     }
+    //   }
+    // }
+    breadcrumb: {
+      colorScheme: {
+        light: {
+          root: {
+            background: 'transparent'
+          }
+        }
+      }
+    }
+  }
 })
 
 export default Noir

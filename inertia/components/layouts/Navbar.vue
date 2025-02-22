@@ -54,7 +54,7 @@
   </div>
 
   <div
-    class="sticky top-0 flex flex-col justify-between hidden w-auto h-screen p-5 lg:flex bg-surface-50 dark:bg-surface-950"
+    class="sticky top-0 flex flex-col justify-between hidden w-auto h-screen p-5 lg:flex bg-surface-100 dark:bg-surface-900"
   >
     <div class="flex flex-col items-center w-12">
       <div class="flex items-center gap-3">

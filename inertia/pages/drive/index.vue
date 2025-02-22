@@ -3,7 +3,7 @@
 
   <div class="flex flex-col w-full h-screen">
     <div class="w-full h-full">
-      <Menubar class="rounded-none">
+      <Menubar class="sticky top-0 border-0 rounded-none z-100 bg-surface-100 dark:bg-surface-900">
         <template #start> Drive </template>
         <template #end>
           <Button icon="pi pi-plus" />

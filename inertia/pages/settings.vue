@@ -1,33 +1,38 @@
 <template>
 
   <Splitter class="bg-transparent border-0 size-full">
-    <SplitterPanel :size="25" class="bg-surface-100 dark:bg-surface-900">
+    <SplitterPanel :size="25" class="bg-surface-200 dark:bg-surface-800">
       <h1 class="p-4 mt-24 text-2xl">Settings</h1>
       <Menu :model="items" class="w-full text-xl bg-transparent border-0" />
     </SplitterPanel>
     <SplitterPanel :size="75" class="flex items-center justify-center">
       <div class="flex items-center justify-center w-full min-h-screen">
-        <Fieldset legend="Profile" pt:content:class="flex justify-center" class="w-2/3 p-8 bg-surface-50 dark:bg-surface-950">
-          <Form :initialValues :resolver @submit="onFormSubmit" class="flex flex-col w-full gap-4 sm:w-80">
-            <FormField v-slot="$field" name="email" initialValue="" class="flex flex-col gap-1">
-              <InputText type="email" placeholder="Email" />
-              <Message v-if="$field?.invalid" severity="error" size="small" variant="simple">{{ $field.error?.message }}</Message>
-            </FormField>
-            <FormField v-slot="$field" name="firstname" initialValue="" class="flex flex-col gap-1">
-              <InputText type="text" placeholder="First Name" />
-              <Message v-if="$field?.invalid" severity="error" size="small" variant="simple">{{ $field.error?.message }}</Message>
-            </FormField>
-            <FormField v-slot="$field" name="lastname" initialValue="" class="flex flex-col gap-1">
-              <InputText type="text" placeholder="Last Name" />
-              <Message v-if="$field?.invalid" severity="error" size="small" variant="simple">{{ $field.error?.message }}</Message>
-            </FormField>
-            <FormField v-slot="$field" name="password" initialValue="" class="flex flex-col gap-1">
-              <Password type="text" placeholder="Password" toggleMask fluid />
-              <Message v-if="$field?.invalid" severity="error" size="small" variant="simple">{{ $field.error?.message }}</Message>
-            </FormField>
-            <Button type="submit" severity="secondary" label="Submit" />
-          </Form>
-        </Fieldset>
+        <Card>
+          <template #title>Profile</template>
+          <template #content>
+            <Form id="profile" :initialValues :resolver @submit="onFormSubmit" class="grid gap-4 sm:grid-cols-2">
+              <FormField v-slot="$field" name="firstname" initialValue="" class="flex flex-col gap-1">
+                <InputText type="text" placeholder="First Name" />
+                <Message v-if="$field?.invalid" severity="error" size="small" variant="simple">{{ $field.error?.message }}</Message>
+              </FormField>
+              <FormField v-slot="$field" name="lastname" initialValue="" class="flex flex-col gap-1">
+                <InputText type="text" placeholder="Last Name" />
+                <Message v-if="$field?.invalid" severity="error" size="small" variant="simple">{{ $field.error?.message }}</Message>
+              </FormField>
+              <FormField v-slot="$field" name="email" initialValue="" class="flex flex-col gap-1">
+                <InputText type="email" placeholder="Email" />
+                <Message v-if="$field?.invalid" severity="error" size="small" variant="simple">{{ $field.error?.message }}</Message>
+              </FormField>
+              <FormField v-slot="$field" name="password" initialValue="" class="flex flex-col gap-1">
+                <Password type="text" placeholder="Password" toggleMask fluid />
+                <Message v-if="$field?.invalid" severity="error" size="small" variant="simple">{{ $field.error?.message }}</Message>
+              </FormField>
+            </Form>
+          </template>
+          <template #footer>
+            <Button type="submit" form="profile" class="w-full mt-2" label="Submit" />
+          </template>
+        </Card>
       </div>
     </SplitterPanel>
   </Splitter>
