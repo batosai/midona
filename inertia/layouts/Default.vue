@@ -3,6 +3,7 @@
     <Toast />
     <ConfirmDialog />
     <Navbar />
+    <input type="file" id="uploads" multiple class="hidden" />
     <slot />
   </div>
 </template>

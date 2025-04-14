@@ -7,73 +7,105 @@
 import type { MakeTuyauRequest, MakeTuyauResponse } from '@tuyau/utils/types'
 import type { InferInput } from '@vinejs/vine/types'
 
-export interface ApiDefinition {}
+type UploadsGetHead = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/uploads_controller.ts').default['handle'], false>
+}
+export interface ApiDefinition {
+  'uploads': {
+    '$url': {
+    };
+    '$get': UploadsGetHead;
+    '$head': UploadsGetHead;
+  };
+}
 const routes = [
   {
     params: [],
     name: 'home',
     path: '/',
-    method: ['GET', 'HEAD'],
+    method: ["GET","HEAD"],
+    types: {} as unknown,
+  },
+  {
+    params: [],
+    name: 'login',
+    path: '/login',
+    method: ["GET","HEAD"],
     types: {} as unknown,
   },
   {
     params: [],
     name: 'notes',
     path: '/notes',
-    method: ['GET', 'HEAD'],
+    method: ["GET","HEAD"],
     types: {} as unknown,
   },
   {
-    params: ['id'],
+    params: ["id"],
     name: 'notes.show',
     path: '/notes/:id',
-    method: ['GET', 'HEAD'],
+    method: ["GET","HEAD"],
     types: {} as unknown,
   },
   {
     params: [],
     name: 'videos',
     path: '/videos',
-    method: ['GET', 'HEAD'],
+    method: ["GET","HEAD"],
     types: {} as unknown,
   },
   {
-    params: ['id'],
+    params: ["id"],
     name: 'videos.show',
     path: '/videos/:id',
-    method: ['GET', 'HEAD'],
+    method: ["GET","HEAD"],
     types: {} as unknown,
   },
   {
     params: [],
     name: 'documents',
     path: '/documents',
-    method: ['GET', 'HEAD'],
+    method: ["GET","HEAD"],
     types: {} as unknown,
   },
   {
-    params: ['id'],
+    params: ["id"],
     name: 'documents.show',
     path: '/documents/:id',
-    method: ['GET', 'HEAD'],
+    method: ["GET","HEAD"],
     types: {} as unknown,
   },
   {
     params: [],
     name: 'settings',
     path: '/settings',
-    method: ['GET', 'HEAD'],
+    method: ["GET","HEAD"],
+    types: {} as unknown,
+  },
+  {
+    params: [],
+    name: 'users',
+    path: '/users',
+    method: ["GET","HEAD"],
     types: {} as unknown,
   },
   {
     params: [],
     name: 'drive',
     path: '/drive',
-    method: ['GET', 'HEAD'],
+    method: ["GET","HEAD"],
     types: {} as unknown,
   },
-] as const
+  {
+    params: [],
+    name: 'uploads',
+    path: '/uploads',
+    method: ["GET","HEAD"],
+    types: {} as UploadsGetHead,
+  },
+] as const;
 export const api = {
   routes,
-  definition: {} as ApiDefinition,
+  definition: {} as ApiDefinition
 }

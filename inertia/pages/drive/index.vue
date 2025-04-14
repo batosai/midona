@@ -6,7 +6,7 @@
       <Menubar class="sticky top-0 border-0 rounded-none z-100 bg-surface-100 dark:bg-surface-900">
         <template #start> Drive </template>
         <template #end>
-          <Button icon="pi pi-plus" />
+          <Button icon="pi pi-plus" @click="uploadStore.browse" />
         </template>
       </Menubar>
 
@@ -40,9 +40,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import File from '@/drive/file.vue'
-import { useActionsStore } from '~/stores/actions'
+import { useActionStore } from '~/stores/actionStore'
+import { useUploadStore } from '~/stores/uploadStore'
 
-const store = useActionsStore()
+const uploadStore = useUploadStore()
+const store = useActionStore()
 store.set([{
   label: 'Add',
   icon: 'pi pi-plus',

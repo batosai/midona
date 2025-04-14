@@ -83,7 +83,7 @@
           />
         </OverlayBadge>
 
-        <OverlayBadge value="4" size="small" severity="danger">
+        <OverlayBadge :value="uploadStore.files.length" size="small" severity="danger">
           <Link
             @click="uploads"
             variant="text"
@@ -95,19 +95,42 @@
 
         <DrawerCustom
           v-model:visible="drawer"
-          header="Downloads"
           position="right"
           class="!w-full md:!w-[30rem]"
         >
-          <FilePond
-            name="test"
-            ref="pond"
-            label-idle="Drop files here..."
-            :allow-multiple="true"
-            accepted-file-types="image/jpeg, image/png"
-            server="/api"
-            credits=""
-          />
+          <template #header>
+            <div class="flex items-center gap-2">
+              <h1 class="text-xl">{{ $t('download.downloads') }}</h1>
+              <Button :label="$t('download.add')" icon="pi pi-plus" text @click="uploadStore.browse" />
+            </div>
+          </template>
+          <template #footer v-if="uploadStore.files.length">
+            <div class="flex items-center gap-2">
+              <Button :label="$t('download.delete_all')" icon="pi pi-trash" severity="danger" text @click="uploadStore.clear()" class="flex-auto"></Button>
+            </div>
+          </template>
+
+          <div
+            v-for="(file, index) in uploadStore.files"
+            :key="index"
+            class="relative flex flex-row p-2 hover:bg-surface-100 hover:dark:bg-surface-900"
+            :class="{ 'border-t border-surface-200 dark:border-surface-700': index !== 0 }"
+          >
+            <div class="w-full">
+              <span class="text-lg">{{ file.filename }}</span>
+              <div class="text-sm text-surface-500 dark:text-surface-400">
+                {{ $t(`download.status.${file.statusLabel}`) }} - {{ file.fileSize }}
+              </div>
+              <div class="flex items-center gap-2">
+                <ProgressBar :mode="file.progress === undefined ? 'indeterminate' : 'determinate'" :value="file.progress" :showValue="false" class="w-full h-2" />
+                <div>
+                  <Button icon="pi pi-times-circle" text @click="uploadStore.abord(file)" v-if="uploadStore.isProcessing(file) && !uploadStore.isAbort(file)" />
+                  <Button icon="pi pi-refresh" text @click="uploadStore.load(file)" v-if="uploadStore.isAbort(file)" />
+                  <Button icon="pi pi-trash" text @click="uploadStore.remove(file)" v-if="uploadStore.isComplete(file) || uploadStore.isAbort(file) || uploadStore.isError(file)" />
+                </div>
+              </div>
+            </div>
+          </div>
         </DrawerCustom>
 
         <Popover ref="op">
@@ -152,19 +175,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { router } from '@inertiajs/vue3'
-import vueFilePond from 'vue-filepond'
 import { tuyau } from '~/settings/tuyau'
 import Link from './Link.vue'
 import DrawerCustom from '@/primevue/drawer/Drawer.vue'
 import Triforce from '~/images/triforce.svg'
-import { useActionsStore } from '~/stores/actions'
+import { useActionStore } from '~/stores/actionStore'
+import { useUploadStore } from '~/stores/uploadStore'
 import Divider from 'primevue/divider'
 
-const store = useActionsStore()
-
-const FilePond = vueFilePond()
+const store = useActionStore()
+const uploadStore = useUploadStore()
 
 const visibleBottom = ref(false)
 
@@ -216,6 +238,7 @@ const items = ref([
     ]
     }
 ])
+
 const toggleAccount = (event) => {
     menu.value.toggle(event);
 }
@@ -234,4 +257,9 @@ const selectMember = (member: any) => {
   selectedMember.value = member
   op.value.hide()
 }
+
+onMounted(() => {
+  uploadStore.init()
+})
+
 </script>

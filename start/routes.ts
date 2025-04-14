@@ -8,6 +8,9 @@
 */
 
 import router from '@adonisjs/core/services/router'
+
+const UploadsController = () => import('#controllers/uploads_controller')
+
 router.on('/').renderInertia('home').as('home')
 router.on('/login').renderInertia('login').as('login')
 router.on('/notes').renderInertia('notes/index').as('notes')
@@ -19,3 +22,5 @@ router.on('/documents/:id').renderInertia('documents/show').as('documents.show')
 router.on('/settings').renderInertia('settings').as('settings')
 router.on('/users').renderInertia('users').as('users')
 router.on('/drive').renderInertia('drive/index').as('drive')
+
+router.post('/uploads', [UploadsController]).as('uploads')
