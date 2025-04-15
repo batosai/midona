@@ -118,14 +118,23 @@
           >
             <div class="w-full">
               <span class="text-lg">{{ file.filename }}</span>
-              <div class="text-sm text-surface-500 dark:text-surface-400">
-                {{ $t(`download.status.${file.statusLabel}`) }} - {{ file.fileSize }}
+              <div
+                class="text-sm"
+                :class="{
+                  'text-red-800' : uploadStore.isError(file),
+                  'dark:text-red-800' : uploadStore.isError(file),
+                  'text-surface-500' : !uploadStore.isError(file),
+                  'dark:text-surface-400' : !uploadStore.isError(file),
+                }">
+                {{ $t(`download.status.${file.statusLabel}`) }} - {{ bytes(file.fileSize) }}
               </div>
               <div class="flex items-center gap-2">
                 <ProgressBar :mode="file.progress === undefined ? 'indeterminate' : 'determinate'" :value="file.progress" :showValue="false" class="w-full h-2" />
                 <div>
                   <Button icon="pi pi-times-circle" text @click="uploadStore.abord(file)" v-if="uploadStore.isProcessing(file) && !uploadStore.isAbort(file)" />
                   <Button icon="pi pi-refresh" text @click="uploadStore.load(file)" v-if="uploadStore.isAbort(file)" />
+                </div>
+                <div>
                   <Button icon="pi pi-trash" text @click="uploadStore.remove(file)" v-if="uploadStore.isComplete(file) || uploadStore.isAbort(file) || uploadStore.isError(file)" />
                 </div>
               </div>
@@ -184,6 +193,7 @@ import Triforce from '~/images/triforce.svg'
 import { useActionStore } from '~/stores/actionStore'
 import { useUploadStore } from '~/stores/uploadStore'
 import Divider from 'primevue/divider'
+import bytes from 'bytes'
 
 const store = useActionStore()
 const uploadStore = useUploadStore()

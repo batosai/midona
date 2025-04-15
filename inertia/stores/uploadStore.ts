@@ -86,8 +86,13 @@ export const useUploadStore = defineStore('uploadStore', () => {
     pond.on('processfileprogress', callback)
 
     pond.on('error', (error: unknown, item: FilePondFile) => {
-      console.error(error)
+      const file = files.value.find((file) => file.id === item.id)
+      if (file && !file.progress) {
+        file.progress = 0
+      }
+
       callback(item)
+      console.error(error)
     })
 
     filePond.value = pond
@@ -95,7 +100,6 @@ export const useUploadStore = defineStore('uploadStore', () => {
 
   function browse() {
     if (filePond.value) {
-      console.log(filePond.value.getFiles())
       filePond.value.browse()
     }
   }
