@@ -6,7 +6,7 @@
       <Menubar class="sticky top-0 border-0 rounded-none z-100 bg-surface-100 dark:bg-surface-900">
         <template #start> Drive </template>
         <template #end>
-          <Button icon="pi pi-plus" @click="uploadStore.browse" />
+          <SplitButton icon="pi pi-plus" @click="uploadStore.browse" :model="itemsAdd" />
         </template>
       </Menubar>
 
@@ -60,6 +60,27 @@ const items = ref([
   { label: 'Accessories' },
   { label: 'Keyboard' },
   { label: 'Wireless' },
+])
+
+const itemsAdd = ref([
+  {
+    label: 'Répertoire',
+    command: () => {
+      uploadStore.browse()
+    }
+  },
+  {
+    label: 'Youtude',
+    command: () => {
+      uploadStore.browse()
+    }
+  },
+  {
+    label: 'Note',
+    command: () => {
+      uploadStore.browse()
+    }
+  },
 ])
 
 const itemsMenu = ref([

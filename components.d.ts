@@ -35,6 +35,7 @@ declare module 'vue' {
     ProgressBar: typeof import('primevue/progressbar')['default']
     SelectButton: typeof import('primevue/selectbutton')['default']
     SpeedDial: typeof import('primevue/speeddial')['default']
+    SplitButton: typeof import('primevue/splitbutton')['default']
     Splitter: typeof import('primevue/splitter')['default']
     SplitterPanel: typeof import('primevue/splitterpanel')['default']
     Tag: typeof import('primevue/tag')['default']
