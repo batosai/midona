@@ -14,6 +14,7 @@ export default defineConfig({
     () => import('@adonisjs/core/commands'),
     () => import('@adonisjs/lucid/commands'),
     () => import('@tuyau/core/commands'),
+    () => import('@jrmc/adonis-attachment/commands')
   ],
 
   /*
@@ -43,6 +44,8 @@ export default defineConfig({
     () => import('@adonisjs/auth/auth_provider'),
     () => import('@adonisjs/inertia/inertia_provider'),
     () => import('@tuyau/core/tuyau_provider'),
+    () => import('@jrmc/adonis-attachment/attachment_provider'),
+    () => import('@adonisjs/drive/drive_provider')
   ],
 
   /*

@@ -1,7 +1,9 @@
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
+import type { Attachment } from '@jrmc/adonis-attachment/types/attachment'
 
 import { DateTime } from 'luxon'
 import { BaseModel, column, beforeCreate, belongsTo } from '@adonisjs/lucid/orm'
+import { attachment } from '@jrmc/adonis-attachment'
 import DocumentTypes from '#enums/document_types'
 
 import User from './user.js'
@@ -18,8 +20,8 @@ export default class Document extends BaseModel {
   @column()
   declare userId: string
 
-  // @attachment({ folder: 'files', preComputeUrl: true })
-  // declare file: Attachment
+  @attachment()
+  declare file: Attachment
 
   @column()
   declare mine: string | null
