@@ -1,25 +1,14 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import type { Attachment } from '@jrmc/adonis-attachment/types/attachment'
-
-// import { DocumentValidator } from '#validators/document'
-
 
 import User from '#models/user'
-import Document from '#models/document'
-import DocumentTypes from '#enums/document_types'
-import { attachmentManager } from '@jrmc/adonis-attachment'
-
-type documentType = {
-  type: DocumentTypes
-  userId: string
-  file: Attachment
-}
+import CreateDocumentFilesAction  from '#actions/create_document_files_action'
+import { inject } from '@adonisjs/core'
 
 export default class UploadsController {
 
-  async handle({ request, response }: HttpContext) {
+  @inject()
+  async handle({ request, response }: HttpContext, createDocumentFilesAction: CreateDocumentFilesAction) {
     const user = await User.first()
-    const documents: documentType[] = []
 
     if (!user) {
       return response.badRequest()
@@ -37,18 +26,16 @@ export default class UploadsController {
           errors: file?.errors[0] ?? 'Fichier invalide'
         })
       }
-
-      documents.push({
-        type: DocumentTypes.FILE,
-        userId: user.id,
-        file: await attachmentManager.createFromFile(file),
-      })
     }
 
+    const documents = await createDocumentFilesAction.execute({
+      userId: user.id,
+      parentId: null,
+      files
+    })
+
     if (documents.length) {
-      return response.json(
-        await Document.createMany(documents)
-      )
+      return response.json(documents)
     }
 
     return response.badRequest()

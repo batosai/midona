@@ -6,18 +6,16 @@ import { BaseModel, computed, column, beforeCreate, scope, beforeSave } from '@a
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import { DbRememberMeTokensProvider } from '@adonisjs/auth/session'
 import Roles from '#enums/roles'
+import { UuidPrimaryKey } from '#models/mixins/uuid_primary_key'
+import { whithTimestamps } from '#models/mixins/with_timestamps'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['email'],
   passwordColumnName: 'password',
 })
 
-export default class User extends compose(BaseModel, AuthFinder) {
-  static selfAssignPrimaryKey = true
+export default class User extends compose(BaseModel, AuthFinder, UuidPrimaryKey, whithTimestamps) {
   static rememberMeTokens = DbRememberMeTokensProvider.forModel(User)
-
-  @column({ isPrimary: true })
-  declare id: string
 
   @column()
   declare role: Roles
@@ -55,12 +53,6 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @column.dateTime({ autoCreate: false })
   declare discardedAt: DateTime
 
-  @column.dateTime({ autoCreate: true })
-  declare createdAt: DateTime
-
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime | null
-
   // scopes
 
   static admin = scope((query: any) => {
@@ -85,11 +77,6 @@ export default class User extends compose(BaseModel, AuthFinder) {
   }
 
   // Hooks
-
-  @beforeCreate()
-  static assignUuid(user: User) {
-    user.id = crypto.randomUUID()
-  }
 
   @beforeCreate()
   static defaultPassword(user: User) {
