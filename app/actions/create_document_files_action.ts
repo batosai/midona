@@ -10,7 +10,6 @@ type documentType = {
   userId: string
   parentId: string | null
   file: Attachment
-  position: number
 }
 
 type CreateDocumentFilesActionParams = {
@@ -22,17 +21,15 @@ type CreateDocumentFilesActionParams = {
 export default class CreateDocumentFilesAction {
   async execute(params: CreateDocumentFilesActionParams) {
     const documents: documentType[] = []
-    const result = await Document.query().count('id', 'count').first()
 
     const files = params.files
 
-    for (const [index, file] of files.entries()) {
+    for (const file of files) {
       documents.push({
         type: DocumentTypes.FILE,
         userId: params.userId,
         parentId: params.parentId,
         file: await attachmentManager.createFromFile(file),
-        position: result?.$extras.count + index + 1,
       })
     }
 

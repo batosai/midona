@@ -9,9 +9,8 @@ export default class extends BaseSchema {
       table.uuid('id').primary().index()
       table.enu('type', Object.values(DocumentTypes)).notNullable().defaultTo(DocumentTypes.FILE)
       table.json('file').nullable()
-      table.string('mimeType').nullable()
+      table.string('mime_type').nullable()
       table.string('content').nullable()
-      table.integer('position').notNullable().defaultTo(0)
       table.integer('views').notNullable().defaultTo(0)
 
       table.uuid('parent_id').nullable().references('documents.id').onDelete('CASCADE')
