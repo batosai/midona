@@ -1,4 +1,5 @@
 <template>
+  <Head title="Settings" />
 
   <Splitter class="bg-transparent border-0 size-full">
     <SplitterPanel :size="25" class="bg-surface-200 dark:bg-surface-800">
@@ -41,6 +42,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { Head } from '@inertiajs/vue3'
 import { Form, FormField } from '@primevue/forms'
 import { zodResolver } from '@primevue/forms/resolvers/zod'
 import { z } from 'zod'

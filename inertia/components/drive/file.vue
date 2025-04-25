@@ -1,6 +1,6 @@
 <template>
 
-  <Card class="hover:bg-surface-100 hover:dark:bg-surface-800" @contextmenu.prevent="onImageRightClick" pt:body:class="p-0">
+  <Card class="group hover:bg-surface-100 hover:dark:bg-surface-800" @contextmenu.prevent="onImageRightClick" pt:body:class="p-0">
     <template #header>
       <div
         class="cursor-pointer relative aspect-[259/174.5] overflow-hidden flex items-center justify-center"
@@ -10,23 +10,23 @@
         </template>
 
         <template v-else>
-          <span class="text-blue-300 text-8xl pi pi-folder" v-if="type == 'folder'"></span>
-          <span class="text-8xl pi pi-image" v-if="type == 'image'"></span>
-          <span class="text-red-600 text-8xl pi pi-video" v-if="type == 'video'"></span>
-          <span class="text-red-500 text-8xl pi pi-file-pdf" v-if="type == 'pdf'"></span>
-          <span class="text-blue-500 text-8xl pi pi-file-word" v-if="type == 'word'"></span>
-          <span class="text-8xl pi pi-file" v-if="type == 'file'"></span>
-          <span class="text-green-500 text-8xl pi pi-file-excel" v-if="type == 'excel'"></span>
+          <span class="text-6xl text-blue-300 pi pi-folder" v-if="type == 'folder'"></span>
+          <span class="text-6xl pi pi-image" v-if="type == 'image'"></span>
+          <span class="text-6xl text-red-600 pi pi-video" v-if="type == 'video'"></span>
+          <span class="text-6xl text-red-500 pi pi-file-pdf" v-if="type == 'pdf'"></span>
+          <span class="text-6xl text-blue-500 pi pi-file-word" v-if="type == 'word'"></span>
+          <span class="text-6xl pi pi-file" v-if="type == 'file'"></span>
+          <span class="text-6xl text-green-500 pi pi-file-excel" v-if="type == 'excel'"></span>
 
-          <span class="text-8xl! text-yellow-300 material-icons" v-if="type == 'zip' || type == 'rar'"
+          <span class="text-6xl! text-yellow-300 material-icons" v-if="type == 'zip' || type == 'rar'"
             >folder_zip</span
           >
-          <span class="text-8xl! text-pink-300 material-icons" v-if="type == 'audio'"
+          <span class="text-6xl! text-pink-300 material-icons" v-if="type == 'audio'"
             >audiotrack</span
           >
         </template>
 
-        <Tag class="absolute z-10 top-2 right-2" severity="secondary" :value="type" />
+        <Tag class="absolute z-10 top-2 right-2 group-hover:dark:bg-surface-900 group-hover:bg-surface-0" severity="secondary" :value="type" />
         <a href="#" class="absolute inset-0"></a>
       </div>
     </template>

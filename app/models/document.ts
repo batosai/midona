@@ -30,9 +30,6 @@ export default class Document extends compose(BaseModel, UuidPrimaryKey, whithTi
   declare content: string | null
 
   @column()
-  declare position: number
-
-  @column()
   declare views: number
 
   // Hooks

@@ -1,5 +1,5 @@
 <template>
-  <Head title="Videos" />
+  <Head title="Drive" />
 
   <div class="flex flex-col w-full h-screen">
     <div class="w-full h-full">
@@ -9,8 +9,6 @@
           <SplitButton icon="pi pi-plus" @click="uploadStore.browse" :model="itemsAdd" />
         </template>
       </Menubar>
-
-      <Breadcrumb :home="home" :model="items" />
 
       <ContextMenu global :model="itemsMenu" />
 
@@ -39,28 +37,18 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { Head } from '@inertiajs/vue3'
 import File from '@/drive/file.vue'
 import { useActionStore } from '~/stores/actionStore'
 import { useUploadStore } from '~/stores/uploadStore'
 
 const uploadStore = useUploadStore()
-const store = useActionStore()
-store.set([{
+const actionStore = useActionStore()
+actionStore.set([{
   label: 'Add',
   icon: 'pi pi-plus',
   href: '/'
 }])
-
-const home = ref({
-  icon: 'pi pi-home',
-})
-const items = ref([
-  { label: 'Electronics' },
-  { label: 'Computer' },
-  { label: 'Accessories' },
-  { label: 'Keyboard' },
-  { label: 'Wireless' },
-])
 
 const itemsAdd = ref([
   {
@@ -84,6 +72,15 @@ const itemsAdd = ref([
 ])
 
 const itemsMenu = ref([
-  { label: 'Add', icon: 'pi pi-plus' },
+  {
+    label: 'Add',
+    icon: 'pi pi-plus',
+    command: () => {
+      uploadStore.browse()
+    },
+    items: [
+      ...itemsAdd.value
+    ]
+  },
 ])
 </script>

@@ -1,4 +1,6 @@
 <template>
+  <Head title="Login" />
+
   <div class="flex items-center justify-center w-full min-h-screen">
     <Card>
       <template #title><h1>Login</h1></template>
@@ -23,6 +25,7 @@
 </template>
 
 <script setup lang="ts">
+import { Head } from '@inertiajs/vue3'
 import { Form, FormField } from '@primevue/forms'
 import { zodResolver } from '@primevue/forms/resolvers/zod'
 import { z } from 'zod'
