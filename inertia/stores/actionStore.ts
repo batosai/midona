@@ -7,7 +7,7 @@ type Item = {
   href: string
 }
 
-export const useActionStore = defineStore('counter', () => {
+export const useActionStore = defineStore('actionStore', () => {
   const items = ref<Item[]>([])
 
   function add(value: Item) {

@@ -120,7 +120,7 @@ export const useUploadStore = defineStore('uploadStore', () => {
     }
   }
 
-  function abord(file: File) {
+  function abort(file: File) {
     if (filePond.value) {
       const item = filePond.value.getFile(file.id)
       item.abortProcessing()
@@ -178,7 +178,7 @@ export const useUploadStore = defineStore('uploadStore', () => {
     files,
     init,
     load,
-    abord,
+    abort,
     remove,
     clear,
     isProcessing,
