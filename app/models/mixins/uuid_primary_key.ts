@@ -12,8 +12,8 @@ export const UuidPrimaryKey = <Model extends NormalizeConstructor<typeof BaseMod
     declare id: string
 
     @beforeCreate()
-    static assignUuid(user: any) {
-      user.id = crypto.randomUUID()
+    static assignUuid(entity: any) {
+      entity.id = crypto.randomUUID()
     }
   }
 
