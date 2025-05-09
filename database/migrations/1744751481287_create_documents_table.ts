@@ -16,6 +16,8 @@ export default class extends BaseSchema {
       table.uuid('parent_id').nullable().references('documents.id').onDelete('CASCADE')
       table.uuid('user_id').notNullable().references('users.id').onDelete('CASCADE')
 
+      table.timestamp('deleted_on').nullable()
+
       table.timestamp('created_at')
       table.timestamp('updated_at')
     })
