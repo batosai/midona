@@ -26,6 +26,7 @@
     "#events/*": "./app/events/*.js",
     "#middleware/*": "./app/middleware/*.js",
     "#validators/*": "./app/validators/*.js",
+    "#dtos/*": "./app/dtos/*.js",
     "#providers/*": "./providers/*.js",
     "#policies/*": "./app/policies/*.js",
     "#abilities/*": "./app/abilities/*.js",
@@ -86,6 +87,7 @@
     "zod": "^3.24.2"
   },
   "dependencies": {
+    "@adocasts.com/dto": "^0.0.9",
     "@adonisjs/auth": "^9.2.4",
     "@adonisjs/core": "^6.17.0",
     "@adonisjs/cors": "^2.2.1",
@@ -105,6 +107,7 @@
     "luxon": "^3.5.0",
     "media-icons": "^1.1.5",
     "reflect-metadata": "^0.2.2",
+    "sharp": "^0.34.1",
     "vue": "^3.5.13"
   },
   "hotHook": {
@@ -127,5 +130,8 @@
       "strtok3": "8.0.1"
     }
   },
-  "prettier": "@adonisjs/prettier-config"
+  "prettier": "@adonisjs/prettier-config",
+  "volta": {
+    "node": "22.15.0"
+  }
 }
