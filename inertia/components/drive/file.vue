@@ -32,8 +32,8 @@
     </template>
     <template #content>
       <div class="flex items-start justify-between gap-1 p-2">
-        <div class="flex-1 px-2">
-          <div class="font-medium leading-6 text-color line-clamp-1">{{ name }}</div>
+        <div class="flex-1 px-2 min-w-0">
+          <div class="font-medium leading-6 text-color truncate">{{ name }}</div>
           <div class="mt-1 text-sm leading-5 text-muted-color">{{ details }}</div>
         </div>
         <Button
@@ -61,8 +61,8 @@ import { useToast } from "primevue/usetoast"
 
 defineProps<{
   name?: string
-  details?: string
-  type: 'folder' | 'pdf' | 'word' | 'excel' | 'file' | 'video' | 'audio' | 'image' | 'zip' | 'rar'
+  details?: string | null
+  type?: 'folder' | 'pdf' | 'word' | 'excel' | 'file' | 'video' | 'audio' | 'image' | 'zip' | 'rar'
   image?: string
 }>()
 

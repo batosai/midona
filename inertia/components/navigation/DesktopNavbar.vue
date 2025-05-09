@@ -13,33 +13,25 @@
         <Link @click="toggleApps" :label="$t('nav.apps')" icon="pi pi-th-large" />
         <Link :href="tuyau.$route('home').path" :label="$t('nav.home')" icon="pi pi-home" />
         <Link :href="tuyau.$route('drive').path" :label="$t('nav.drive')" icon="pi pi-folder-open" />
-        <Link :href="tuyau.$route('notes').path" :label="$t('nav.notes')" icon="pi pi-clipboard" />
-        <Link :href="tuyau.$route('videos').path" :label="$t('nav.videos')" icon="pi pi-video" />
+        <!-- <Link :href="tuyau.$route('notes').path" :label="$t('nav.notes')" icon="pi pi-clipboard" />
+        <Link :href="tuyau.$route('videos').path" :label="$t('nav.videos')" icon="pi pi-video" /> -->
       </div>
     </div>
     <div class="flex flex-col items-center w-12">
       <div class="flex flex-col mt-10">
-        <OverlayBadge value="4" size="small" severity="danger">
-          <Link
-            @click="toggleApps"
-            variant="text"
-            icon="pi pi-bell"
-            severity="secondary"
-            label="Notifications"
-          />
-        </OverlayBadge>
+        <template v-if="uploadStore.files.length > 0">
+          <OverlayBadge :value="uploadStore.files.length" size="small" severity="danger">
+            <Link
+              @click="uploadDrawerStore.open"
+              variant="text"
+              icon="pi pi-upload"
+              severity="secondary"
+              label="Uploads"
+            />
+          </OverlayBadge>
 
-        <OverlayBadge :value="uploadStore.files.length" size="small" severity="danger">
-          <Link
-            @click="uploadDrawerStore.open"
-            variant="text"
-            icon="pi pi-upload"
-            severity="secondary"
-            label="Uploads"
-          />
-        </OverlayBadge>
-
-        <Divider />
+          <Divider />
+        </template>
         <Link @click="toggleAccount" :label="$t('nav.settings')" :unstyled="true" class="flex items-center justify-center">
           <Avatar
             image="https://www.primefaces.org/cdn/primevue/images/landing/apps/main-avatar.png"

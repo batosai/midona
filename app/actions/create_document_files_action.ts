@@ -1,7 +1,9 @@
 import type { Attachment } from '@jrmc/adonis-attachment/types/attachment'
 import type { MultipartFile } from '@adonisjs/core/bodyparser'
 
-import Document from '#models/document'
+import { inject } from '@adonisjs/core'
+
+import DocumentService from '#services/document_service'
 import DocumentTypes from '#enums/document_types'
 import { attachmentManager } from '@jrmc/adonis-attachment'
 
@@ -18,7 +20,10 @@ type CreateDocumentFilesActionParams = {
   parentId: string | null
 }
 
+@inject()
 export default class CreateDocumentFilesAction {
+  constructor(private documentService: DocumentService) {}
+
   async execute(params: CreateDocumentFilesActionParams) {
     const documents: documentType[] = []
 
@@ -34,7 +39,7 @@ export default class CreateDocumentFilesAction {
     }
 
     if (documents.length) {
-      return await Document.createMany(documents)
+      return await this.documentService.createMany(documents)
     }
 
     return []
