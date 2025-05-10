@@ -1,0 +1,4 @@
+session:
+  forgotLink: Forgot your password?
+  loginLink: Login?
+  invalidResetLink: Your password reset link is invalid or has expired.

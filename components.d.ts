@@ -13,6 +13,7 @@ declare module 'vue' {
     Button: typeof import('primevue/button')['default']
     ButtonGroup: typeof import('primevue/buttongroup')['default']
     Card: typeof import('primevue/card')['default']
+    Checkbox: typeof import('primevue/checkbox')['default']
     ConfirmDialog: typeof import('primevue/confirmdialog')['default']
     ContextMenu: typeof import('primevue/contextmenu')['default']
     DataView: typeof import('primevue/dataview')['default']

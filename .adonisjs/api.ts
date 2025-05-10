@@ -7,30 +7,86 @@
 import type { MakeTuyauRequest, MakeTuyauResponse } from '@tuyau/utils/types'
 import type { InferInput } from '@vinejs/vine/types'
 
-type UploadsGetHead = {
+type AuthLoginGetHead = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/session_controller.ts').default['create'], false>
+}
+type AuthLoginPost = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/session_controller.ts').default['store'], false>
+}
+type AuthLogoutDelete = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/session_controller.ts').default['destroy'], false>
+}
+type DriveGetHead = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/drives_controller.ts').default['index'], false>
+}
+type UploadsPost = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/uploads_controller.ts').default['handle'], false>
 }
 export interface ApiDefinition {
+  'auth': {
+    'login': {
+      '$url': {
+      };
+      '$get': AuthLoginGetHead;
+      '$head': AuthLoginGetHead;
+      '$post': AuthLoginPost;
+    };
+    'logout': {
+      '$url': {
+      };
+      '$delete': AuthLogoutDelete;
+    };
+  };
+  'drive': {
+    '$url': {
+    };
+    '$get': DriveGetHead;
+    '$head': DriveGetHead;
+  };
   'uploads': {
     '$url': {
     };
-    '$get': UploadsGetHead;
-    '$head': UploadsGetHead;
+    '$post': UploadsPost;
   };
 }
 const routes = [
   {
-    params: [],
-    name: 'home',
-    path: '/',
+    params: ["*"],
+    name: 'drive.fs.serve',
+    path: '/uploads/*',
     method: ["GET","HEAD"],
     types: {} as unknown,
   },
   {
     params: [],
-    name: 'login',
-    path: '/login',
+    name: 'auth.session.create',
+    path: '/auth/login',
+    method: ["GET","HEAD"],
+    types: {} as AuthLoginGetHead,
+  },
+  {
+    params: [],
+    name: 'auth.session.store',
+    path: '/auth/login',
+    method: ["POST"],
+    types: {} as AuthLoginPost,
+  },
+  {
+    params: [],
+    name: 'auth.session.destroy',
+    path: '/auth/logout',
+    method: ["DELETE"],
+    types: {} as AuthLogoutDelete,
+  },
+  {
+    params: [],
+    name: 'home',
+    path: '/',
     method: ["GET","HEAD"],
     types: {} as unknown,
   },
@@ -95,14 +151,14 @@ const routes = [
     name: 'drive',
     path: '/drive',
     method: ["GET","HEAD"],
-    types: {} as unknown,
+    types: {} as DriveGetHead,
   },
   {
     params: [],
     name: 'uploads',
     path: '/uploads',
-    method: ["GET","HEAD"],
-    types: {} as UploadsGetHead,
+    method: ["POST"],
+    types: {} as UploadsPost,
   },
 ] as const;
 export const api = {

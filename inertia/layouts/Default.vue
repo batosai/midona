@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-start h-full">
-    <Toast />
+    <FlashMessages />
     <ConfirmDialog />
     <Navbar />
     <input type="file" id="uploads" multiple class="hidden" />
@@ -10,4 +10,6 @@
 
 <script setup lang="ts">
 import Navbar from '~/components/layouts/Navbar.vue'
+import FlashMessages from '~/components/FlashMessages.vue'
+import ConfirmDialog from 'primevue/confirmdialog'
 </script>

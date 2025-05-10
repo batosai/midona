@@ -95,7 +95,8 @@ const items = ref([
       },
       {
         label: 'Logout',
-        icon: 'pi pi-sign-out'
+        icon: 'pi pi-sign-out',
+        command: () => router.visit(tuyau.$route('auth.session.destroy').path, { method: 'delete' })
       }
     ]
     }

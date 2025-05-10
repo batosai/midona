@@ -3,6 +3,16 @@
 
 import type { DefineComponent } from 'vue'
 
+declare global {
+  interface ImportMeta {
+    env: {
+      VITE_APP_NAME: string
+      [key: string]: string
+    }
+    glob: <T>(pattern: string) => Record<string, () => Promise<T>>
+  }
+}
+
 import './app.css'
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
@@ -18,6 +28,8 @@ import Noir from './presets/Noir'
 import Layout from '~/layouts/Default.vue'
 import { tuyau } from '~/settings/tuyau'
 import { useActionStore } from '~/stores/actionStore'
+import en from './locales/en'
+import fr from './locales/fr'
 
 const appName = import.meta.env.VITE_APP_NAME || 'AdonisJS'
 
@@ -25,67 +37,11 @@ const pinia = createPinia()
 
 const i18n = createI18n({
   legacy: false,
-  locale: 'fr',
+  locale: 'en',
   fallbackLocale: 'en',
   messages: {
-    en: {
-      nav: {
-        apps: 'Applications',
-        home: 'Home',
-        drive: 'Drive',
-        notes: 'Notes',
-        videos: 'Videos',
-        chat: 'Chat',
-        notifications: 'Notifications',
-        uploads: 'Downloads',
-        settings: 'Settings',
-      },
-      download: {
-        downloads: 'Downloads',
-        add: 'Add',
-        delete_all: 'Add',
-        status: {
-          INIT: 'Initialized',
-          IDLE: 'Idle',
-          PROCESSING_QUEUED: 'Queued for processing',
-          PROCESSING: 'Processing',
-          PROCESSING_COMPLETE: 'Processing complete',
-          PROCESSING_ERROR: 'Processing error',
-          PROCESSING_REVERT_ERROR: 'Error reverting processing',
-          LOADING: 'Loading',
-          LOAD_ERROR: 'Loading error',
-        }
-      }
-    },
-    fr: {
-      nav: {
-        apps: 'Applications',
-        home: 'Accueil',
-        drive: 'Drive',
-        notes: 'Notes',
-        videos: 'Vidéos',
-        chat: 'Chat',
-        notifications: 'Notifications',
-        uploads: 'Téléchargements',
-        settings: 'Paramètres',
-      },
-      download: {
-        downloads: 'Téléchargements',
-        add: 'Ajouter',
-        delete_all: 'Vider la liste des téléchargements',
-        status: {
-          INIT: 'Initialisé',
-          IDLE: 'En attente',
-          PROCESSING_QUEUED: 'En file d’attente',
-          PROCESSING: 'En traitement',
-          PROCESSING_COMPLETE: 'Traitement terminé',
-          PROCESSING_ERROR: 'Erreur de traitement',
-          PROCESSING_REVERT_ERROR: 'Erreur lors de l’annulation du traitement',
-          LOADING: 'Chargement',
-          LOAD_ERROR: 'Erreur de chargement',
-        }
-      }
-    },
+    en,
+    fr
   },
 })
 
@@ -94,14 +50,14 @@ createInertiaApp({
 
   title: (title) => `${title} - ${appName}`,
 
-  resolve: async (name) => {
+  resolve: async (name: string) => {
     const page = await resolvePageComponent(
       `../pages/${name}.vue`,
       import.meta.glob<DefineComponent>('../pages/**/*.vue')
-    )
+    ) as any
 
     page.default.layout = page.default.layout || Layout
-    return page
+    return page.default
   },
 
   setup({ el, App, props, plugin }) {
