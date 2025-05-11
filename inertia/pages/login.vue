@@ -7,7 +7,7 @@
       <template #content>
         <Form :resolver @submit="onFormSubmit" class="flex flex-col w-full gap-4 sm:w-80">
           <Message v-if="error" severity="error" size="small" variant="simple">{{ error }}</Message>
-          <FormField v-slot="$field" name="redirectTo" :initialValue="tuyau.$route('drive').path" class="hidden">
+          <FormField v-slot="$field" name="redirectTo" :initialValue="tuyau.$route('drive.store').path" class="hidden">
             <InputText type="hidden" />
           </FormField>
           <FormField v-slot="$field" name="email" initialValue="" class="flex flex-col gap-1">
@@ -52,7 +52,7 @@ const resolver = zodResolver(
     email: z.string().email({ message: t('login.validation.email') }),
     password: z.string().min(1, { message: t('login.validation.password') }),
     rememberMe: z.boolean().optional().default(false),
-    redirectTo: z.string().default(tuyau.$route('drive').path)
+    redirectTo: z.string().default(tuyau.drive.$url())
   })
 )
 
