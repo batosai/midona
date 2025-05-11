@@ -1,7 +1,7 @@
 export default {
   downloads: 'Downloads',
   add: 'Add',
-  delete_all: 'Add',
+  delete_all: 'Clear download list',
   status: {
     INIT: 'Initialized',
     IDLE: 'Idle',
