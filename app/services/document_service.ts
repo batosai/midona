@@ -7,10 +7,10 @@ import Document from '#models/document'
 export default class DocumentService {
   /**
    * Recherche un document par son identifiant
-   * @param {number} id - L'identifiant du document
+   * @param {string} id - L'identifiant du document
    * @returns {Promise<Document | null>} Le document trouvé ou null
    */
-  async find(id: number): Promise<Document | null> {
+  async find(id: string): Promise<Document | null> {
     return await Document.find(id)
   }
 
@@ -26,10 +26,10 @@ export default class DocumentService {
 
   /**
    * Récupère tous les documents d'un utilisateur spécifique
-   * @param {number} userId - L'identifiant de l'utilisateur
+   * @param {string} userId - L'identifiant de l'utilisateur
    * @returns {Promise<Document[]>} Liste des documents de l'utilisateur
    */
-  async findByUser(userId: number): Promise<Document[]> {
+  async findByUser(userId: string): Promise<Document[]> {
     return await Document.query().where('user_id', userId)
   }
 
@@ -53,11 +53,11 @@ export default class DocumentService {
 
   /**
    * Met à jour un document existant
-   * @param {number} id - L'identifiant du document à mettre à jour
+   * @param {string} id - L'identifiant du document à mettre à jour
    * @param {Partial<Document>} data - Les nouvelles données du document
    * @returns {Promise<Document | null>} Le document mis à jour ou null si non trouvé
    */
-  async update(id: number, data: Partial<Document>): Promise<Document | null> {
+  async update(id: string, data: Partial<Document>): Promise<Document | null> {
     const document = await this.find(id)
     if (!document) return null
 
@@ -66,10 +66,10 @@ export default class DocumentService {
 
   /**
    * Supprime un document
-   * @param {number} id - L'identifiant du document à supprimer
+   * @param {string} id - L'identifiant du document à supprimer
    * @returns {Promise<boolean>} true si la suppression a réussi, false sinon
    */
-  async delete(id: number): Promise<boolean> {
+  async delete(id: string): Promise<boolean> {
     const document = await this.find(id)
     if (!document) return false
 

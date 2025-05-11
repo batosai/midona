@@ -16,16 +16,16 @@
         class="grid grid-cols-2 p-8 gap-x-6 gap-y-10 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8"
       >
         <template v-for="document in documents" :key="document.id">
-          <File :name="document.name" :image="document.thumbnail" :details="bytes(document.size)" type="folder" v-if="document.isFolder" />
-          <File :name="document.name" :image="document.thumbnail" :details="bytes(document.size)" type="pdf" v-else-if="document.isPdf" />
-          <File :name="document.name" :image="document.thumbnail" :details="bytes(document.size)" type="word" v-else-if="document.isWord" />
-          <File :name="document.name" :image="document.thumbnail" :details="bytes(document.size)" type="excel" v-else-if="document.isExcel" />
-          <File :name="document.name" :image="document.thumbnail" :details="bytes(document.size)" type="video" v-else-if="document.isVideo" />
-          <File :name="document.name" :image="document.thumbnail" :details="bytes(document.size)" type="audio" v-else-if="document.isAudio" />
-          <File :name="document.name" :image="document.thumbnail" :details="bytes(document.size)" type="image" v-else-if="document.isImage" />
-          <File :name="document.name" :image="document.thumbnail" :details="bytes(document.size)" type="zip" v-else-if="document.isZip" />
-          <File :name="document.name" :image="document.thumbnail" :details="bytes(document.size)" type="rar" v-else-if="document.isRar" />
-          <File :name="document.name" :image="document.thumbnail" :details="bytes(document.size)" type="file" v-else />
+          <File :id="document.id" :name="document.name" :image="document.thumbnail" :details="bytes(document.size)" type="folder" v-if="document.isFolder" />
+          <File :id="document.id" :name="document.name" :image="document.thumbnail" :details="bytes(document.size)" type="pdf" v-else-if="document.isPdf" />
+          <File :id="document.id" :name="document.name" :image="document.thumbnail" :details="bytes(document.size)" type="word" v-else-if="document.isWord" />
+          <File :id="document.id" :name="document.name" :image="document.thumbnail" :details="bytes(document.size)" type="excel" v-else-if="document.isExcel" />
+          <File :id="document.id" :name="document.name" :image="document.thumbnail" :details="bytes(document.size)" type="video" v-else-if="document.isVideo" />
+          <File :id="document.id" :name="document.name" :image="document.thumbnail" :details="bytes(document.size)" type="audio" v-else-if="document.isAudio" />
+          <File :id="document.id" :name="document.name" :image="document.thumbnail" :details="bytes(document.size)" type="image" v-else-if="document.isImage" />
+          <File :id="document.id" :name="document.name" :image="document.thumbnail" :details="bytes(document.size)" type="zip" v-else-if="document.isZip" />
+          <File :id="document.id" :name="document.name" :image="document.thumbnail" :details="bytes(document.size)" type="rar" v-else-if="document.isRar" />
+          <File :id="document.id" :name="document.name" :image="document.thumbnail" :details="bytes(document.size)" type="file" v-else />
         </template>
       </div>
     </div>

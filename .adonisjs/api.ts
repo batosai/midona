@@ -23,6 +23,10 @@ type DriveGetHead = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/drives_controller.ts').default['index'], false>
 }
+type DriveIdDelete = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/drives_controller.ts').default['destroy'], false>
+}
 type UploadsPost = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/uploads_controller.ts').default['handle'], false>
@@ -47,6 +51,11 @@ export interface ApiDefinition {
     };
     '$get': DriveGetHead;
     '$head': DriveGetHead;
+    ':id': {
+      '$url': {
+      };
+      '$delete': DriveIdDelete;
+    };
   };
   'uploads': {
     '$url': {
@@ -152,6 +161,13 @@ const routes = [
     path: '/drive',
     method: ["GET","HEAD"],
     types: {} as DriveGetHead,
+  },
+  {
+    params: ["id"],
+    name: 'drive.destroy',
+    path: '/drive/:id',
+    method: ["DELETE"],
+    types: {} as DriveIdDelete,
   },
   {
     params: [],

@@ -42,7 +42,7 @@ router
     router.on('/users').renderInertia('users').as('users')
 
     router.get('/drive', [DrivesController, 'index']).as('drive')
-
+    router.delete('/drive/:id', [DrivesController, 'destroy']).as('drive.destroy')
     router.post('/uploads', [UploadsController]).as('uploads')
   })
   .use(middleware.auth())

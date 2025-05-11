@@ -58,38 +58,44 @@
 import { ref } from 'vue'
 import { useConfirm } from "primevue/useconfirm"
 import { useToast } from "primevue/usetoast"
+import { router } from '@inertiajs/vue3'
+import { useI18n } from 'vue-i18n'
+import { tuyau } from '~/settings/tuyau'
 
-defineProps<{
+const props = defineProps<{
+  id: string
   name?: string
   details?: string | null
   type?: 'folder' | 'pdf' | 'word' | 'excel' | 'file' | 'video' | 'audio' | 'image' | 'zip' | 'rar'
   image?: string
 }>()
 
+const { t } = useI18n()
 const confirm = useConfirm()
 const toast = useToast()
 const displayFinder = ref(false)
 
 const deleteConfirm = () => {
   confirm.require({
-    message: 'Do you want to delete this record?',
-    header: 'Danger Zone',
+    message: t('drive.file.delete.message'),
+    header: t('drive.file.delete.title'),
     icon: 'pi pi-info-circle',
-    rejectLabel: 'Cancel',
+    rejectLabel: t('drive.file.delete.cancel'),
     rejectProps: {
-      label: 'Cancel',
+      label: t('drive.file.delete.cancel'),
       severity: 'secondary',
       outlined: true
     },
     acceptProps: {
-      label: 'Delete',
+      label: t('drive.file.delete.confirm'),
       severity: 'danger'
     },
     accept: () => {
-      toast.add({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted', life: 3000 });
+      router.delete(tuyau.drive({ id: props.id }).$url())
+      toast.add({ severity: 'info', summary: t('drive.file.delete.summary.success'), detail: t('drive.file.delete.success'), life: 3000 });
     },
     reject: () => {
-      toast.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
+      toast.add({ severity: 'error', summary: t('drive.file.delete.summary.error'), detail: t('drive.file.delete.error'), life: 3000 });
     }
   });
 }
@@ -97,16 +103,16 @@ const deleteConfirm = () => {
 const menu = ref()
 const items = ref([
   {
-    label: 'Open',
+    label: t('drive.file.menu.open'),
     icon: 'pi pi-folder-open',
   },
   {
-    label: 'Delete',
+    label: t('drive.file.menu.delete'),
     icon: 'pi pi-trash',
     command: () => deleteConfirm()
   },
   {
-    label: 'Move',
+    label: t('drive.file.menu.move'),
     icon: 'pi pi-file-export',
     command: () => displayFinder.value = true
   },
@@ -114,11 +120,11 @@ const items = ref([
     separator: true,
   },
   {
-    label: 'Share',
+    label: t('drive.file.menu.share'),
     icon: 'pi pi-link',
   },
   {
-    label: 'Info',
+    label: t('drive.file.menu.info'),
     icon: 'pi pi-info-circle',
   },
 ])
