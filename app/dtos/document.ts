@@ -16,7 +16,7 @@ export default class DocumentDto extends BaseModelDto {
     thumbnail: {
       url: string
     }
-  }
+  } | null
   declare mimeType: string | null
   declare content: string | null
   declare views: number
@@ -46,14 +46,14 @@ export default class DocumentDto extends BaseModelDto {
     this.type = document.type
     this.userId = document.userId
     this.parentId = document.parentId
-    this.file = document.file.toJSON() as {
+    this.file = document.file?.toJSON() as {
       name: string
       size: number
       url: string
       thumbnail: {
         url: string
       }
-    }
+    } | null
     this.mimeType = document.mimeType
     this.content = document.content
     this.views = document.views

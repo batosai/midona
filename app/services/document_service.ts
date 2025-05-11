@@ -1,5 +1,4 @@
 import Document from '#models/document'
-
 export interface DocumentParams {
   id: string
   userId: string

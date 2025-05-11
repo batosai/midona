@@ -102,12 +102,14 @@ export default class Document extends compose(BaseModel, UuidPrimaryKey, whithTi
 
   @beforeCreate()
   static async setName(document: Document) {
-    document.name = document.file?.originalName ?? null
+    if (!document.name) {
+      document.name = document.file?.originalName
+    }
   }
 
   @beforeCreate()
   static async insertMineType(document: Document) {
-    document.mimeType = document.file.mimeType
+    document.mimeType = document.file?.mimeType
   }
 
   // Relationships

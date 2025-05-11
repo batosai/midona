@@ -11,10 +11,10 @@
       </div>
       <div class="flex flex-col gap-6 mt-10">
         <Link @click="toggleApps" :label="$t('nav.apps')" icon="pi pi-th-large" />
-        <Link :href="tuyau.$route('home').path" :label="$t('nav.home')" icon="pi pi-home" />
-        <Link :href="tuyau.$route('drive').path" :label="$t('nav.drive')" icon="pi pi-folder-open" />
-        <!-- <Link :href="tuyau.$route('notes').path" :label="$t('nav.notes')" icon="pi pi-clipboard" />
-        <Link :href="tuyau.$route('videos').path" :label="$t('nav.videos')" icon="pi pi-video" /> -->
+        <Link href="/" :label="$t('nav.home')" icon="pi pi-home" />
+        <Link :href="tuyau.drive.$url()" :label="$t('nav.drive')" icon="pi pi-folder-open" />
+        <!-- <Link :href="tuyau.notes.$url()" :label="$t('nav.notes')" icon="pi pi-clipboard" />
+        <Link :href="tuyau.videos.$url()" :label="$t('nav.videos')" icon="pi pi-video" /> -->
       </div>
     </div>
     <div class="flex flex-col items-center w-12">
@@ -96,7 +96,7 @@ const items = ref([
       {
         label: 'Logout',
         icon: 'pi pi-sign-out',
-        command: () => router.visit(tuyau.$route('auth.session.destroy').path, { method: 'delete' })
+        command: () => router.delete(tuyau.auth.logout.$url())
       }
     ]
     }

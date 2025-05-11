@@ -3,7 +3,7 @@
   <Card class="group hover:bg-surface-100 hover:dark:bg-surface-800" @contextmenu.prevent="onImageRightClick" pt:body:class="p-0">
     <template #header>
       <div
-        class="cursor-pointer relative aspect-[259/174.5] overflow-hidden flex items-center justify-center"
+        class="cursor-pointer relative aspect-[259/174.5] overflow-hidden flex items-center justify-center p-4"
       >
         <template v-if="image">
           <img class="object-cover w-full h-full" :src="image" :alt="name" />
