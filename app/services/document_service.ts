@@ -1,5 +1,14 @@
 import Document from '#models/document'
 
+interface DocumentParams {
+  id: string
+  userId: string
+}
+
+interface UpdateDocumentParams extends DocumentParams {
+  data: Partial<Document>
+}
+
 /**
  * Service de gestion des documents
  * @class DocumentService
@@ -7,11 +16,14 @@ import Document from '#models/document'
 export default class DocumentService {
   /**
    * Recherche un document par son identifiant
-   * @param {string} id - L'identifiant du document
+   * @param {DocumentParams} params - Les paramètres de recherche
    * @returns {Promise<Document | null>} Le document trouvé ou null
    */
-  async find(id: string): Promise<Document | null> {
-    return await Document.find(id)
+  async find({ id, userId }: DocumentParams): Promise<Document | null> {
+    return Document.query()
+      .where('id', id)
+      .where('user_id', userId)
+      .first()
   }
 
   /**
@@ -19,7 +31,7 @@ export default class DocumentService {
    * @returns {Promise<Document[]>} Liste de tous les documents
    */
   async findAll(): Promise<Document[]> {
-    return await Document.query()
+    return Document.query()
       .withScopes((scopes) => scopes.withoutDeleted())
       .orderBy('created_at', 'desc')
   }
@@ -39,7 +51,7 @@ export default class DocumentService {
    * @returns {Promise<Document>} Le document créé
    */
   async create(data: Partial<Document>): Promise<Document> {
-    return await Document.create(data)
+    return Document.create(data)
   }
 
   /**
@@ -48,29 +60,28 @@ export default class DocumentService {
    * @returns {Promise<Document[]>} Les documents créés
    */
   async createMany(dataArray: Partial<Document>[]): Promise<Document[]> {
-    return await Document.createMany(dataArray)
+    return Document.createMany(dataArray)
   }
 
   /**
    * Met à jour un document existant
-   * @param {string} id - L'identifiant du document à mettre à jour
-   * @param {Partial<Document>} data - Les nouvelles données du document
+   * @param {UpdateDocumentParams} params - Les paramètres de mise à jour
    * @returns {Promise<Document | null>} Le document mis à jour ou null si non trouvé
    */
-  async update(id: string, data: Partial<Document>): Promise<Document | null> {
-    const document = await this.find(id)
+  async update({ id, userId, data }: UpdateDocumentParams): Promise<Document | null> {
+    const document = await this.find({ id, userId })
     if (!document) return null
 
-    return await document.merge(data).save()
+    return document.merge(data).save()
   }
 
   /**
    * Supprime un document
-   * @param {string} id - L'identifiant du document à supprimer
+   * @param {DocumentParams} params - Les paramètres de suppression
    * @returns {Promise<boolean>} true si la suppression a réussi, false sinon
    */
-  async delete(id: string): Promise<boolean> {
-    const document = await this.find(id)
+  async delete({ id, userId }: DocumentParams): Promise<boolean> {
+    const document = await this.find({ id, userId })
     if (!document) return false
 
     await document.delete()
@@ -84,6 +95,6 @@ export default class DocumentService {
    * @returns {Promise<any>} Les documents paginés avec leurs métadonnées
    */
   async paginate(page: number = 1, limit: number = 10): Promise<any> {
-    return await Document.query().paginate(page, limit)
+    return Document.query().paginate(page, limit)
   }
 }

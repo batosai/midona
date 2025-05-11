@@ -2,6 +2,7 @@ import type { Attachment } from '@jrmc/adonis-attachment/types/attachment'
 import type { MultipartFile } from '@adonisjs/core/bodyparser'
 
 import { inject } from '@adonisjs/core'
+import { HttpContext } from '@adonisjs/core/http'
 
 import DocumentService from '#services/document_service'
 import DocumentTypes from '#enums/document_types'
@@ -16,13 +17,15 @@ type documentType = {
 
 type CreateDocumentFilesActionParams = {
   files: MultipartFile[],
-  userId: string
   parentId: string | null
 }
 
 @inject()
 export default class CreateDocumentFilesAction {
-  constructor(private documentService: DocumentService) {}
+  constructor(
+    private documentService: DocumentService,
+    private ctx: HttpContext
+  ) {}
 
   async execute(params: CreateDocumentFilesActionParams) {
     const documents: documentType[] = []
@@ -32,7 +35,7 @@ export default class CreateDocumentFilesAction {
     for (const file of files) {
       documents.push({
         type: DocumentTypes.FILE,
-        userId: params.userId,
+        userId: this.ctx.auth.user!.id,
         parentId: params.parentId,
         file: await attachmentManager.createFromFile(file),
       })
