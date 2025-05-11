@@ -7,6 +7,7 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.uuid('id').primary().index()
+      table.string('name').notNullable()
       table.enu('type', Object.values(DocumentTypes)).notNullable().defaultTo(DocumentTypes.FILE)
       table.json('file').nullable()
       table.string('mime_type').nullable()

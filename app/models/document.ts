@@ -4,6 +4,7 @@ import type { Attachment } from '@jrmc/adonis-attachment/types/attachment'
 import { BaseModel, column, belongsTo, beforeCreate, computed } from '@adonisjs/lucid/orm'
 import { compose } from '@adonisjs/core/helpers'
 import { attachment } from '@jrmc/adonis-attachment'
+import { DateTime } from 'luxon'
 import DocumentTypes from '#enums/document_types'
 import { UuidPrimaryKey } from '#models/mixins/uuid_primary_key'
 import { whithTimestamps } from '#models/mixins/with_timestamps'
@@ -15,6 +16,9 @@ export default class Document extends compose(BaseModel, UuidPrimaryKey, whithTi
   declare type: DocumentTypes
 
   @column()
+  declare name: string
+
+  @column()
   declare userId: string
 
   @column()
@@ -22,6 +26,8 @@ export default class Document extends compose(BaseModel, UuidPrimaryKey, whithTi
 
   @attachment({
     preComputeUrl: true,
+    rename: false,
+    folder: () => DateTime.now().toFormat('yyyy/MM'),
     variants: ['thumbnail'],
   })
   declare file: Attachment
@@ -36,11 +42,6 @@ export default class Document extends compose(BaseModel, UuidPrimaryKey, whithTi
   declare views: number
 
   // Computed
-
-  @computed()
-  get name() {
-    return this.file?.originalName
-  }
 
   @computed()
   get size() {
@@ -100,10 +101,14 @@ export default class Document extends compose(BaseModel, UuidPrimaryKey, whithTi
   // Hooks
 
   @beforeCreate()
+  static async setName(document: Document) {
+    document.name = document.file?.originalName ?? null
+  }
+
+  @beforeCreate()
   static async insertMineType(document: Document) {
     document.mimeType = document.file.mimeType
   }
-
 
   // Relationships
 
