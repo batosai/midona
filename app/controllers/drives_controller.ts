@@ -3,8 +3,9 @@ import type { HttpContext } from '@adonisjs/core/http'
 import { inject } from '@adonisjs/core'
 import DocumentService from '#services/document_service'
 import DocumentDto from '#dtos/document'
-import DeleteDocumentFileAction from '#actions/delete_document_file_action'
 import DocumentPolicy from '#policies/document_policy'
+import DeleteDocumentFileAction from '#actions/delete_document_file_action'
+import CreateDocumentFolderAction from '#actions/create_document_folder_action'
 
 export default class DrivesController {
   @inject()
@@ -14,6 +15,18 @@ export default class DrivesController {
     return inertia.render('drives/index', {
       documents: DocumentDto.fromArray(documents)
     })
+  }
+
+  @inject()
+  async store({ request, response, bouncer }: HttpContext, createDocumentFolderAction: CreateDocumentFolderAction) {
+    if (await bouncer.with(DocumentPolicy).denies('create')) {
+      return response.forbidden('Cannot create a document')
+    }
+
+    const data = request.only(['name', 'parentId'])
+    await createDocumentFolderAction.execute(data)
+
+    return response.redirect().back()
   }
 
   @inject()

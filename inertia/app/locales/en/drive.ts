@@ -1,12 +1,21 @@
 export default {
+  title: 'Drive',
+  create: {
+    folder: {
+      title: 'Create folder',
+      name: 'Folder name',
+      cancel: 'Cancel',
+      submit: 'Create'
+    }
+  },
   file: {
     delete: {
-      title: 'Danger Zone',
-      message: 'Do you want to delete this record?',
+      title: 'Danger zone',
+      message: 'Do you want to delete this item?',
       confirm: 'Delete',
       cancel: 'Cancel',
-      success: 'Record deleted',
-      error: 'You have rejected',
+      success: 'Item deleted',
+      error: 'You cancelled',
       summary: {
         success: 'Confirmed',
         error: 'Rejected'
@@ -17,7 +26,14 @@ export default {
       delete: 'Delete',
       move: 'Move',
       share: 'Share',
-      info: 'Info'
+      info: 'Information'
+    }
+  },
+  menu: {
+    add: {
+      folder: 'Folder',
+      youtube: 'Youtube',
+      note: 'Note'
     }
   }
 }

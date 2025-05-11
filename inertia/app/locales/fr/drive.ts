@@ -1,4 +1,13 @@
 export default {
+  title: 'Drive',
+  create: {
+    folder: {
+      title: 'Créer un répertoire',
+      name: 'Nom du répertoire',
+      cancel: 'Annuler',
+      submit: 'Créer'
+    }
+  },
   file: {
     delete: {
       title: 'Zone de danger',
@@ -18,6 +27,13 @@ export default {
       move: 'Déplacer',
       share: 'Partager',
       info: 'Informations'
+    }
+  },
+  menu: {
+    add: {
+      folder: 'Répertoire',
+      youtube: 'Youtube',
+      note: 'Note'
     }
   }
 }
