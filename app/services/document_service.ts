@@ -1,11 +1,15 @@
 import Document from '#models/document'
 
-interface DocumentParams {
+export interface DocumentParams {
   id: string
   userId: string
 }
 
-interface UpdateDocumentParams extends DocumentParams {
+export interface FindAllParams {
+  userId: string
+}
+
+export interface UpdateDocumentParams extends DocumentParams {
   data: Partial<Document>
 }
 
@@ -27,11 +31,13 @@ export default class DocumentService {
   }
 
   /**
-   * Récupère tous les documents
-   * @returns {Promise<Document[]>} Liste de tous les documents
+   * Récupère tous les documents d'un utilisateur
+   * @param {FindAllParams} params - Les paramètres de recherche
+   * @returns {Promise<Document[]>} Liste des documents de l'utilisateur
    */
-  async findAll(): Promise<Document[]> {
+  async findAll({ userId }: FindAllParams): Promise<Document[]> {
     return Document.query()
+      .where('user_id', userId)
       .withScopes((scopes) => scopes.withoutDeleted())
       .orderBy('created_at', 'desc')
   }
@@ -42,7 +48,7 @@ export default class DocumentService {
    * @returns {Promise<Document[]>} Liste des documents de l'utilisateur
    */
   async findByUser(userId: string): Promise<Document[]> {
-    return await Document.query().where('user_id', userId)
+    return Document.query().where('user_id', userId)
   }
 
   /**

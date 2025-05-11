@@ -7,9 +7,9 @@ import DeleteDocumentFileAction from '#actions/delete_document_file_action'
 
 export default class DrivesController {
   @inject()
-  async index({ inertia }: HttpContext) {
+  async index({ inertia, auth }: HttpContext) {
     const documentService = new DocumentService()
-    const documents = await documentService.findAll()
+    const documents = await documentService.findAll({ userId: auth.user!.id })
 
     return inertia.render('drives/index', {
       documents: DocumentDto.fromArray(documents)
