@@ -1,7 +1,7 @@
 <template>
   <Button
     @click="handleClick"
-    :severity="$page.url === href ? '' : 'secondary'"
+    :severity="href && href.includes($page.url) ? '' : 'secondary'"
     :variant="variant"
     :icon="icon"
     :size="size"
