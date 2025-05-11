@@ -2,11 +2,15 @@ import type { HttpContext } from '@adonisjs/core/http'
 
 import CreateDocumentFilesAction  from '#actions/create_document_files_action'
 import { inject } from '@adonisjs/core'
-
+import DocumentPolicy from '#policies/document_policy'
 export default class UploadsController {
 
   @inject()
-  async handle({ request, response }: HttpContext, createDocumentFilesAction: CreateDocumentFilesAction) {
+  async handle({ request, response, bouncer }: HttpContext, createDocumentFilesAction: CreateDocumentFilesAction) {
+    if (await bouncer.with(DocumentPolicy).denies('create')) {
+      return response.forbidden('Cannot create a document')
+    }
+
     const files = request.files('uploads', {
       size: '2mb',
     })

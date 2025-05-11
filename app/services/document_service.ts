@@ -31,6 +31,19 @@ export default class DocumentService {
   }
 
   /**
+   * Recherche un document par son identifiant et lance une exception si non trouvé
+   * @param {DocumentParams} params - Les paramètres de recherche
+   * @returns {Promise<Document>} Le document trouvé
+   * @throws {Error} Si le document n'est pas trouvé
+   */
+  async findOrFail({ id, userId }: DocumentParams): Promise<Document> {
+    return Document.query()
+      .where('id', id)
+      .where('user_id', userId)
+      .firstOrFail()
+  }
+
+  /**
    * Récupère tous les documents d'un utilisateur
    * @param {FindAllParams} params - Les paramètres de recherche
    * @returns {Promise<Document[]>} Liste des documents de l'utilisateur
