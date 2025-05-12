@@ -8,7 +8,10 @@
 */
 
 import router from '@adonisjs/core/services/router'
+import transmit from '@adonisjs/transmit/services/main'
 import { middleware } from '#start/kernel'
+
+transmit.registerRoutes()
 
 const SessionController = () => import('#controllers/session_controller')
 const UploadsController = () => import('#controllers/uploads_controller')
