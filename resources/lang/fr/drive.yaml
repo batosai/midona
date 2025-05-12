@@ -1,0 +1,16 @@
+create:
+  folder:
+    success:
+      summary: 'Succès'
+      detail: 'Le dossier a été créé avec succès'
+
+delete:
+  file:
+    success:
+      summary: 'Succès'
+      detail: 'Le fichier a été supprimé avec succès'
+
+upload:
+  success:
+    summary: 'Téléchargement réussi'
+    detail: 'Vos fichiers ont été téléchargés avec succès'
