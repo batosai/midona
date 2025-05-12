@@ -7,6 +7,7 @@ import { onMounted } from 'vue'
 import { usePage } from '@inertiajs/vue3'
 import { useToast } from 'primevue/usetoast'
 import Toast from 'primevue/toast'
+import { transmit } from '~/app/transmit'
 
 interface FlashProps {
   errors?: Record<string, string>
@@ -21,7 +22,19 @@ interface PageProps {
 const page = usePage<PageProps>()
 const toast = useToast()
 
-onMounted(() => {
+onMounted(async () => {
+
+  const subscription = transmit.subscription('notifications')
+  await subscription.create()
+
+  subscription.onMessage((data: { severity: string, summary: string, detail: string }) => {
+    toast.add({
+      ...data,
+      life: 5000
+    })
+  })
+
+
   // Gestion des erreurs
   if (page.props.flash?.errors) {
     Object.entries(page.props.flash.errors).forEach(([_key, value]) => {

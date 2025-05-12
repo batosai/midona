@@ -5,7 +5,11 @@ export default {
       title: 'Créer un répertoire',
       name: 'Nom du répertoire',
       cancel: 'Annuler',
-      submit: 'Créer'
+      submit: 'Créer',
+      success: {
+        summary: 'Succès',
+        detail: 'Le dossier a été créé avec succès'
+      }
     }
   },
   file: {
@@ -17,7 +21,6 @@ export default {
       success: 'Élément supprimé',
       error: 'Vous avez annulé',
       summary: {
-        success: 'Confirmé',
         error: 'Rejeté'
       }
     },

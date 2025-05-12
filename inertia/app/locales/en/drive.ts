@@ -17,7 +17,6 @@ export default {
       success: 'Item deleted',
       error: 'You cancelled',
       summary: {
-        success: 'Confirmed',
         error: 'Rejected'
       }
     },

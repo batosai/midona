@@ -92,10 +92,9 @@ const deleteConfirm = () => {
     },
     accept: () => {
       router.delete(tuyau.drive({ id: props.id }).$url())
-      toast.add({ severity: 'info', summary: t('drive.file.delete.summary.success'), detail: t('drive.file.delete.success'), life: 3000 });
     },
     reject: () => {
-      toast.add({ severity: 'error', summary: t('drive.file.delete.summary.error'), detail: t('drive.file.delete.error'), life: 3000 });
+      toast.add({ severity: 'error', summary: t('drive.file.delete.summary.error'), detail: t('drive.file.delete.error'), life: 3000 })
     }
   });
 }
