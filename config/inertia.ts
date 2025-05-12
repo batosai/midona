@@ -13,6 +13,7 @@ const inertiaConfig = defineConfig({
   sharedData: {
     errors: (ctx) => ctx.inertia.always(() => ctx.session?.flashMessages.get('errors')),
     success: (ctx) => ctx.inertia.always(() => ctx.session?.flashMessages.get('success')),
+    locale: (ctx) => ctx.inertia.always(() => ctx.i18n.locale),
   },
 
   /**

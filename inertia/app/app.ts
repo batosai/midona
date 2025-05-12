@@ -35,16 +35,6 @@ const appName = import.meta.env.VITE_APP_NAME || 'AdonisJS'
 
 const pinia = createPinia()
 
-const i18n = createI18n({
-  legacy: false,
-  locale: 'en',
-  fallbackLocale: 'en',
-  messages: {
-    en,
-    fr
-  },
-})
-
 createInertiaApp({
   progress: { color: '#5468FF' },
 
@@ -61,6 +51,16 @@ createInertiaApp({
   },
 
   setup({ el, App, props, plugin }) {
+    const i18n = createI18n({
+      legacy: false,
+      locale: (props.initialPage.props.locale as string) || 'en',
+      fallbackLocale: 'en',
+      messages: {
+        en,
+        fr
+      },
+    })
+
     const app = createApp({ render: () => h(App, props) })
       .use(plugin)
       .use(pinia)
