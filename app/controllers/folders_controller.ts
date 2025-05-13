@@ -13,7 +13,8 @@ export default class FoldersController {
     })
 
     return inertia.render('drives/folder', {
-      documents: DocumentDto.fromArray(documents)
+      documents: DocumentDto.fromArray(documents),
+      folderId: params.id
     })
   }
 }
