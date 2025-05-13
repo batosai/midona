@@ -1,7 +1,7 @@
 <template>
   <Button
     @click="handleClick"
-    :severity="href && href.includes($page.url) ? '' : 'secondary'"
+    :severity="href && (href === '/' ? $page.url === '/' : $page.url.includes(getBasePath(href))) ? '' : 'secondary'"
     :variant="variant"
     :icon="icon"
     :size="size"
@@ -26,6 +26,15 @@ const props = defineProps<{
   variant?: 'outlined' | 'text' | 'link'
   unstyled?: boolean
 }>()
+
+const getBasePath = (url: string) => {
+  try {
+    const urlObj = new URL(url)
+    return urlObj.pathname
+  } catch {
+    return url
+  }
+}
 
 const handleClick = (event: MouseEvent) => {
   emit('click', event)
