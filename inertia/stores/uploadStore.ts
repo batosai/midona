@@ -5,6 +5,7 @@ import * as FilePond from 'filepond'
 import { defineStore } from 'pinia'
 import { tuyau } from '~/settings/tuyau'
 import { ref } from 'vue'
+import { router } from '@inertiajs/vue3'
 
 type File  = {
   filename: string,
@@ -102,6 +103,16 @@ export const useUploadStore = defineStore('uploadStore', () => {
 
       callback(item)
       console.error(error)
+    })
+
+    pond.on('processfile', (error: unknown, item: FilePondFile) => {
+      if (error) {
+        console.error(error)
+        return
+      }
+
+      callback(item)
+      router.reload()
     })
 
     filePond.value = pond
