@@ -4,11 +4,6 @@ export interface DocumentParams {
   userId: string
 }
 
-export interface FindAllParams {
-  userId: string
-  parentId?: string | null
-}
-
 export interface UpdateDocumentParams extends DocumentParams {
   data: Partial<Document>
 }
@@ -45,17 +40,21 @@ export default class DocumentService {
 
   /**
    * Récupère tous les documents d'un utilisateur
-   * @param {FindAllParams} params - Les paramètres de recherche
+   * @param {Object} params - Les paramètres de recherche
+   * @param {string} params.userId - L'identifiant de l'utilisateur
+   * @param {string | null} [params.parentId=null] - L'identifiant du dossier parent
    * @returns {Promise<Document[]>} Liste des documents de l'utilisateur
    */
-  async findAll({ userId, parentId }: FindAllParams): Promise<Document[]> {
+  async findAll({ userId, parentId = null }: { userId: string, parentId?: string | null }): Promise<Document[]> {
     const query = Document.query()
       .where('user_id', userId)
       .withScopes((scopes) => scopes.withoutDeleted())
       .orderBy('created_at', 'desc')
 
-    if (parentId !== undefined) {
-      query.where('parent_id', parentId === null ? null : parentId)
+    if (parentId === null) {
+      query.whereNull('parent_id')
+    } else {
+      query.where('parent_id', parentId)
     }
 
     return query

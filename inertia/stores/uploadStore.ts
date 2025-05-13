@@ -22,6 +22,7 @@ function getEnumKeyByValue<T extends object>(enumObj: T, value: number): string 
 export const useUploadStore = defineStore('uploadStore', () => {
   const filePond: Ref<FilePondContrat | undefined> = ref()
   const files = ref<File[]>([])
+  const currentFolderId = ref<string | null>(null)
 
   function init() {
     const inputElement = document.querySelector('#uploads')
@@ -34,14 +35,22 @@ export const useUploadStore = defineStore('uploadStore', () => {
       name: 'uploads'
     })
     pond.setOptions({
-      server: tuyau.$route('uploads').path,
-      // server: {
-      //   process: tuyau.$route('uploads').path,
-      //   load: null,
-      //   restore: null,
-      //   fetch: null,
-      //   revert: null,
-      // },
+      server: {
+        process: {
+          url: tuyau.$route('uploads').path,
+          method: 'POST',
+          withCredentials: true,
+          headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
+          },
+          ondata: (formData) => {
+            if (currentFolderId.value) {
+              formData.append('parentId', currentFolderId.value)
+            }
+            return formData
+          }
+        }
+      }
     })
 
     pond.on('addfile', (error: unknown, item: FilePondFile) => {
@@ -98,7 +107,8 @@ export const useUploadStore = defineStore('uploadStore', () => {
     filePond.value = pond
   }
 
-  function browse() {
+  function browse(folderId?: string) {
+    currentFolderId.value = folderId || null
     if (filePond.value) {
       filePond.value.browse()
     }
@@ -185,6 +195,7 @@ export const useUploadStore = defineStore('uploadStore', () => {
     isComplete,
     isAbort,
     isError,
-    browse
+    browse,
+    currentFolderId
   }
 })

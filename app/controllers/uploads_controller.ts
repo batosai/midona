@@ -25,7 +25,7 @@ export default class UploadsController {
     }
 
     const documents = await createDocumentFilesAction.execute({
-      parentId: null,
+      parentId: request.input('parentId'),
       files
     })
 

@@ -6,7 +6,7 @@
       <Menubar class="sticky top-0 border-0 rounded-none z-100 bg-surface-100 dark:bg-surface-900">
         <template #start> {{ $t('drive.folder.title') }} </template>
         <template #end>
-          <SplitButton icon="pi pi-plus" @click="uploadStore.browse" :model="itemsAdd" />
+          <SplitButton icon="pi pi-plus" @click="() => uploadStore.browse(folderId)" :model="itemsAdd" />
         </template>
       </Menubar>
 
@@ -58,8 +58,9 @@ import { useActionStore } from '~/stores/actionStore'
 import { useUploadStore } from '~/stores/uploadStore'
 import { tuyau } from '~/settings/tuyau'
 
-defineProps<{
+const props = defineProps<{
   documents: InferPageProps<FoldersController, 'show'>['documents'],
+  folderId: string
 }>()
 
 const uploadStore = useUploadStore()
@@ -78,7 +79,7 @@ const folderName = ref('')
 const createFolder = () => {
   router.post(tuyau.drive.$url(), {
     name: folderName.value,
-    parentId: null
+    parentId: props.folderId
   })
   showCreateFolderModal.value = false
   folderName.value = ''
@@ -94,13 +95,13 @@ const itemsAdd = ref([
   {
     label: t('drive.menu.add.youtube'),
     command: () => {
-      uploadStore.browse()
+      uploadStore.browse(props.folderId)
     }
   },
   {
     label: t('drive.menu.add.note'),
     command: () => {
-      uploadStore.browse()
+      uploadStore.browse(props.folderId)
     }
   },
 ])
@@ -110,7 +111,7 @@ const itemsMenu = ref([
     label: 'Add',
     icon: 'pi pi-plus',
     command: () => {
-      uploadStore.browse()
+      uploadStore.browse(props.folderId)
     },
     items: [
       ...itemsAdd.value
