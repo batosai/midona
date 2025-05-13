@@ -16,6 +16,7 @@ transmit.registerRoutes()
 const SessionController = () => import('#controllers/session_controller')
 const UploadsController = () => import('#controllers/uploads_controller')
 const DrivesController = () => import('#controllers/drives_controller')
+const FoldersController = () => import('#controllers/folders_controller')
 
 router
   .group(() => {
@@ -45,6 +46,7 @@ router
     router.on('/users').renderInertia('users').as('users')
 
     router.resource('/drive', DrivesController).only(['index', 'store', 'destroy']).as('drive')
+    router.get('/drive/folders/:id', [FoldersController, 'show']).as('drive.folders.show')
 
     router.post('/uploads', [UploadsController]).as('uploads')
   })

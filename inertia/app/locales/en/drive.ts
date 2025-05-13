@@ -1,5 +1,8 @@
 export default {
   title: 'Drive',
+  folder: {
+    title: 'Folder'
+  },
   create: {
     folder: {
       title: 'Create folder',

@@ -1,5 +1,8 @@
 export default {
   title: 'Drive',
+  folder: {
+    title: 'Dossier'
+  },
   create: {
     folder: {
       title: 'Créer un répertoire',

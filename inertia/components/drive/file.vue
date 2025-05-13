@@ -27,7 +27,7 @@
         </template>
 
         <Tag class="absolute z-10 top-2 right-2 group-hover:dark:bg-surface-900 group-hover:bg-surface-0" severity="secondary" :value="type" />
-        <a href="#" class="absolute inset-0"></a>
+        <Link v-if="type === 'folder'" :href="`/drive/folders/${id}`" class="absolute inset-0" />
       </div>
     </template>
     <template #content>
@@ -58,7 +58,7 @@
 import { ref } from 'vue'
 import { useConfirm } from "primevue/useconfirm"
 import { useToast } from "primevue/usetoast"
-import { router } from '@inertiajs/vue3'
+import { router, Link } from '@inertiajs/vue3'
 import { useI18n } from 'vue-i18n'
 import { tuyau } from '~/settings/tuyau'
 
@@ -104,6 +104,11 @@ const items = ref([
   {
     label: t('drive.file.menu.open'),
     icon: 'pi pi-folder-open',
+    command: () => {
+      if (props.type === 'folder') {
+        router.visit(`/drive/folders/${props.id}`)
+      }
+    }
   },
   {
     label: t('drive.file.menu.delete'),
