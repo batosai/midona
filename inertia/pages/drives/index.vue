@@ -6,7 +6,7 @@
       <Menubar class="sticky top-0 border-0 rounded-none z-100 bg-surface-100 dark:bg-surface-900">
         <template #start> {{ $t('drive.title') }} </template>
         <template #end>
-          <SplitButton icon="pi pi-plus" @click="uploadStore.browse" :model="itemsAdd" />
+          <SplitButton icon="pi pi-plus" @click=" () => uploadStore.browse()" :model="itemsAdd" />
         </template>
       </Menubar>
 
