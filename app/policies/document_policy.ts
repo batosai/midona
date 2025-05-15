@@ -19,6 +19,13 @@ export default class DocumentPolicy extends BasePolicy {
     }
 
     /**
+     * Only the document creator can update the document
+     */
+    update(user: User, document: Document): AuthorizerResponse {
+      return user.id === document.userId
+    }
+
+    /**
      * Only the document creator can delete the document
      */
     delete(user: User, document: Document): AuthorizerResponse {

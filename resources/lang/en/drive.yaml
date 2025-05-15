@@ -14,3 +14,11 @@ upload:
   success:
     summary: 'Upload successful'
     detail: 'Your files have been successfully uploaded'
+
+move:
+  success:
+    summary: 'Success'
+    detail: 'Item has been moved successfully'
+  error:
+    summary: 'Error'
+    detail: 'An error occurred while moving the item'

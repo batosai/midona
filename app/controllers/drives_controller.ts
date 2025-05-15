@@ -37,13 +37,40 @@ export default class DrivesController {
   }
 
   @inject()
-  async destroy({ params, response, auth, bouncer, i18n }: HttpContext, documentService: DocumentService, deleteDocumentFileAction: DeleteDocumentFileAction) {
-    const document = await documentService.findOrFail({ id: params.id, userId: auth.user!.id })
+  async update({ request, response, bouncer, i18n, params, auth }: HttpContext, documentService: DocumentService) {
+    const document = await documentService.find({ id: params.id, userId: auth.user!.id })
+    if (!document) {
+      return response.notFound()
+    }
+
+    if (await bouncer.with(DocumentPolicy).denies('update', document)) {
+      return response.forbidden('Cannot update a document')
+    }
+
+    const data = request.only(['parentId'])
+    await documentService.update({ id: params.id, data })
+
+    transmit.broadcast('notifications', {
+      severity: 'success',
+      summary: i18n.t('drive.move.success.summary'),
+      detail: i18n.t('drive.move.success.detail'),
+    })
+
+    return response.redirect().back()
+  }
+
+  @inject()
+  async destroy({ request, response, bouncer, i18n, auth }: HttpContext, deleteDocumentFileAction: DeleteDocumentFileAction, documentService: DocumentService) {
+    const document = await documentService.find({ id: request.param('id'), userId: auth.user!.id })
+    if (!document) {
+      return response.notFound()
+    }
+
     if (await bouncer.with(DocumentPolicy).denies('delete', document)) {
       return response.forbidden('Cannot delete a document')
     }
 
-    await deleteDocumentFileAction.execute({ id: params.id })
+    await deleteDocumentFileAction.execute({ id: request.param('id') })
 
     transmit.broadcast('notifications', {
       severity: 'success',

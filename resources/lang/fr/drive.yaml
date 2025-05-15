@@ -14,3 +14,11 @@ upload:
   success:
     summary: 'Téléchargement réussi'
     detail: 'Vos fichiers ont été téléchargés avec succès'
+
+move:
+  success:
+    summary: 'Succès'
+    detail: "L'élément a été déplacé avec succès"
+  error:
+    summary: 'Erreur'
+    detail: 'Une erreur est survenue lors du déplacement'

@@ -33,6 +33,19 @@ export default {
       move: 'Déplacer',
       share: 'Partager',
       info: 'Informations'
+    },
+    move: {
+      title: 'Déplacer vers',
+      cancel: 'Annuler',
+      submit: 'Déplacer',
+      success: {
+        summary: 'Succès',
+        detail: 'L\'élément a été déplacé avec succès'
+      },
+      error: {
+        summary: 'Erreur',
+        detail: 'Une erreur est survenue lors du déplacement'
+      }
     }
   },
   menu: {

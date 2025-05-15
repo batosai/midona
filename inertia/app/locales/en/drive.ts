@@ -29,6 +29,19 @@ export default {
       move: 'Move',
       share: 'Share',
       info: 'Information'
+    },
+    move: {
+      title: 'Move to',
+      cancel: 'Cancel',
+      submit: 'Move',
+      success: {
+        summary: 'Success',
+        detail: 'Item has been moved successfully'
+      },
+      error: {
+        summary: 'Error',
+        detail: 'An error occurred while moving the item'
+      }
     }
   },
   menu: {

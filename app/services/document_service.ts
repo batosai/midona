@@ -1,10 +1,13 @@
 import Document from '#models/document'
+import DocumentTypes from '#enums/document_types'
+
 export interface DocumentParams {
   id: string
   userId: string
 }
 
-export interface UpdateDocumentParams extends DocumentParams {
+export interface UpdateDocumentParams {
+  id: string
   data: Partial<Document>
 }
 
@@ -43,21 +46,29 @@ export default class DocumentService {
    * @param {Object} params - Les paramètres de recherche
    * @param {string} params.userId - L'identifiant de l'utilisateur
    * @param {string | null} [params.parentId=null] - L'identifiant du dossier parent
+   * @param {DocumentTypes} [params.type] - Le type de document à récupérer
    * @returns {Promise<Document[]>} Liste des documents de l'utilisateur
    */
-  async findAll({ userId, parentId = null }: { userId: string, parentId?: string | null }): Promise<Document[]> {
+  async findAll({ userId, parentId = null, type }: { userId: string, parentId?: string | null, type?: DocumentTypes }): Promise<Document[]> {
+
     const query = Document.query()
       .where('user_id', userId)
       .withScopes((scopes) => scopes.withoutDeleted())
       .orderBy('created_at', 'desc')
 
-    if (parentId === null) {
+    if (parentId === null || parentId === '') {
       query.whereNull('parent_id')
     } else {
       query.where('parent_id', parentId)
     }
 
-    return query
+    if (type) {
+      query.where('type', type)
+    }
+
+    // console.log('Document query:', query.toQuery().toString())
+    const results = await query
+    return results
   }
 
   /**
@@ -92,8 +103,13 @@ export default class DocumentService {
    * @param {UpdateDocumentParams} params - Les paramètres de mise à jour
    * @returns {Promise<Document | null>} Le document mis à jour ou null si non trouvé
    */
-  async update({ id, userId, data }: UpdateDocumentParams): Promise<Document | null> {
-    const document = await this.find({ id, userId })
+  async update({ id, data }: UpdateDocumentParams): Promise<Document | null> {
+    const document = await Document.findBy('id', id)
+
+    if (data.parentId) {
+      data.parentId = data.parentId === 'root' ? null : data.parentId
+    }
+
     if (!document) return null
 
     return document.merge(data).save()
@@ -104,8 +120,8 @@ export default class DocumentService {
    * @param {DocumentParams} params - Les paramètres de suppression
    * @returns {Promise<boolean>} true si la suppression a réussi, false sinon
    */
-  async delete({ id, userId }: DocumentParams): Promise<boolean> {
-    const document = await this.find({ id, userId })
+  async delete({ id }: DocumentParams): Promise<boolean> {
+    const document = await Document.findBy('id', id)
     if (!document) return false
 
     await document.delete()

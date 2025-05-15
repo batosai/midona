@@ -1,5 +1,4 @@
 <template>
-
   <Card class="group hover:bg-surface-100 hover:dark:bg-surface-800" @contextmenu.prevent="onImageRightClick" pt:body:class="p-0">
     <template #header>
       <div
@@ -27,7 +26,7 @@
         </template>
 
         <Tag class="absolute z-10 top-2 right-2 group-hover:dark:bg-surface-900 group-hover:bg-surface-0" severity="secondary" :value="type" />
-        <Link v-if="type === 'folder'" :href="`/drive/folders/${id}`" class="absolute inset-0" />
+        <Link v-if="type === 'folder'" :href="tuyau.drive.folders({ id: props.id }).$url()" class="absolute inset-0" />
       </div>
     </template>
     <template #content>
@@ -49,9 +48,7 @@
     </template>
   </Card>
 
-  <Dialog v-model:visible="displayFinder" header="Finder" :breakpoints="{ '960px': '50vw' }" :style="{ width: '40vw' }" :maximizable="true">
-    <Tree :value="samples" />
-  </Dialog>
+  <MoveModal v-model:visible="showMoveModal" :document-id="id" />
 </template>
 
 <script setup lang="ts">
@@ -61,6 +58,7 @@ import { useToast } from "primevue/usetoast"
 import { router, Link } from '@inertiajs/vue3'
 import { useI18n } from 'vue-i18n'
 import { tuyau } from '~/settings/tuyau'
+import MoveModal from './move-modal.vue'
 
 const props = defineProps<{
   id: string
@@ -73,113 +71,55 @@ const props = defineProps<{
 const { t } = useI18n()
 const confirm = useConfirm()
 const toast = useToast()
-const displayFinder = ref(false)
+const menu = ref()
+const showMoveModal = ref(false)
 
-const deleteConfirm = () => {
-  confirm.require({
-    message: t('drive.file.delete.message'),
-    header: t('drive.file.delete.title'),
-    icon: 'pi pi-info-circle',
-    rejectLabel: t('drive.file.delete.cancel'),
-    rejectProps: {
-      label: t('drive.file.delete.cancel'),
-      severity: 'secondary',
-      outlined: true
-    },
-    acceptProps: {
-      label: t('drive.file.delete.confirm'),
-      severity: 'danger'
-    },
-    accept: () => {
-      router.delete(tuyau.drive({ id: props.id }).$url())
-    },
-    reject: () => {
-      toast.add({ severity: 'error', summary: t('drive.file.delete.summary.error'), detail: t('drive.file.delete.error'), life: 3000 })
-    }
-  });
+const toggle = (event: Event) => {
+  menu.value.toggle(event)
 }
 
-const menu = ref()
+const onImageRightClick = (event: Event) => {
+  event.stopPropagation()
+  menu.value.show(event)
+}
+
 const items = ref([
   {
     label: t('drive.file.menu.open'),
     icon: 'pi pi-folder-open',
     command: () => {
-      if (props.type === 'folder') {
-        router.visit(`/drive/folders/${props.id}`)
-      }
+      router.visit(tuyau.drive.folders({ id: props.id }).$url())
+    }
+  },
+  {
+    label: t('drive.file.menu.move'),
+    icon: 'pi pi-arrows-h',
+    command: () => {
+      showMoveModal.value = true
     }
   },
   {
     label: t('drive.file.menu.delete'),
     icon: 'pi pi-trash',
-    command: () => deleteConfirm()
-  },
-  {
-    label: t('drive.file.menu.move'),
-    icon: 'pi pi-file-export',
-    command: () => displayFinder.value = true
-  },
-  {
-    separator: true,
-  },
-  {
-    label: t('drive.file.menu.share'),
-    icon: 'pi pi-link',
-  },
-  {
-    label: t('drive.file.menu.info'),
-    icon: 'pi pi-info-circle',
-  },
+    command: () => {
+      confirm.require({
+        message: t('drive.file.delete.message'),
+        header: t('drive.file.delete.title'),
+        icon: 'pi pi-exclamation-triangle',
+        acceptLabel: t('drive.file.delete.confirm'),
+        rejectProps: {
+          label: t('drive.file.delete.cancel'),
+          severity: 'secondary',
+          outlined: true
+        },
+        accept: () => {
+          router.delete(tuyau.drive({ id: props.id }).$url())
+        },
+        reject: () => {
+          toast.add({ severity: 'info', summary: t('drive.file.delete.error'), life: 3000 })
+        }
+      })
+    }
+  }
 ])
-
-const samples = ref([
-{
-                    key: '0',
-                    label: 'Documents',
-                    data: 'Documents Folder',
-                    icon: 'pi pi-fw pi-inbox',
-                    children: [
-                        {
-                            key: '0-0',
-                            label: 'Work',
-                            data: 'Work Folder',
-                            icon: 'pi pi-fw pi-cog',
-                            children: [
-                                { key: '0-0-0', label: 'Expenses.doc', icon: 'pi pi-fw pi-file', data: 'Expenses Document' },
-                                { key: '0-0-1', label: 'Resume.doc', icon: 'pi pi-fw pi-file', data: 'Resume Document' }
-                            ]
-                        },
-                        {
-                            key: '0-1',
-                            label: 'Home',
-                            data: 'Home Folder',
-                            icon: 'pi pi-fw pi-home',
-                            children: [{ key: '0-1-0', label: 'Invoices.txt', icon: 'pi pi-fw pi-file', data: 'Invoices for this month' }]
-                        }
-                    ]
-                },
-                {
-                    key: '1',
-                    label: 'Events',
-                    data: 'Events Folder',
-                    icon: 'pi pi-fw pi-calendar',
-                    children: [
-                        { key: '1-0', label: 'Meeting', icon: 'pi pi-fw pi-calendar-plus', data: 'Meeting' },
-                        { key: '1-1', label: 'Product Launch', icon: 'pi pi-fw pi-calendar-plus', data: 'Product Launch' },
-                        { key: '1-2', label: 'Report Review', icon: 'pi pi-fw pi-calendar-plus', data: 'Report Review' }
-                    ]
-                },
-])
-
-const toggle = (event: any) => {
-  menu.value.toggle(event)
-}
-
-const onImageRightClick = (event: any) => {
-  event.stopPropagation()
-  menu.value.show(event)
-}
-
-
 </script>

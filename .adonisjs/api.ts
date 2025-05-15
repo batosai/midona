@@ -27,6 +27,10 @@ type DrivePost = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/drives_controller.ts').default['store'], false>
 }
+type DriveIdPutPatch = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/drives_controller.ts').default['update'], false>
+}
 type DriveIdDelete = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/drives_controller.ts').default['destroy'], false>
@@ -34,6 +38,10 @@ type DriveIdDelete = {
 type DriveFoldersIdGetHead = {
   request: unknown
   response: MakeTuyauResponse<import('../app/controllers/folders_controller.ts').default['show'], false>
+}
+type ApiFoldersGetHead = {
+  request: unknown
+  response: MakeTuyauResponse<import('../app/controllers/folders_controller.ts').default['list'], false>
 }
 type UploadsPost = {
   request: unknown
@@ -63,6 +71,8 @@ export interface ApiDefinition {
     ':id': {
       '$url': {
       };
+      '$put': DriveIdPutPatch;
+      '$patch': DriveIdPutPatch;
       '$delete': DriveIdDelete;
     };
     'folders': {
@@ -72,6 +82,14 @@ export interface ApiDefinition {
         '$get': DriveFoldersIdGetHead;
         '$head': DriveFoldersIdGetHead;
       };
+    };
+  };
+  'api': {
+    'folders': {
+      '$url': {
+      };
+      '$get': ApiFoldersGetHead;
+      '$head': ApiFoldersGetHead;
     };
   };
   'uploads': {
@@ -188,6 +206,13 @@ const routes = [
   },
   {
     params: ["id"],
+    name: 'drive.update',
+    path: '/drive/:id',
+    method: ["PUT","PATCH"],
+    types: {} as DriveIdPutPatch,
+  },
+  {
+    params: ["id"],
     name: 'drive.destroy',
     path: '/drive/:id',
     method: ["DELETE"],
@@ -199,6 +224,13 @@ const routes = [
     path: '/drive/folders/:id',
     method: ["GET","HEAD"],
     types: {} as DriveFoldersIdGetHead,
+  },
+  {
+    params: [],
+    name: 'api.folders.list',
+    path: '/api/folders',
+    method: ["GET","HEAD"],
+    types: {} as ApiFoldersGetHead,
   },
   {
     params: [],
