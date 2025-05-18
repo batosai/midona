@@ -10,11 +10,15 @@ import CreateDocumentFolderAction from '#actions/create_document_folder_action'
 
 export default class DrivesController {
   @inject()
-  async index({ inertia, auth }: HttpContext, documentService: DocumentService) {
-    const documents = await documentService.findAll({ userId: auth.user!.id })
+  async index({ inertia, auth, params }: HttpContext, documentService: DocumentService) {
+    const documents = await documentService.findAll({
+      userId: auth.user!.id,
+      parentId: params.id || null
+    })
 
     return inertia.render('drives/index', {
-      documents: DocumentDto.fromArray(documents)
+      documents: DocumentDto.fromArray(documents),
+      parentId: params.id || null
     })
   }
 

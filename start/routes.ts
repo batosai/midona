@@ -46,7 +46,7 @@ router
     router.on('/users').renderInertia('users').as('users')
 
     router.resource('/drive', DrivesController).only(['index', 'store', 'update', 'destroy']).as('drive')
-    router.get('/drive/folders/:id', [FoldersController, 'show']).as('drive.folders.show')
+    router.get('/drive/folders/:id', [DrivesController, 'index']).as('drive.folders.show')
     router.get('/api/folders', [FoldersController, 'list']).as('api.folders.list')
 
     router.post('/uploads', [UploadsController]).as('uploads')

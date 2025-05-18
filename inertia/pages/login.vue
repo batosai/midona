@@ -7,7 +7,7 @@
       <template #content>
         <Form :resolver @submit="onFormSubmit" class="flex flex-col w-full gap-4 sm:w-80">
           <Message v-if="error" severity="error" size="small" variant="simple">{{ error }}</Message>
-          <FormField v-slot="$field" name="redirectTo" :initialValue="tuyau.$route('drive.store').path" class="hidden">
+          <FormField name="redirectTo" :initialValue="tuyau.$route('drive.store').path" class="hidden">
             <InputText type="hidden" />
           </FormField>
           <FormField v-slot="$field" name="email" initialValue="" class="flex flex-col gap-1">
@@ -18,7 +18,7 @@
             <Password type="text" size="large" :placeholder="$t('login.password')" :feedback="false" toggleMask fluid />
             <Message v-if="$field?.invalid" severity="error" size="small" variant="simple">{{ $field.error?.message }}</Message>
           </FormField>
-          <FormField v-slot="$field" name="rememberMe" initialValue="false" class="flex items-center gap-2">
+          <FormField name="rememberMe" initialValue="false" class="flex items-center gap-2">
             <Checkbox :binary="true" id="rememberMe" />
             <label for="rememberMe">{{ $t('login.rememberMe') }}</label>
           </FormField>

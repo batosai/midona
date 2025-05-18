@@ -6,7 +6,7 @@
       <Menubar class="sticky top-0 border-0 rounded-none z-100 bg-surface-100 dark:bg-surface-900">
         <template #start> {{ $t('drive.title') }} </template>
         <template #end>
-          <SplitButton icon="pi pi-plus" @click=" () => uploadStore.browse()" :model="itemsAdd" />
+          <SplitButton icon="pi pi-plus" @click=" () => uploadStore.browse(parentId)" :model="itemsAdd" />
         </template>
       </Menubar>
 
@@ -33,14 +33,22 @@
 
   <Dialog v-model:visible="showCreateFolderModal" modal :header="$t('drive.create.folder.title')" :style="{ width: '50vw' }">
     <div class="flex flex-col gap-4">
-      <div class="field">
-        <label for="folderName" class="block mb-2">{{ $t('drive.create.folder.name') }}</label>
-        <InputText id="folderName" v-model="folderName" class="w-full" @keyup.enter="createFolder" />
-      </div>
+      <Form id="folderForm" :resolver @submit="onFormSubmit" class="w-full">
+        <Message v-if="error" severity="error" size="small" variant="simple">{{ error }}</Message>
+        <FormField v-slot="$field" name="name">
+          <label for="folderName" class="block mb-2">{{ $t('drive.create.folder.name') }}</label>
+          <InputText id="folderName" size="large" :placeholder="$t('drive.create.folder.name')" class="w-full" />
+          <Message v-if="$field?.invalid" severity="error" size="small" variant="simple">{{ $field.error?.message }}</Message>
+        </FormField>
+
+        <FormField name="parentId" :initialValue="parentId" class="hidden">
+          <InputText type="hidden" />
+        </FormField>
+      </Form>
     </div>
     <template #footer>
       <Button :label="$t('drive.create.folder.cancel')" icon="pi pi-times" @click="showCreateFolderModal = false" class="p-button-text" />
-      <Button :label="$t('drive.create.folder.submit')" icon="pi pi-check" @click="createFolder" autofocus />
+      <Button :label="$t('drive.create.folder.submit')" icon="pi pi-check" type="submit" form="folderForm" autofocus />
     </template>
   </Dialog>
 </template>
@@ -51,6 +59,9 @@ import type DrivesController from '#controllers/drives_controller'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { Head, router } from '@inertiajs/vue3'
+import { Form, FormField, type FormSubmitEvent } from '@primevue/forms'
+import { zodResolver } from '@primevue/forms/resolvers/zod'
+import { z } from 'zod'
 import { InferPageProps } from '@adonisjs/inertia/types'
 import bytes from 'bytes'
 import File from '@/drive/file.vue'
@@ -58,8 +69,9 @@ import { useActionStore } from '~/stores/actionStore'
 import { useUploadStore } from '~/stores/uploadStore'
 import { tuyau } from '~/settings/tuyau'
 
-defineProps<{
+const props = defineProps<{
   documents: InferPageProps<DrivesController, 'index'>['documents'],
+  parentId?: string
 }>()
 
 const uploadStore = useUploadStore()
@@ -71,17 +83,32 @@ actionStore.set([{
 }])
 
 const { t } = useI18n()
-
+const error = ref('')
 const showCreateFolderModal = ref(false)
 const folderName = ref('')
 
-const createFolder = () => {
-  router.post(tuyau.drive.$url(), {
-    name: folderName.value,
-    parentId: null
+const resolver = zodResolver(
+  z.object({
+    name: z.string().min(1),
+    parentId: z.string().optional()
   })
-  showCreateFolderModal.value = false
-  folderName.value = ''
+)
+
+const onFormSubmit = (event: FormSubmitEvent<Record<string, any>>) => {
+  if (!event.valid) return
+  error.value = ''
+
+  console.log(event.values)
+
+  router.post(tuyau.drive.$url(), event.values, {
+    // onError: (errors) => {
+    //   error.value = errors.E_INVALID_CREDENTIALS || errors.E_INVALID_DISABLED
+    // }
+    onSuccess: () => {
+      showCreateFolderModal.value = false
+      folderName.value = ''
+    }
+  })
 }
 
 const itemsAdd = ref([
@@ -94,13 +121,13 @@ const itemsAdd = ref([
   {
     label: t('drive.menu.add.youtube'),
     command: () => {
-      uploadStore.browse()
+      uploadStore.browse(props.parentId)
     }
   },
   {
     label: t('drive.menu.add.note'),
     command: () => {
-      uploadStore.browse()
+      uploadStore.browse(props.parentId)
     }
   },
 ])
@@ -110,7 +137,7 @@ const itemsMenu = ref([
     label: 'Add',
     icon: 'pi pi-plus',
     command: () => {
-      uploadStore.browse()
+      uploadStore.browse(props.parentId)
     },
     items: [
       ...itemsAdd.value
