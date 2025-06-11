@@ -4,10 +4,7 @@ import { InferConverters } from '@jrmc/adonis-attachment/types/config'
 const attachmentConfig = defineConfig({
   converters: {
     thumbnail: {
-      converter: () => import('@jrmc/adonis-attachment/converters/image_converter'),
-      options: {
-        resize: 300,
-      }
+      resize: 300,
     }
   }
 })

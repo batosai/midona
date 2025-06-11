@@ -10,6 +10,7 @@ export default class DocumentDto extends BaseModelDto {
   declare userId: string
   declare parentId: string | null
   declare file: {
+    keyId: string
     name: string
     size: number
     url: string
@@ -37,6 +38,7 @@ export default class DocumentDto extends BaseModelDto {
   declare isRar: boolean
 
   declare thumbnail: string | undefined
+  declare key: string
 
   constructor(document?: Document) {
     super()
@@ -47,6 +49,7 @@ export default class DocumentDto extends BaseModelDto {
     this.userId = document.userId
     this.parentId = document.parentId
     this.file = document.file?.toJSON() as {
+      keyId: string
       name: string
       size: number
       url: string
@@ -74,5 +77,6 @@ export default class DocumentDto extends BaseModelDto {
     this.isRar = document.isRar ?? false
 
     this.thumbnail = this.file?.thumbnail?.url
+    this.key = this.file?.keyId ?? ''
   }
 }

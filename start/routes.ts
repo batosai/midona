@@ -50,6 +50,8 @@ router
     router.get('/api/folders', [FoldersController, 'list']).as('api.folders.list')
 
     router.post('/uploads', [UploadsController]).as('uploads')
+
+    router.attachments()
   })
   .use(middleware.auth())
 

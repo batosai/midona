@@ -5,7 +5,8 @@
         class="cursor-pointer relative aspect-[259/174.5] overflow-hidden flex items-center justify-center p-4"
       >
         <template v-if="image">
-          <img class="object-cover w-full h-full" :src="image" :alt="name" />
+          <!-- <img class="object-cover w-full h-full" :src="image" :alt="name" /> -->
+          <img class="object-cover w-full h-full" :src="tuyau.$url('attachments', { params: { key: props.id, name: name! }, query: { variant: 'thumbnail'} })" :alt="name" />
         </template>
 
         <template v-else>

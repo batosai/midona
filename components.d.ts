@@ -44,9 +44,8 @@ declare module 'vue' {
     Toast: typeof import('primevue/toast')['default']
     Tree: typeof import('primevue/tree')['default']
   }
-  export interface ComponentCustomProperties {
+  export interface GlobalDirectives {
     FocusTrap: typeof import('primevue/focustrap')['default']
-    Ripple: typeof import('primevue/ripple')['default']
     Tooltip: typeof import('primevue/tooltip')['default']
   }
 }
