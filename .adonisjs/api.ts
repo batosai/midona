@@ -24,8 +24,8 @@ type DriveGetHead = {
   response: MakeTuyauResponse<import('../app/controllers/drives_controller.ts').default['index'], false>
 }
 type DrivePost = {
-  request: unknown
-  response: MakeTuyauResponse<import('../app/controllers/drives_controller.ts').default['store'], false>
+  request: MakeTuyauRequest<InferInput<typeof import('../app/controllers/drives_controller.ts').default['validator']>>
+  response: MakeTuyauResponse<import('../app/controllers/drives_controller.ts').default['store'], true>
 }
 type DriveIdPutPatch = {
   request: unknown
@@ -37,7 +37,7 @@ type DriveIdDelete = {
 }
 type DriveFoldersIdGetHead = {
   request: unknown
-  response: MakeTuyauResponse<import('../app/controllers/folders_controller.ts').default['show'], false>
+  response: MakeTuyauResponse<import('../app/controllers/drives_controller.ts').default['index'], false>
 }
 type ApiFoldersGetHead = {
   request: unknown
@@ -238,6 +238,13 @@ const routes = [
     path: '/uploads',
     method: ["POST"],
     types: {} as UploadsPost,
+  },
+  {
+    params: ["key","name"],
+    name: 'attachments',
+    path: '/attachments/:key/:name?',
+    method: ["GET","HEAD"],
+    types: {} as unknown,
   },
 ] as const;
 export const api = {
