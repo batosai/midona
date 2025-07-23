@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import CaptionButton from '../buttons/CaptionButton.vue'
-import FullscreenButton from '../buttons/FullscreenButton.vue'
-import MuteButton from '../buttons/MuteButton.vue'
-import PIPButton from '../buttons/PIPButton.vue'
-import PlayButton from '../buttons/PlayButton.vue'
-import Captions from '../Captions.vue'
-import ChapterTitle from '../ChapterTitle.vue'
-import Gestures from '../Gestures.vue'
-import SettingsMenu from '../menus/SettingsMenu.vue'
-import TimeSlider from '../sliders/TimeSlider.vue'
-import VolumeSlider from '../sliders/VolumeSlider.vue'
-import TimeGroup from '../TimeGroup.vue'
+  import CaptionButton from '../buttons/CaptionButton.vue'
+  import FullscreenButton from '../buttons/FullscreenButton.vue'
+  import MuteButton from '../buttons/MuteButton.vue'
+  import PIPButton from '../buttons/PIPButton.vue'
+  import PlayButton from '../buttons/PlayButton.vue'
+  import Captions from '../Captions.vue'
+  import ChapterTitle from '../ChapterTitle.vue'
+  import Gestures from '../Gestures.vue'
+  import SettingsMenu from '../menus/SettingsMenu.vue'
+  import TimeSlider from '../sliders/TimeSlider.vue'
+  import VolumeSlider from '../sliders/VolumeSlider.vue'
+  import TimeGroup from '../TimeGroup.vue'
 
-const { thumbnails } = defineProps<{
-  thumbnails?: string
-}>()
+  const { thumbnails } = defineProps<{
+    thumbnails?: string
+  }>()
 </script>
 
 <template>
@@ -43,13 +43,13 @@ const { thumbnails } = defineProps<{
 </template>
 
 <style scoped>
-media-controls {
-  /* These CSS variables are supported out of the box to easily apply offsets to all tooltips/menus.  */
-  --media-tooltip-y-offset: 30px;
-  --media-menu-y-offset: 30px;
-}
+  media-controls {
+    /* These CSS variables are supported out of the box to easily apply offsets to all tooltips/menus.  */
+    --media-tooltip-y-offset: 30px;
+    --media-menu-y-offset: 30px;
+  }
 
-media-controls :deep(media-volume-slider) {
-  --media-slider-preview-offset: 30px;
-}
+  media-controls :deep(media-volume-slider) {
+    --media-slider-preview-offset: 30px;
+  }
 </style>

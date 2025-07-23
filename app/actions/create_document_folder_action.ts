@@ -21,7 +21,7 @@ export default class CreateDocumentFolderAction {
       name: params.name,
       type: DocumentTypes.FOLDER,
       userId: this.ctx.auth.user!.id,
-      parentId: params.parentId
+      parentId: params.parentId,
     })
   }
 }

@@ -7,6 +7,6 @@ export default {
   forgotPassword: 'Forgot password?',
   validation: {
     email: 'Invalid email address',
-    password: 'Password is required'
-  }
+    password: 'Password is required',
+  },
 }

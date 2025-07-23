@@ -137,7 +137,6 @@
       "strtok3": "8.0.1"
     }
   },
-  "prettier": "@adonisjs/prettier-config",
   "volta": {
     "node": "22.15.0"
   }

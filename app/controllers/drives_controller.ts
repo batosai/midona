@@ -10,34 +10,34 @@ import DeleteDocumentFileAction from '#actions/delete_document_file_action'
 import CreateDocumentFolderAction from '#actions/create_document_folder_action'
 
 export default class DrivesController {
-
   static validator = vine.compile(
-		vine.object({
-			name: vine.string().minLength(1),
+    vine.object({
+      name: vine.string().minLength(1),
       parentId: vine.string().uuid().nullable(),
-		})
-	);
+    })
+  )
 
   @inject()
   async index({ inertia, auth, params }: HttpContext, documentService: DocumentService) {
     const documents = await documentService.findAll({
       userId: auth.user!.id,
-      parentId: params.id || null
+      parentId: params.id || null,
     })
 
     return inertia.render('drives/index', {
       documents: DocumentDto.fromArray(documents),
-      parentId: params.id || null
+      parentId: params.id || null,
     })
   }
 
   @inject()
-  async store({ request, response, bouncer, i18n }: HttpContext, createDocumentFolderAction: CreateDocumentFolderAction) {
+  async store(
+    { request, response, bouncer, i18n }: HttpContext,
+    createDocumentFolderAction: CreateDocumentFolderAction
+  ) {
     await bouncer.with(DocumentPolicy).allows('create')
 
-    const payload = await request.validateUsing(
-			DrivesController.validator
-		)
+    const payload = await request.validateUsing(DrivesController.validator)
 
     await createDocumentFolderAction.execute(payload)
 
@@ -51,7 +51,10 @@ export default class DrivesController {
   }
 
   @inject()
-  async update({ request, response, bouncer, i18n, params, auth }: HttpContext, documentService: DocumentService) {
+  async update(
+    { request, response, bouncer, i18n, params, auth }: HttpContext,
+    documentService: DocumentService
+  ) {
     const document = await documentService.find({ id: params.id, userId: auth.user!.id })
     if (!document) {
       return response.notFound()
@@ -74,7 +77,11 @@ export default class DrivesController {
   }
 
   @inject()
-  async destroy({ request, response, bouncer, i18n, auth }: HttpContext, deleteDocumentFileAction: DeleteDocumentFileAction, documentService: DocumentService) {
+  async destroy(
+    { request, response, bouncer, i18n, auth }: HttpContext,
+    deleteDocumentFileAction: DeleteDocumentFileAction,
+    documentService: DocumentService
+  ) {
     const document = await documentService.find({ id: request.param('id'), userId: auth.user!.id })
     if (!document) {
       return response.notFound()

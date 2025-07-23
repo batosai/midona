@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { TooltipPlacement } from 'vidstack'
+  import type { TooltipPlacement } from 'vidstack'
 
-const { placement } = defineProps<{
-  placement: TooltipPlacement
-}>()
+  const { placement } = defineProps<{
+    placement: TooltipPlacement
+  }>()
 </script>
 
 <template>
@@ -21,7 +21,7 @@ const { placement } = defineProps<{
 </template>
 
 <style scoped>
-media-menu[data-open] .tooltip {
-  display: none !important;
-}
+  media-menu[data-open] .tooltip {
+    display: none !important;
+  }
 </style>

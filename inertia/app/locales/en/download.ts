@@ -12,5 +12,5 @@ export default {
     PROCESSING_REVERT_ERROR: 'Error reverting processing',
     LOADING: 'Loading',
     LOAD_ERROR: 'Loading error',
-  }
+  },
 }

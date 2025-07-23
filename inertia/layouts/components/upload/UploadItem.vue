@@ -1,3 +1,22 @@
+<script setup lang="ts">
+  import bytes from 'bytes'
+
+  defineProps<{
+    file: any
+    isFirst: boolean
+    isError: boolean
+    isProcessing: boolean
+    isAbort: boolean
+    isComplete: boolean
+  }>()
+
+  defineEmits<{
+    (e: 'abort'): void
+    (e: 'retry'): void
+    (e: 'remove'): void
+  }>()
+</script>
+
 <template>
   <div
     class="relative flex flex-row p-2 hover:bg-surface-100 hover:dark:bg-surface-900"
@@ -30,12 +49,7 @@
             @click="$emit('abort')"
             v-if="isProcessing && !isAbort"
           />
-          <Button
-            icon="pi pi-refresh"
-            text
-            @click="$emit('retry')"
-            v-if="isAbort"
-          />
+          <Button icon="pi pi-refresh" text @click="$emit('retry')" v-if="isAbort" />
         </div>
         <div>
           <Button
@@ -49,22 +63,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import bytes from 'bytes'
-
-defineProps<{
-  file: any
-  isFirst: boolean
-  isError: boolean
-  isProcessing: boolean
-  isAbort: boolean
-  isComplete: boolean
-}>()
-
-defineEmits<{
-  (e: 'abort'): void
-  (e: 'retry'): void
-  (e: 'remove'): void
-}>()
-</script>

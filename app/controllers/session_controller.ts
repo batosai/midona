@@ -13,10 +13,7 @@ export default class SessionController {
     const { email, password, redirectTo } = request.only(['email', 'password', 'redirectTo'])
     const user = await User.verifyCredentials(email, password)
 
-    await auth.use('web').login(
-      user,
-      !!request.input('rememberMe')
-    )
+    await auth.use('web').login(user, !!request.input('rememberMe'))
 
     if (user?.disabled) {
       session.flash('notification', {

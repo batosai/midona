@@ -1,15 +1,15 @@
 export default {
   title: 'Drive',
   folder: {
-    title: 'Folder'
+    title: 'Folder',
   },
   create: {
     folder: {
       title: 'Create folder',
       name: 'Folder name',
       cancel: 'Cancel',
-      submit: 'Create'
-    }
+      submit: 'Create',
+    },
   },
   file: {
     delete: {
@@ -20,15 +20,15 @@ export default {
       success: 'Item deleted',
       error: 'You cancelled',
       summary: {
-        error: 'Rejected'
-      }
+        error: 'Rejected',
+      },
     },
     menu: {
       open: 'Open',
       delete: 'Delete',
       move: 'Move',
       share: 'Share',
-      info: 'Information'
+      info: 'Information',
     },
     move: {
       title: 'Move to',
@@ -36,19 +36,19 @@ export default {
       submit: 'Move',
       success: {
         summary: 'Success',
-        detail: 'Item has been moved successfully'
+        detail: 'Item has been moved successfully',
       },
       error: {
         summary: 'Error',
-        detail: 'An error occurred while moving the item'
-      }
-    }
+        detail: 'An error occurred while moving the item',
+      },
+    },
   },
   menu: {
     add: {
       folder: 'Folder',
       youtube: 'Youtube',
-      note: 'Note'
-    }
-  }
+      note: 'Note',
+    },
+  },
 }

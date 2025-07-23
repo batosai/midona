@@ -7,7 +7,7 @@
 </template>
 
 <style scoped>
-.time {
-  contain: content;
-}
+  .time {
+    contain: content;
+  }
 </style>

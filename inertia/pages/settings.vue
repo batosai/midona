@@ -1,3 +1,63 @@
+<script setup lang="ts">
+  import { ref } from 'vue'
+  import { Head } from '@inertiajs/vue3'
+  import { Form, FormField } from '@primevue/forms'
+  import { zodResolver } from '@primevue/forms/resolvers/zod'
+  import { z } from 'zod'
+
+  const initialValues = ref({
+    email: '',
+    firstname: '',
+    lastname: '',
+    password: '',
+  })
+
+  const resolver = zodResolver(
+    z.object({
+      email: z.string().email({ message: 'Invalid email address' }),
+      firstname: z.string().min(1, { message: 'Firstname is required' }),
+      lastname: z.string().min(1, { message: 'Lastname is required' }),
+      password: z.string().min(1, { message: 'Password is required' }),
+    })
+  )
+
+  const onFormSubmit = ({ valid }) => {}
+
+  const items = ref([
+    {
+      label: 'Administrator',
+      items: [
+        {
+          label: 'Users',
+          icon: 'pi pi-users',
+        },
+      ],
+    },
+    {
+      label: 'Profile',
+      items: [
+        {
+          label: 'Informations',
+          icon: 'pi pi-user',
+        },
+        {
+          label: 'Settings',
+          icon: 'pi pi-cog',
+          // url: tuyau.$route('settings').path
+          command: () => router.visit(tuyau.$route('settings').path),
+        },
+        {
+          separator: true,
+        },
+        {
+          label: 'Logout',
+          icon: 'pi pi-sign-out',
+        },
+      ],
+    },
+  ])
+</script>
+
 <template>
   <Head title="Settings" />
 
@@ -11,22 +71,51 @@
         <Card>
           <template #title>Profile</template>
           <template #content>
-            <Form id="profile" :initialValues :resolver @submit="onFormSubmit" class="grid gap-4 sm:grid-cols-2">
-              <FormField v-slot="$field" name="firstname" initialValue="" class="flex flex-col gap-1">
+            <Form
+              id="profile"
+              :initialValues
+              :resolver
+              @submit="onFormSubmit"
+              class="grid gap-4 sm:grid-cols-2"
+            >
+              <FormField
+                v-slot="$field"
+                name="firstname"
+                initialValue=""
+                class="flex flex-col gap-1"
+              >
                 <InputText type="text" placeholder="First Name" />
-                <Message v-if="$field?.invalid" severity="error" size="small" variant="simple">{{ $field.error?.message }}</Message>
+                <Message v-if="$field?.invalid" severity="error" size="small" variant="simple">{{
+                  $field.error?.message
+                }}</Message>
               </FormField>
-              <FormField v-slot="$field" name="lastname" initialValue="" class="flex flex-col gap-1">
+              <FormField
+                v-slot="$field"
+                name="lastname"
+                initialValue=""
+                class="flex flex-col gap-1"
+              >
                 <InputText type="text" placeholder="Last Name" />
-                <Message v-if="$field?.invalid" severity="error" size="small" variant="simple">{{ $field.error?.message }}</Message>
+                <Message v-if="$field?.invalid" severity="error" size="small" variant="simple">{{
+                  $field.error?.message
+                }}</Message>
               </FormField>
               <FormField v-slot="$field" name="email" initialValue="" class="flex flex-col gap-1">
                 <InputText type="email" placeholder="Email" />
-                <Message v-if="$field?.invalid" severity="error" size="small" variant="simple">{{ $field.error?.message }}</Message>
+                <Message v-if="$field?.invalid" severity="error" size="small" variant="simple">{{
+                  $field.error?.message
+                }}</Message>
               </FormField>
-              <FormField v-slot="$field" name="password" initialValue="" class="flex flex-col gap-1">
+              <FormField
+                v-slot="$field"
+                name="password"
+                initialValue=""
+                class="flex flex-col gap-1"
+              >
                 <Password type="text" placeholder="Password" toggleMask fluid />
-                <Message v-if="$field?.invalid" severity="error" size="small" variant="simple">{{ $field.error?.message }}</Message>
+                <Message v-if="$field?.invalid" severity="error" size="small" variant="simple">{{
+                  $field.error?.message
+                }}</Message>
               </FormField>
             </Form>
           </template>
@@ -37,67 +126,4 @@
       </div>
     </SplitterPanel>
   </Splitter>
-
 </template>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-import { Head } from '@inertiajs/vue3'
-import { Form, FormField } from '@primevue/forms'
-import { zodResolver } from '@primevue/forms/resolvers/zod'
-import { z } from 'zod'
-
-const initialValues = ref({
-    email: '',
-    firstname: '',
-    lastname: '',
-    password: ''
-})
-
-const resolver = zodResolver(
-  z.object({
-    email: z.string().email({ message: "Invalid email address" }),
-    firstname: z.string().min(1, { message: 'Firstname is required' }),
-    lastname: z.string().min(1, { message: 'Lastname is required' }),
-    password: z.string().min(1, { message: 'Password is required' }),
-  })
-)
-
-const onFormSubmit = ({ valid }) => {
-
-}
-
-const items = ref([
-  {
-    label: 'Administrator',
-    items: [
-      {
-        label: 'Users',
-        icon: 'pi pi-users'
-      },
-    ]
-  },
-  {
-    label: 'Profile',
-    items: [
-      {
-        label: 'Informations',
-        icon: 'pi pi-user'
-      },
-      {
-        label: 'Settings',
-        icon: 'pi pi-cog',
-        // url: tuyau.$route('settings').path
-        command: () => router.visit(tuyau.$route('settings').path)
-      },
-      {
-        separator: true
-      },
-      {
-        label: 'Logout',
-        icon: 'pi pi-sign-out'
-      }
-    ]
-    }
-])
-</script>

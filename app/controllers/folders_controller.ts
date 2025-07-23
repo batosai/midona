@@ -13,7 +13,7 @@ export default class FoldersController {
     const folders = await documentService.findAll({
       userId: auth.user!.id,
       parentId,
-      type: DocumentTypes.FOLDER
+      type: DocumentTypes.FOLDER,
     })
 
     const dtos = DocumentDto.fromArray(folders)

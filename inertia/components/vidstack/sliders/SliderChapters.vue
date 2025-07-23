@@ -22,11 +22,11 @@
 </template>
 
 <style scoped>
-.chapter {
-  contain: layout style;
-}
+  .chapter {
+    contain: layout style;
+  }
 
-.track {
-  contain: strict;
-}
+  .track {
+    contain: strict;
+  }
 </style>

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import SubmenuButton from './SubmenuButton.vue'
+  import SubmenuButton from './SubmenuButton.vue'
 
-const { label } = defineProps<{
-  label: string
-}>()
+  const { label } = defineProps<{
+    label: string
+  }>()
 </script>
 
 <template>

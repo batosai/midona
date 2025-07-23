@@ -4,7 +4,9 @@ import type { DateTime } from 'luxon'
 
 import { column } from '@adonisjs/lucid/orm'
 
-export const whithTimestamps = <Model extends NormalizeConstructor<typeof BaseModel>>(superclass: Model) => {
+export const whithTimestamps = <Model extends NormalizeConstructor<typeof BaseModel>>(
+  superclass: Model
+) => {
   class whithTimestampsClass extends superclass {
     @column.dateTime({ autoCreate: true })
     declare createdAt: DateTime

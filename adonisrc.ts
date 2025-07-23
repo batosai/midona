@@ -16,7 +16,7 @@ export default defineConfig({
     () => import('@tuyau/core/commands'),
     () => import('@jrmc/adonis-attachment/commands'),
     () => import('@adonisjs/bouncer/commands'),
-    () => import('@nemoventures/adonis-jobs/commands')
+    () => import('@nemoventures/adonis-jobs/commands'),
   ],
 
   /*
@@ -52,7 +52,7 @@ export default defineConfig({
     () => import('@adonisjs/bouncer/bouncer_provider'),
     () => import('@adonisjs/transmit/transmit_provider'),
     () => import('@nemoventures/adonis-jobs/queue_provider'),
-    () => import('@adonisjs/redis/redis_provider')
+    () => import('@adonisjs/redis/redis_provider'),
   ],
 
   /*
@@ -63,7 +63,12 @@ export default defineConfig({
   | List of modules to import before starting the application.
   |
   */
-  preloads: [() => import('#start/routes'), () => import('#start/kernel'), () => import('#start/events'), () => import('#start/transmit')],
+  preloads: [
+    () => import('#start/routes'),
+    () => import('#start/kernel'),
+    () => import('#start/events'),
+    () => import('#start/transmit'),
+  ],
 
   /*
   |--------------------------------------------------------------------------
@@ -111,7 +116,7 @@ export default defineConfig({
     {
       pattern: 'resources/lang/**/*.{json,yaml,yml}',
       reloadServer: false,
-    }
+    },
   ],
 
   assetsBundler: false,

@@ -1,3 +1,12 @@
+<script setup lang="ts">
+  import { ref } from 'vue'
+
+  const items = ref([
+    { name: 'note 1', category: 'dev', date: '01/02/2025' },
+    { name: 'note 2', category: 'idée', date: '01/02/2025' },
+  ])
+</script>
+
 <template>
   <div
     class="flex-col hidden h-screen md:flex lg:border-r border-surface-200 dark:border-primary-600 w-100"
@@ -28,12 +37,3 @@
   </div>
   <slot />
 </template>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-
-const items = ref([
-  { name: 'note 1', category: 'dev', date: '01/02/2025' },
-  { name: 'note 2', category: 'idée', date: '01/02/2025' },
-])
-</script>

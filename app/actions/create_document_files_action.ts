@@ -16,7 +16,7 @@ type documentType = {
 }
 
 type CreateDocumentFilesActionParams = {
-  files: MultipartFile[],
+  files: MultipartFile[]
   parentId: string | null
 }
 

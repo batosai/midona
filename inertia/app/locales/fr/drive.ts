@@ -1,7 +1,7 @@
 export default {
   title: 'Drive',
   folder: {
-    title: 'Dossier'
+    title: 'Dossier',
   },
   create: {
     folder: {
@@ -11,9 +11,9 @@ export default {
       submit: 'Créer',
       success: {
         summary: 'Succès',
-        detail: 'Le dossier a été créé avec succès'
-      }
-    }
+        detail: 'Le dossier a été créé avec succès',
+      },
+    },
   },
   file: {
     delete: {
@@ -24,15 +24,15 @@ export default {
       success: 'Élément supprimé',
       error: 'Vous avez annulé',
       summary: {
-        error: 'Rejeté'
-      }
+        error: 'Rejeté',
+      },
     },
     menu: {
       open: 'Ouvrir',
       delete: 'Supprimer',
       move: 'Déplacer',
       share: 'Partager',
-      info: 'Informations'
+      info: 'Informations',
     },
     move: {
       title: 'Déplacer vers',
@@ -40,19 +40,19 @@ export default {
       submit: 'Déplacer',
       success: {
         summary: 'Succès',
-        detail: 'L\'élément a été déplacé avec succès'
+        detail: "L'élément a été déplacé avec succès",
       },
       error: {
         summary: 'Erreur',
-        detail: 'Une erreur est survenue lors du déplacement'
-      }
-    }
+        detail: 'Une erreur est survenue lors du déplacement',
+      },
+    },
   },
   menu: {
     add: {
       folder: 'Répertoire',
       youtube: 'Youtube',
-      note: 'Note'
-    }
-  }
+      note: 'Note',
+    },
+  },
 }

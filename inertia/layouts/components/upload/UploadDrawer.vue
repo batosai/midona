@@ -1,3 +1,13 @@
+<script setup lang="ts">
+  import DrawerCustom from '@/primevue/drawer/Drawer.vue'
+  import { useUploadStore } from '~/stores/uploadStore'
+  import { useUploadDrawerStore } from '~/stores/uploadDrawerStore'
+  import UploadItem from './UploadItem.vue'
+
+  const uploadStore = useUploadStore()
+  const uploadDrawerStore = useUploadDrawerStore()
+</script>
+
 <template>
   <DrawerCustom
     v-model:visible="uploadDrawerStore.visible"
@@ -12,7 +22,14 @@
     </template>
     <template #footer v-if="uploadStore.files.length">
       <div class="flex items-center gap-2">
-        <Button :label="$t('download.delete_all')" icon="pi pi-trash" severity="danger" text @click="uploadStore.clear()" class="flex-auto"></Button>
+        <Button
+          :label="$t('download.delete_all')"
+          icon="pi pi-trash"
+          severity="danger"
+          text
+          @click="uploadStore.clear()"
+          class="flex-auto"
+        ></Button>
       </div>
     </template>
 
@@ -31,13 +48,3 @@
     />
   </DrawerCustom>
 </template>
-
-<script setup lang="ts">
-import DrawerCustom from '@/primevue/drawer/Drawer.vue'
-import { useUploadStore } from '~/stores/uploadStore'
-import { useUploadDrawerStore } from '~/stores/uploadDrawerStore'
-import UploadItem from './UploadItem.vue'
-
-const uploadStore = useUploadStore()
-const uploadDrawerStore = useUploadDrawerStore()
-</script>

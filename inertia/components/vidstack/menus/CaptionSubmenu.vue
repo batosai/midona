@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import MenuRadio from './MenuRadio.vue'
-import Submenu from './Submenu.vue'
+  import MenuRadio from './MenuRadio.vue'
+  import Submenu from './Submenu.vue'
 </script>
 
 <template>

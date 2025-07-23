@@ -7,12 +7,12 @@ import { tuyau } from '~/settings/tuyau'
 import { ref } from 'vue'
 import { router } from '@inertiajs/vue3'
 
-type File  = {
-  filename: string,
-  id: string,
-  fileSize: number,
-  progress?: number,
-  status: FileStatus,
+type File = {
+  filename: string
+  id: string
+  fileSize: number
+  progress?: number
+  status: FileStatus
   statusLabel: string
 }
 
@@ -33,7 +33,7 @@ export const useUploadStore = defineStore('uploadStore', () => {
     }
 
     const pond = FilePond.create(inputElement, {
-      name: 'uploads'
+      name: 'uploads',
     })
     pond.setOptions({
       server: {
@@ -42,16 +42,17 @@ export const useUploadStore = defineStore('uploadStore', () => {
           method: 'POST',
           withCredentials: true,
           headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
+            'X-CSRF-TOKEN':
+              document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '',
           },
           ondata: (formData) => {
             if (currentFolderId.value) {
               formData.append('parentId', currentFolderId.value)
             }
             return formData
-          }
-        }
-      }
+          },
+        },
+      },
     })
 
     pond.on('addfile', (error: unknown, item: FilePondFile) => {
@@ -66,7 +67,7 @@ export const useUploadStore = defineStore('uploadStore', () => {
         fileSize: item.fileSize,
         progress: undefined,
         status: item.status,
-        statusLabel: getEnumKeyByValue(FilePond.FileStatus, item.status)!
+        statusLabel: getEnumKeyByValue(FilePond.FileStatus, item.status)!,
       })
     })
 
@@ -169,27 +170,21 @@ export const useUploadStore = defineStore('uploadStore', () => {
   }
 
   function isComplete(file: File) {
-    if (
-      FilePond.FileStatus.PROCESSING_COMPLETE === file.status
-    ) {
+    if (FilePond.FileStatus.PROCESSING_COMPLETE === file.status) {
       return true
     }
     return false
   }
 
   function isError(file: File) {
-    if (
-      FilePond.FileStatus.PROCESSING_ERROR === file.status
-    ) {
+    if (FilePond.FileStatus.PROCESSING_ERROR === file.status) {
       return true
     }
     return false
   }
 
   function isAbort(file: File) {
-    if (
-      FilePond.FileStatus.IDLE === file.status
-    ) {
+    if (FilePond.FileStatus.IDLE === file.status) {
       return true
     }
     return false
@@ -207,6 +202,6 @@ export const useUploadStore = defineStore('uploadStore', () => {
     isAbort,
     isError,
     browse,
-    currentFolderId
+    currentFolderId,
   }
 })

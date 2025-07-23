@@ -22,10 +22,7 @@ export default class DocumentService {
    * @returns {Promise<Document | null>} Le document trouvé ou null
    */
   async find({ id, userId }: DocumentParams): Promise<Document | null> {
-    return Document.query()
-      .where('id', id)
-      .where('user_id', userId)
-      .first()
+    return Document.query().where('id', id).where('user_id', userId).first()
   }
 
   /**
@@ -35,10 +32,7 @@ export default class DocumentService {
    * @throws {Error} Si le document n'est pas trouvé
    */
   async findOrFail({ id, userId }: DocumentParams): Promise<Document> {
-    return Document.query()
-      .where('id', id)
-      .where('user_id', userId)
-      .firstOrFail()
+    return Document.query().where('id', id).where('user_id', userId).firstOrFail()
   }
 
   /**
@@ -49,8 +43,15 @@ export default class DocumentService {
    * @param {DocumentTypes} [params.type] - Le type de document à récupérer
    * @returns {Promise<Document[]>} Liste des documents de l'utilisateur
    */
-  async findAll({ userId, parentId = null, type }: { userId: string, parentId?: string | null, type?: DocumentTypes }): Promise<Document[]> {
-
+  async findAll({
+    userId,
+    parentId = null,
+    type,
+  }: {
+    userId: string
+    parentId?: string | null
+    type?: DocumentTypes
+  }): Promise<Document[]> {
     const query = Document.query()
       .where('user_id', userId)
       .withScopes((scopes) => scopes.withoutDeleted())

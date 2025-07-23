@@ -7,5 +7,5 @@ export default {
   nav,
   login,
   download,
-  drive
+  drive,
 }

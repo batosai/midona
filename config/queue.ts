@@ -22,9 +22,7 @@ const queueConfig = defineConfig({
     endpoint: '/internal/healthz',
     checks: ({ connection }) => [
       new RedisCheck(connection),
-      new RedisMemoryUsageCheck(connection)
-        .warnWhenExceeds('100MB')
-        .failWhenExceeds('200MB'),
+      new RedisMemoryUsageCheck(connection).warnWhenExceeds('100MB').failWhenExceeds('200MB'),
     ],
   },
 

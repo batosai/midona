@@ -1,6 +1,66 @@
+<script setup lang="ts">
+  import { ref } from 'vue'
+  import { tuyau } from '~/settings/tuyau'
+  import { useActionStore } from '~/stores/actionStore'
+  import { useUploadDrawerStore } from '~/stores/uploadDrawerStore'
+  import { useUploadStore } from '~/stores/uploadStore'
+  import Link from './Link.vue'
+  import { router } from '@inertiajs/vue3'
+
+  const store = useActionStore()
+  const uploadDrawerStore = useUploadDrawerStore()
+  const uploadStore = useUploadStore()
+  const visibleBottom = ref(false)
+
+  const menu = ref()
+
+  const toggleAccount = () => {
+    menu.value.toggle(event)
+  }
+
+  const items = ref([
+    {
+      label: 'Administrator',
+      items: [
+        {
+          label: 'Users',
+          icon: 'pi pi-users',
+        },
+      ],
+    },
+    {
+      label: 'Profile',
+      items: [
+        {
+          label: 'Informations',
+          icon: 'pi pi-user',
+        },
+        {
+          label: 'Settings',
+          icon: 'pi pi-cog',
+          // url: tuyau.$route('settings').path
+          command: () => router.visit(tuyau.$route('settings').path),
+        },
+        {
+          separator: true,
+        },
+        {
+          label: 'Logout',
+          icon: 'pi pi-sign-out',
+        },
+      ],
+    },
+  ])
+</script>
+
 <template>
   <div class="sm:hidden! fixed! bottom-4 left-4 z-2!">
-    <OverlayBadge :value="uploadStore.files.length" size="small" severity="danger" v-if="uploadStore.files.length != 0">
+    <OverlayBadge
+      :value="uploadStore.files.length"
+      size="small"
+      severity="danger"
+      v-if="uploadStore.files.length != 0"
+    >
       <Button
         @click="visibleBottom = true"
         rounded
@@ -83,59 +143,3 @@
     <Menu ref="menu" :model="items" :popup="true" />
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-import { tuyau } from '~/settings/tuyau'
-import { useActionStore } from '~/stores/actionStore'
-import { useUploadDrawerStore } from '~/stores/uploadDrawerStore'
-import { useUploadStore } from '~/stores/uploadStore'
-import Link from './Link.vue'
-import { router } from '@inertiajs/vue3'
-
-const store = useActionStore()
-const uploadDrawerStore = useUploadDrawerStore()
-const uploadStore = useUploadStore()
-const visibleBottom = ref(false)
-
-const menu = ref()
-
-const toggleAccount = () => {
-  menu.value.toggle(event)
-}
-
-const items = ref([
-  {
-    label: 'Administrator',
-    items: [
-      {
-        label: 'Users',
-        icon: 'pi pi-users'
-      },
-    ]
-  },
-  {
-    label: 'Profile',
-    items: [
-      {
-        label: 'Informations',
-        icon: 'pi pi-user'
-      },
-      {
-        label: 'Settings',
-        icon: 'pi pi-cog',
-        // url: tuyau.$route('settings').path
-        command: () => router.visit(tuyau.$route('settings').path)
-      },
-      {
-        separator: true
-      },
-      {
-        label: 'Logout',
-        icon: 'pi pi-sign-out'
-      }
-    ]
-    }
-])
-
-</script>

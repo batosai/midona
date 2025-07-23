@@ -41,10 +41,10 @@ createInertiaApp({
   title: (title) => `${title} - ${appName}`,
 
   resolve: async (name: string) => {
-    const page = await resolvePageComponent(
+    const page = (await resolvePageComponent(
       `../pages/${name}.vue`,
       import.meta.glob<DefineComponent>('../pages/**/*.vue')
-    ) as any
+    )) as any
 
     page.default.layout = page.default.layout || Layout
     return page.default
@@ -57,7 +57,7 @@ createInertiaApp({
       fallbackLocale: 'en',
       messages: {
         en,
-        fr
+        fr,
       },
     })
 

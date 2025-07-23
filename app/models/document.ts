@@ -11,7 +11,12 @@ import { whithTimestamps } from '#models/mixins/with_timestamps'
 import { whithDeletedOn } from '#models/mixins/with_deleted_on'
 import User from './user.js'
 
-export default class Document extends compose(BaseModel, UuidPrimaryKey, whithTimestamps, whithDeletedOn) {
+export default class Document extends compose(
+  BaseModel,
+  UuidPrimaryKey,
+  whithTimestamps,
+  whithDeletedOn
+) {
   @column()
   declare type: DocumentTypes
 

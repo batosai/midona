@@ -56,15 +56,15 @@ const Noir = definePreset(Aura, {
             // shadow: 'none'
           },
           body: {
-            padding: '2rem'
-          }
+            padding: '2rem',
+          },
         },
         // dark: {
         //   root: {
         //     background: '{surface.950}',
         //   },
         // }
-      }
+      },
     },
     // inputtext: {
     //   colorScheme: {
@@ -79,12 +79,12 @@ const Noir = definePreset(Aura, {
       colorScheme: {
         light: {
           root: {
-            background: 'transparent'
-          }
-        }
-      }
-    }
-  }
+            background: 'transparent',
+          },
+        },
+      },
+    },
+  },
 })
 
 export default Noir

@@ -5,8 +5,8 @@ const attachmentConfig = defineConfig({
   converters: {
     thumbnail: {
       resize: 300,
-    }
-  }
+    },
+  },
 })
 
 export default attachmentConfig

@@ -1,3 +1,61 @@
+<script setup lang="ts">
+  import { ref } from 'vue'
+  import { router } from '@inertiajs/vue3'
+  import { tuyau } from '~/settings/tuyau'
+  import Triforce from '~/images/triforce.svg'
+  import Link from './Link.vue'
+  import { useUploadDrawerStore } from '~/stores/uploadDrawerStore'
+  import { useUploadStore } from '~/stores/uploadStore'
+
+  const uploadDrawerStore = useUploadDrawerStore()
+  const uploadStore = useUploadStore()
+
+  const menu = ref()
+
+  const toggleAccount = () => {
+    menu.value.toggle(event)
+  }
+
+  const toggleApps = () => {
+    alert('toggleApps')
+  }
+
+  const items = ref([
+    {
+      label: 'Administrator',
+      items: [
+        {
+          label: 'Users',
+          icon: 'pi pi-users',
+        },
+      ],
+    },
+    {
+      label: 'Profile',
+      items: [
+        {
+          label: 'Informations',
+          icon: 'pi pi-user',
+        },
+        {
+          label: 'Settings',
+          icon: 'pi pi-cog',
+          // url: tuyau.$route('settings').path
+          command: () => router.visit(tuyau.$route('settings').path),
+        },
+        {
+          separator: true,
+        },
+        {
+          label: 'Logout',
+          icon: 'pi pi-sign-out',
+          command: () => router.delete(tuyau.auth.logout.$url()),
+        },
+      ],
+    },
+  ])
+</script>
+
 <template>
   <div
     class="sticky top-0 flex flex-col justify-between hidden w-auto h-screen p-5 sm:flex bg-surface-100 dark:bg-surface-900"
@@ -32,7 +90,12 @@
 
           <Divider />
         </template>
-        <Link @click="toggleAccount" :label="$t('nav.settings')" :unstyled="true" class="flex items-center justify-center">
+        <Link
+          @click="toggleAccount"
+          :label="$t('nav.settings')"
+          :unstyled="true"
+          class="flex items-center justify-center"
+        >
           <Avatar
             image="https://www.primefaces.org/cdn/primevue/images/landing/apps/main-avatar.png"
             size="large"
@@ -44,61 +107,3 @@
   </div>
   <Menu ref="menu" :model="items" :popup="true" />
 </template>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-import { router } from '@inertiajs/vue3'
-import { tuyau } from '~/settings/tuyau'
-import Triforce from '~/images/triforce.svg'
-import Link from './Link.vue'
-import { useUploadDrawerStore } from '~/stores/uploadDrawerStore'
-import { useUploadStore } from '~/stores/uploadStore'
-
-const uploadDrawerStore = useUploadDrawerStore()
-const uploadStore = useUploadStore()
-
-const menu = ref()
-
-const toggleAccount = () => {
-  menu.value.toggle(event)
-}
-
-const toggleApps = () => {
-  alert('toggleApps')
-}
-
-const items = ref([
-  {
-    label: 'Administrator',
-    items: [
-      {
-        label: 'Users',
-        icon: 'pi pi-users'
-      },
-    ]
-  },
-  {
-    label: 'Profile',
-    items: [
-      {
-        label: 'Informations',
-        icon: 'pi pi-user'
-      },
-      {
-        label: 'Settings',
-        icon: 'pi pi-cog',
-        // url: tuyau.$route('settings').path
-        command: () => router.visit(tuyau.$route('settings').path)
-      },
-      {
-        separator: true
-      },
-      {
-        label: 'Logout',
-        icon: 'pi pi-sign-out',
-        command: () => router.delete(tuyau.auth.logout.$url())
-      }
-    ]
-    }
-])
-</script>

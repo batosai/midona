@@ -17,7 +17,7 @@ export default class DeleteDocumentFileAction {
   async execute(params: DeleteDocumentFileActionParams) {
     const deleted = await this.documentService.delete({
       id: params.id,
-      userId: this.ctx.auth.user!.id
+      userId: this.ctx.auth.user!.id,
     })
 
     if (!deleted) {

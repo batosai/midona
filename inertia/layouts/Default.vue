@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import Navbar from '~/components/layouts/Navbar.vue'
-import FlashMessages from '~/components/FlashMessages.vue'
-import ConfirmDialog from 'primevue/confirmdialog'
+  import Navbar from './components/Navbar.vue'
+  import FlashMessages from './components/FlashMessages.vue'
+  import ConfirmDialog from 'primevue/confirmdialog'
 </script>
