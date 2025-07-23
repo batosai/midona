@@ -15,7 +15,8 @@ export default defineConfig({
     () => import('@adonisjs/lucid/commands'),
     () => import('@tuyau/core/commands'),
     () => import('@jrmc/adonis-attachment/commands'),
-    () => import('@adonisjs/bouncer/commands')
+    () => import('@adonisjs/bouncer/commands'),
+    () => import('@nemoventures/adonis-jobs/commands')
   ],
 
   /*
@@ -49,7 +50,9 @@ export default defineConfig({
     () => import('@adonisjs/drive/drive_provider'),
     () => import('@adonisjs/i18n/i18n_provider'),
     () => import('@adonisjs/bouncer/bouncer_provider'),
-    () => import('@adonisjs/transmit/transmit_provider')
+    () => import('@adonisjs/transmit/transmit_provider'),
+    () => import('@nemoventures/adonis-jobs/queue_provider'),
+    () => import('@adonisjs/redis/redis_provider')
   ],
 
   /*
@@ -114,5 +117,8 @@ export default defineConfig({
   assetsBundler: false,
   hooks: {
     onBuildStarting: [() => import('@adonisjs/vite/build_hook')],
+  },
+  directories: {
+    jobs: 'app/jobs',
   },
 })
