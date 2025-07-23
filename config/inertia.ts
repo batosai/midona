@@ -1,5 +1,5 @@
 import { defineConfig } from '@adonisjs/inertia'
-import type { InferSharedProps, PageProps } from '@adonisjs/inertia/types'
+import type { InferSharedProps } from '@adonisjs/inertia/types'
 
 const inertiaConfig = defineConfig({
   /**
