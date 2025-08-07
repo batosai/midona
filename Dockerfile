@@ -1,16 +1,18 @@
-FROM node:22.17.1-alpine3.22 AS base
+FROM node:22-alpine AS base
+
+RUN apk add --no-cache libc6-compat
 
 # All deps stage
 FROM base AS deps
 WORKDIR /app
 ADD package.json package-lock.json ./
-RUN npm ci
+RUN npm ci --silent --no-progress
 
 # Production only deps stage
 FROM base AS production-deps
 WORKDIR /app
 ADD package.json package-lock.json ./
-RUN npm ci --omit=dev
+RUN npm ci --silent --no-progress --omit=dev
 
 # Build stage
 FROM base AS build
@@ -25,5 +27,5 @@ ENV NODE_ENV=production
 WORKDIR /app
 COPY --from=production-deps /app/node_modules /app/node_modules
 COPY --from=build /app/build /app
-EXPOSE 8080
+EXPOSE 3333
 CMD ["node", "./bin/server.js"]
