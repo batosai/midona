@@ -97,7 +97,7 @@
             class="object-cover w-full h-full"
             :src="
               tuyau.$url('attachments', {
-                params: { key: props.id, name: name! },
+                params: { key: id, name: name! },
                 query: { variant: 'thumbnail' },
               })
             "
@@ -131,7 +131,7 @@
         />
         <Link
           v-if="type === 'folder'"
-          :href="tuyau.drive.folders({ id: props.id }).$url()"
+          :href="tuyau.drive.folders({ id }).$url()"
           class="absolute inset-0"
         />
       </div>
