@@ -7,11 +7,17 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "nuxt": "^4.1.2",
-    "vue": "^3.5.21",
+    "vue": "catalog:",
     "vue-router": "^4.5.1"
-  }
+  },
+  "devDependencies": {
+    "@adonisjs/prettier-config": "catalog:",
+    "prettier": "catalog:"
+  },
+  "prettier": "@adonisjs/prettier-config"
 }

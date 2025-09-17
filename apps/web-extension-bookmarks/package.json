@@ -6,16 +6,20 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "format": "prettier --write ."
   },
   "dependencies": {
-    "vue": "^3.5.18"
+    "vue": "catalog:"
   },
   "devDependencies": {
+    "@adonisjs/prettier-config": "catalog:",
     "@vitejs/plugin-vue": "^6.0.1",
     "@vue/tsconfig": "^0.7.0",
-    "typescript": "~5.8.3",
+    "prettier": "catalog:",
+    "typescript": "catalog:",
     "vite": "^7.1.2",
     "vue-tsc": "^3.0.5"
-  }
+  },
+  "prettier": "@adonisjs/prettier-config"
 }
