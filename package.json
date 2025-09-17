@@ -1,0 +1,14 @@
+{
+  "name": "midona",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "scripts": {},
+  "author": "Jeremy Chaufourier",
+  "license": "MIT",
+  "packageManager": "pnpm@10.15.1",
+  "volta": {
+    "node": "22.19.0",
+    "pnpm": "10.15.1"
+  }
+}

@@ -1,0 +1,48 @@
+# Dependencies and AdonisJS build
+node_modules
+build
+distdist-ssr
+tmp
+*.local
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Frontend assets compiled code
+public/assets
+
+# Build tools specific
+npm-debug.log
+yarn-error.log
+
+# Editors specific
+.fleet
+.idea
+.vscode/*
+!.vscode/extensions.json
+
+# Platform specific
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Nuxt dev/build outputs
+.output
+.data
+.nuxt
+.nitro
+.cache
