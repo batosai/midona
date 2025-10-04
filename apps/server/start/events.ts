@@ -17,27 +17,27 @@ if (app.inDev) {
   })
 
   emitter.on('access_tokens_auth:authentication_attempted', (event) => {
-    console.log(event.guardName)
+    logger.info(event.guardName)
   })
 
 
   emitter.on('access_tokens_auth:authentication_succeeded', (event) => {
-    console.log(event.guardName)
-    console.log(event.user)
-    console.log(event.token)
+    logger.info(event.guardName)
+    logger.info(event.user)
+    logger.info(event.token)
   })
 
   emitter.on('access_tokens_auth:authentication_failed', (event) => {
-    console.log(event.guardName)
-    console.log(event.error)
+    logger.info(event.guardName)
+    logger.info(event.error)
   })
 
-  /*emitter.on('authorization:finished', (event) => {
-    console.log(event.user)
-    console.log(event.response)
-    console.log(event.parameters)
-    console.log(event.action)
-  })*/
+  emitter.on('authorization:finished', (event) => {
+    logger.info(event.user)
+    logger.info(event.response)
+    logger.info(event.parameters)
+    logger.info(event.action)
+  })
 
 
 
@@ -45,7 +45,32 @@ if (app.inDev) {
     logger.warn(`Translation missing: ${event.locale}, ${event.identifier}`)
   })
 
-  // emitter.on('mail:sending', (event) => {
-  //   logger.info(`Mail ${event.mailerName} is sending: ${event.message.subject}`)
-  // })
+  emitter.on('mail:sending', (event) => {
+    logger.info(`Mail ${event.mailerName} is sending: ${event.message.subject}`)
+  })
+
+  emitter.on('mail:sent', (event) => {
+    logger.info(event.response)
+
+    logger.info(event.message)
+    logger.info(event.views)
+  })
+
+  /*emitter.on('mail:queueing', (event) => {
+    logger.info(event.mailerName)
+    logger.info(event.message)
+    logger.info(event.views)
+  })
+
+  emitter.on('mail:queued', (event) => {
+    logger.info(event.mailerName)
+    logger.info(event.message)
+    logger.info(event.views)
+  })*/
+
+  emitter.on('queued:mail:error', (event) => {
+    logger.info(event.error)
+    logger.info(event.mailerName)
+  })
+
 }

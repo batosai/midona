@@ -19,9 +19,7 @@ router
           router.get('users/:id/tokens', () => {})
         })
         .use(
-          middleware.auth({
-            guards: ['web', 'api']
-          })
+          middleware.auth()
         )
 
       })

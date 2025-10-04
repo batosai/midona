@@ -1,3 +1,4 @@
+import app from '@adonisjs/core/services/app'
 import env from '#start/env'
 import { defineConfig, transports } from '@adonisjs/mail'
 
@@ -9,10 +10,11 @@ const mailConfig = defineConfig({
     * each using a different transport or same transport with different
     * options.
    */
-  mailers: { 
+  mailers: {
     smtp: transports.smtp({
       host: env.get('SMTP_HOST'),
       port: env.get('SMTP_PORT'),
+      ignoreTLS: app.inDev,
 			/**
        * Uncomment the auth block if your SMTP
        * server needs authentication
@@ -23,7 +25,7 @@ const mailConfig = defineConfig({
         pass: env.get('SMTP_PASSWORD'),
       }, */
     }),
-		     
+
   },
 })
 
