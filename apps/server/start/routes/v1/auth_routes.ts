@@ -16,8 +16,3 @@ router
       .prefix('v1')
   })
   .prefix('api')
-
-
-
-// TODO
-// X-Auth-Mode: token
