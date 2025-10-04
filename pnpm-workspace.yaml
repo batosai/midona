@@ -7,3 +7,5 @@ catalog:
   prettier: ^3.5.3
   typescript: ~5.8
   "@adonisjs/prettier-config": ^1.4.4
+
+minimumReleaseAge: 1440
