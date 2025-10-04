@@ -109,6 +109,9 @@ importers:
       '@adonisjs/cors':
         specifier: ^2.2.1
         version: 2.2.1(@adonisjs/core@6.19.0(@adonisjs/assembler@7.8.2(babel-plugin-macros@3.1.0)(typescript@5.8.3))(@vinejs/vine@3.0.1))
+      '@adonisjs/i18n':
+        specifier: ^2.2.2
+        version: 2.2.2(@adonisjs/core@6.19.0(@adonisjs/assembler@7.8.2(babel-plugin-macros@3.1.0)(typescript@5.8.3))(@vinejs/vine@3.0.1))(@vinejs/vine@3.0.1)
       '@adonisjs/lucid':
         specifier: ^21.6.1
         version: 21.8.0(@adonisjs/assembler@7.8.2(babel-plugin-macros@3.1.0)(typescript@5.8.3))(@adonisjs/core@6.19.0(@adonisjs/assembler@7.8.2(babel-plugin-macros@3.1.0)(typescript@5.8.3))(@vinejs/vine@3.0.1))(@vinejs/vine@3.0.1)(luxon@3.7.2)(pg@8.16.3)
@@ -374,6 +377,19 @@ packages:
       '@adonisjs/events': ^9.0.0
       '@adonisjs/fold': ^10.0.1
       '@adonisjs/logger': ^6.0.1
+
+  '@adonisjs/i18n@2.2.2':
+    resolution: {integrity: sha512-fE+IBoxW7btQXbkPoVOQR9FGhIROnMcCSD1dj0JiPqe1+fYDq0IouZaO8+5zhwZ8kHLiTv19U/NwLdc9hpaMiw==}
+    engines: {node: '>=18.16.0'}
+    peerDependencies:
+      '@adonisjs/core': ^6.6.0
+      '@vinejs/vine': ^2.0.0 || ^3.0.0
+      edge.js: ^6.0.2
+    peerDependenciesMeta:
+      '@vinejs/vine':
+        optional: true
+      edge.js:
+        optional: true
 
   '@adonisjs/logger@6.0.6':
     resolution: {integrity: sha512-r5mLmmklSezzu3cu9QaXle2/gPNrgKpiIo+utYlwV3ITsW5JeIX/xcwwMTNM/9f1zU+SwOj5NccPTEFD3feRaw==}
@@ -899,6 +915,21 @@ packages:
 
   '@floating-ui/vue@1.1.9':
     resolution: {integrity: sha512-BfNqNW6KA83Nexspgb9DZuz578R7HT8MZw1CfK9I6Ah4QReNWEJsXWHN+SdmOVLNGmTPDi+fDT535Df5PzMLbQ==}
+
+  '@formatjs/ecma402-abstract@2.3.5':
+    resolution: {integrity: sha512-1HTESOq1IUa23g1lFZEGIXsfZKZOwWmB9RROwGn+xariiQnd++wwTMvlRAbZ8wtXRHFUamJPxsKcxpSzeCvFWQ==}
+
+  '@formatjs/fast-memoize@2.2.7':
+    resolution: {integrity: sha512-Yabmi9nSvyOMrlSeGGWDiH7rf3a7sIwplbvo/dlz9WCIjzIQAfy1RMf4S0X3yG724n5Ghu2GmEl5NJIV6O9sZQ==}
+
+  '@formatjs/icu-messageformat-parser@2.11.3':
+    resolution: {integrity: sha512-H/KfWSosaiDiOaW4nHe1Fn4Cgzm+oFQ8giTmB5RJzTBNSMmd+j2NVrvvZHAmlxJHcuOelzKBLjQ2EDcyH4NSWw==}
+
+  '@formatjs/icu-skeleton-parser@1.8.15':
+    resolution: {integrity: sha512-qNrKxWJmnWxin5U4A4Evy7C0rgRiNw3IqXu9OGuT31B8lDxBGl+OgT8kcq0ZVKK0gqA4l4SQB9x+SFAvLT5hcQ==}
+
+  '@formatjs/intl-localematcher@0.6.2':
+    resolution: {integrity: sha512-XOMO2Hupl0wdd172Y06h6kLpBz6Dv+J4okPLl4LPtzbr8f66WbIoy4ev98EBuZ6ZK4h5ydTN6XneT4QVpD7cdA==}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -1629,6 +1660,9 @@ packages:
 
   '@poppinss/hooks@7.2.6':
     resolution: {integrity: sha512-+bZhb1CrIvhgnypjE0W/NZVkRnRDZL37HDDI6zvIo8h3PVs1lKj5Dyl54V/EpU6SFSZAS5dilgZ0V7zhjyJMgA==}
+
+  '@poppinss/intl-formatter@3.0.5':
+    resolution: {integrity: sha512-JnpQ64lAYl5Q8C3asUklDVponYJCQTjOAouzH/OaP2vvisykLUxVqL8Lo+9Vr+Hb9RPPfZ/cwANEvHTL1rcEiw==}
 
   '@poppinss/macroable@1.1.0':
     resolution: {integrity: sha512-y/YKzZDuG8XrpXpM7Z1RdQpiIc0MAKyva24Ux1PB4aI7RiSI/79K8JVDcdyubriTm7vJ1LhFs8CrZpmPnx/8Pw==}
@@ -3455,6 +3489,9 @@ packages:
       supports-color:
         optional: true
 
+  decimal.js@10.6.0:
+    resolution: {integrity: sha512-YpgQiITW3JXGntzdUmyUR1V812Hn8T1YVXhCu+wO3OpS4eU9l4YdD3qjyiKdV6mvV29zapkMeD390UVEf2lkUg==}
+
   dedent@1.7.0:
     resolution: {integrity: sha512-HGFtf8yhuhGhqO07SV79tRp+br4MnbdjeVxotpn1QBl30pcLLCQjX5b2295ll0fv8RKDKsmWYrl05usHM9CewQ==}
     peerDependencies:
@@ -3922,6 +3959,9 @@ packages:
   fast-diff@1.3.0:
     resolution: {integrity: sha512-VxPP4NqbUjj6MaAOafWeUn2cXWLcCtljklUtZf0Ind4XQ+QPtmA0b18zZy0jIQx+ExRVCR/ZQpBmik5lXshNsw==}
 
+  fast-equals@3.0.3:
+    resolution: {integrity: sha512-NCe8qxnZFARSHGztGMZOO/PC1qa5MIFB5Hp66WdzbCRAz8U8US3bx1UTgLS49efBQPcUtO9gf5oVEY8o7y/7Kg==}
+
   fast-fifo@1.3.2:
     resolution: {integrity: sha512-/d9sfos4yxzpwkDkuN7k2SqFKtYNmCTzgfEpz82x34IM9/zc8KGxQoXg1liNC/izpRM/MBdt44Nmx41ZWqk+FQ==}
 
@@ -4325,6 +4365,9 @@ packages:
   interpret@2.2.0:
     resolution: {integrity: sha512-Ju0Bz/cEia55xDwUWEa8+olFpCiQoypjnQySseKtmjNrnps3P+xfpUmGr90T7yjlVJmOtybRvPXhKMbHr+fWnw==}
     engines: {node: '>= 0.10'}
+
+  intl-messageformat@10.7.17:
+    resolution: {integrity: sha512-0Ugaf65B2J76rb31drgNF1l6bGEDkbIiYc2Glx6jaZINHnwa5kDRGy8KXYuA+/8P4G0c9prAFhfVhQJJfzUuvQ==}
 
   ioredis@5.7.0:
     resolution: {integrity: sha512-NUcA93i1lukyXU+riqEyPtSEkyFq8tX90uL659J+qpCZ3rEdViB/APC58oAhIh3+bJln2hzdlZbBZsGNrlsR8g==}
@@ -4778,6 +4821,9 @@ packages:
     resolution: {integrity: sha512-iclAHeNqNm68zFtnZ0e+1L2yUIdvzNoauKU4WBA3VvH/vPFieF7qfRlwUZU+DA9P9bPXIS90ulxoUoCH23sV2w==}
     engines: {node: '>= 0.6'}
 
+  micro-memoize@4.2.0:
+    resolution: {integrity: sha512-dRxIsNh0XosO9sd3aASUabKOzG9dloLO41g74XUGThpHBoGm1ttakPT5in14CuW/EDedkniaShFHbymmmKGOQA==}
+
   micromatch@4.0.8:
     resolution: {integrity: sha512-PXwfBhYu0hBCPw8Dn0E+WDYb7af3dSLVWKi3HGv84IdF4TyFoC0ysxFd0Goxw7nSv4T/PzEJQxsYsEiFCKo2BA==}
     engines: {node: '>=8.6'}
@@ -4857,6 +4903,9 @@ packages:
   mocked-exports@0.1.1:
     resolution: {integrity: sha512-aF7yRQr/Q0O2/4pIXm6PZ5G+jAd7QS4Yu8m+WEeEHGnbo+7mE36CbLSDQiXYV8bVL3NfmdeqPJct0tUlnjVSnA==}
 
+  moize@6.1.6:
+    resolution: {integrity: sha512-vSKdIUO61iCmTqhdoIDrqyrtp87nWZUmBPniNjO0fX49wEYmyDO4lvlnFXiGcaH1JLE/s/9HbiK4LSHsbiUY6Q==}
+
   motion-dom@12.23.12:
     resolution: {integrity: sha512-RcR4fvMCTESQBD/uKQe49D5RUeDOokkGRmz4ceaJKDBgHYtZtntC/s2vLvY38gqGaytinij/yi3hMcWVcEF5Kw==}
 
@@ -4912,6 +4961,10 @@ packages:
 
   negotiator@0.6.3:
     resolution: {integrity: sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==}
+    engines: {node: '>= 0.6'}
+
+  negotiator@1.0.0:
+    resolution: {integrity: sha512-8Ofs/AUQh8MaEcrlq5xOX0CQ9ypTF5dl78mjlMNfOK08fzpgTHQRQPBxcPlEtIw0yRpws+Zo/3r+5WRby7u3Gg==}
     engines: {node: '>= 0.6'}
 
   nitropack@2.12.6:
@@ -6947,6 +7000,18 @@ snapshots:
       vary: 1.1.2
       youch: 3.3.4
 
+  '@adonisjs/i18n@2.2.2(@adonisjs/core@6.19.0(@adonisjs/assembler@7.8.2(babel-plugin-macros@3.1.0)(typescript@5.8.3))(@vinejs/vine@3.0.1))(@vinejs/vine@3.0.1)':
+    dependencies:
+      '@adonisjs/core': 6.19.0(@adonisjs/assembler@7.8.2(babel-plugin-macros@3.1.0)(typescript@5.8.3))(@vinejs/vine@3.0.1)
+      '@poppinss/intl-formatter': 3.0.5
+      '@poppinss/utils': 6.10.1
+      intl-messageformat: 10.7.17
+      luxon: 3.7.2
+      negotiator: 1.0.0
+      yaml: 2.8.1
+    optionalDependencies:
+      '@vinejs/vine': 3.0.1
+
   '@adonisjs/logger@6.0.6':
     dependencies:
       '@poppinss/utils': 6.10.1
@@ -7523,6 +7588,32 @@ snapshots:
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
+
+  '@formatjs/ecma402-abstract@2.3.5':
+    dependencies:
+      '@formatjs/fast-memoize': 2.2.7
+      '@formatjs/intl-localematcher': 0.6.2
+      decimal.js: 10.6.0
+      tslib: 2.8.1
+
+  '@formatjs/fast-memoize@2.2.7':
+    dependencies:
+      tslib: 2.8.1
+
+  '@formatjs/icu-messageformat-parser@2.11.3':
+    dependencies:
+      '@formatjs/ecma402-abstract': 2.3.5
+      '@formatjs/icu-skeleton-parser': 1.8.15
+      tslib: 2.8.1
+
+  '@formatjs/icu-skeleton-parser@1.8.15':
+    dependencies:
+      '@formatjs/ecma402-abstract': 2.3.5
+      tslib: 2.8.1
+
+  '@formatjs/intl-localematcher@0.6.2':
+    dependencies:
+      tslib: 2.8.1
 
   '@humanfs/core@0.19.1': {}
 
@@ -8508,6 +8599,10 @@ snapshots:
   '@poppinss/exception@1.2.2': {}
 
   '@poppinss/hooks@7.2.6': {}
+
+  '@poppinss/intl-formatter@3.0.5':
+    dependencies:
+      moize: 6.1.6
 
   '@poppinss/macroable@1.1.0': {}
 
@@ -10491,6 +10586,8 @@ snapshots:
     dependencies:
       ms: 2.1.3
 
+  decimal.js@10.6.0: {}
+
   dedent@1.7.0(babel-plugin-macros@3.1.0):
     optionalDependencies:
       babel-plugin-macros: 3.1.0
@@ -10976,6 +11073,8 @@ snapshots:
 
   fast-diff@1.3.0: {}
 
+  fast-equals@3.0.3: {}
+
   fast-fifo@1.3.2: {}
 
   fast-glob@3.3.3:
@@ -11368,6 +11467,13 @@ snapshots:
   internmap@2.0.3: {}
 
   interpret@2.2.0: {}
+
+  intl-messageformat@10.7.17:
+    dependencies:
+      '@formatjs/ecma402-abstract': 2.3.5
+      '@formatjs/fast-memoize': 2.2.7
+      '@formatjs/icu-messageformat-parser': 2.11.3
+      tslib: 2.8.1
 
   ioredis@5.7.0:
     dependencies:
@@ -11784,6 +11890,8 @@ snapshots:
 
   methods@1.1.2: {}
 
+  micro-memoize@4.2.0: {}
+
   micromatch@4.0.8:
     dependencies:
       braces: 3.0.3
@@ -11844,6 +11952,11 @@ snapshots:
 
   mocked-exports@0.1.1: {}
 
+  moize@6.1.6:
+    dependencies:
+      fast-equals: 3.0.3
+      micro-memoize: 4.2.0
+
   motion-dom@12.23.12:
     dependencies:
       motion-utils: 12.23.6
@@ -11885,6 +11998,8 @@ snapshots:
   natural-compare@1.4.0: {}
 
   negotiator@0.6.3: {}
+
+  negotiator@1.0.0: {}
 
   nitropack@2.12.6:
     dependencies:
