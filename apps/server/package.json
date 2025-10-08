@@ -59,6 +59,7 @@
     "@adonisjs/i18n": "^2.2.2",
     "@adonisjs/lucid": "^21.6.1",
     "@adonisjs/mail": "^9.2.2",
+    "@foadonis/openapi": "^0.4.1",
     "@jrmc/adonis-lucid-commands": "^1.0.0",
     "@vinejs/vine": "^3.0.1",
     "edge.js": "^6.3.0",

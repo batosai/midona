@@ -1,5 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import mail from '@adonisjs/mail/services/main'
+import { ApiOperation, ApiBody, ApiResponse, ApiSecurity, ApiHeader } from '@foadonis/openapi/decorators'
 import { DateTime } from 'luxon'
 
 import User from '#models/user'
@@ -7,8 +8,19 @@ import UserPolicy from '#policies/user_policy'
 import ForgotPasswordNotification from '#mails/forgot_password_notification'
 import { ForgotPasswordValidator, ResetPasswordValidator } from '#validators/password_validator'
 
+import { Login, LoginResponse, ForgotPassword, ResetPassword } from '../../resources/docs/api/interfaces/auth.js'
+
 export default class AuthController {
 
+  @ApiOperation({ summary: 'Login' })
+  @ApiBody({
+    type: Login
+  })
+  @ApiResponse({
+    status: 201,
+    description: 'The record has been successfully created.',
+    type: LoginResponse,
+  })
   async login({ request, response, auth, i18n }: HttpContext) {
     const { email, password } = request.only(['email', 'password'])
 
@@ -28,11 +40,28 @@ export default class AuthController {
     return await auth.use('api').createToken(user)
   }
 
+  @ApiOperation({ summary: 'Logout' })
+  @ApiSecurity('basic')
+  @ApiHeader({
+    name: 'Authorization',
+    description: 'Token Authorization received in the login',
+    required: true,
+  })
+  @ApiResponse({
+    status: 204
+  })
   async logout({ response, auth }: HttpContext) {
     await auth.use('api').invalidateToken()
     return response.noContent()
   }
 
+  @ApiOperation({ summary: 'Forgot Password' })
+  @ApiBody({
+    type: ForgotPassword
+  })
+  @ApiResponse({
+    status: 204
+  })
   async forgotPassword({ request, response }: HttpContext) {
     const payload = await request.validateUsing(ForgotPasswordValidator)
 
@@ -49,6 +78,21 @@ export default class AuthController {
     return response.noContent()
   }
 
+  @ApiOperation({ summary: 'Reset Password' })
+  @ApiSecurity('basic')
+  @ApiHeader({
+    name: 'Authorization',
+    description: 'Token Authorization received in the forgot password email',
+    required: true,
+  })
+  @ApiBody({
+    type: ResetPassword
+  })
+  @ApiResponse({
+    status: 201,
+    description: 'The record has been successfully created.',
+    type: LoginResponse,
+  })
   async resetPassword({ request, auth, bouncer }: HttpContext) {
     const { password } = await request.validateUsing(ResetPasswordValidator)
 
