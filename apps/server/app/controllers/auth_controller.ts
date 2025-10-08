@@ -8,7 +8,7 @@ import UserPolicy from '#policies/user_policy'
 import ForgotPasswordNotification from '#mails/forgot_password_notification'
 import { ForgotPasswordValidator, ResetPasswordValidator } from '#validators/password_validator'
 
-import { Login, LoginResponse, ForgotPassword, ResetPassword } from '../../resources/docs/api/interfaces/auth.js'
+import { Login, LoginResponse, ForgotPassword, ResetPassword } from '#openapi/schemas/auth'
 
 export default class AuthController {
 

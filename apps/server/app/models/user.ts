@@ -5,6 +5,7 @@ import { BaseModel, column, beforeCreate, scope, beforeSave, computed } from '@a
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
 import { AccessToken } from '@adonisjs/auth/access_tokens'
+import { ApiProperty } from '@foadonis/openapi/decorators'
 
 import Roles from '#enums/roles'
 import { UuidPrimaryKey } from '#models/mixins/uuid_primary_key'
@@ -20,21 +21,26 @@ export default class User extends compose(BaseModel, AuthFinder, UuidPrimaryKey,
   static accessTokens = DbAccessTokensProvider.forModel(User)
 
   @column()
+  @ApiProperty({ type: String, enum: Roles })
   declare role: Roles
 
   @column()
+  @ApiProperty()
   declare firstname: string
 
   @column()
+  @ApiProperty()
   declare lastname: string
 
   @column()
+  @ApiProperty()
   declare email: string
 
   @column({ serializeAs: null })
   declare password: string
 
   @column()
+  @ApiProperty()
   declare disabled: boolean
 
   // @attachment({
@@ -44,15 +50,19 @@ export default class User extends compose(BaseModel, AuthFinder, UuidPrimaryKey,
   // declare avatar: Attachment | null
 
   @column.dateTime({ autoCreate: false })
+  @ApiProperty({ type: DateTime })
   declare disabledOn: DateTime | null
 
   @column.dateTime({ autoCreate: false })
+  @ApiProperty({ type: DateTime })
   declare lastLoginAt: DateTime
 
   @column.dateTime({ autoCreate: false })
+  @ApiProperty({ type: DateTime })
   declare passwordChangedAt: DateTime
 
   @column.dateTime({ autoCreate: false })
+  @ApiProperty({ type: DateTime })
   declare discardedAt: DateTime
 
   // scopes
@@ -64,16 +74,19 @@ export default class User extends compose(BaseModel, AuthFinder, UuidPrimaryKey,
   // Computed
 
   @computed()
+  @ApiProperty({ type: Boolean })
   get isAdmin() {
     return this.role === Roles.ADMIN
   }
 
   @computed()
+  @ApiProperty({ type: Boolean })
   get isUser() {
     return this.role === Roles.USER
   }
 
   @computed()
+  @ApiProperty({ type: String })
   get fullname() {
     return `${this.firstname} ${this.lastname}`
   }

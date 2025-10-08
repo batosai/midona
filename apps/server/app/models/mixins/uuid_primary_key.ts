@@ -3,6 +3,7 @@ import type { NormalizeConstructor } from '@adonisjs/core/types/helpers'
 
 import crypto from 'node:crypto'
 import { column, beforeCreate } from '@adonisjs/lucid/orm'
+import { ApiProperty } from '@foadonis/openapi/decorators'
 
 export const UuidPrimaryKey = <Model extends NormalizeConstructor<typeof BaseModel>>(
   superclass: Model
@@ -11,6 +12,7 @@ export const UuidPrimaryKey = <Model extends NormalizeConstructor<typeof BaseMod
     static selfAssignPrimaryKey = true
 
     @column({ isPrimary: true })
+    @ApiProperty()
     declare id: string
 
     @beforeCreate()

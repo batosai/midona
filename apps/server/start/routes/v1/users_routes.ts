@@ -1,6 +1,8 @@
 import router from '@adonisjs/core/services/router'
 import { middleware } from '#start/kernel'
 
+const usersController = () => import('#controllers/users_controller')
+
 router.get('/', async () => {
   return {
     hello: 'world',
@@ -14,7 +16,7 @@ router
 
         router
         .group(() => {
-          router.get('users', () => {})
+          router.resource('users', usersController)
           router.get('users/me', () => {})
           router.get('users/:id/tokens', () => {})
         })

@@ -4,6 +4,11 @@ import { BasePolicy } from '@adonisjs/bouncer'
 import User from '#models/user'
 
 export default class UserPolicy extends BasePolicy {
+
+  manage(currentUser: User): AuthorizerResponse {
+    return currentUser.isAdmin
+  }
+
   resetPassword(currentUser: User, user: User): AuthorizerResponse {
 
     if (currentUser.isAdmin && currentUser.id !== user.id) {
