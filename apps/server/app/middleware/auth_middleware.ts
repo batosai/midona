@@ -24,7 +24,9 @@ export default class AuthMiddleware {
     // Force deconnexion if disabled account
     if (ctx.auth.user?.disabled) {
       for (let guard of options.guards || [ctx.auth.defaultGuard]) {
-        await ctx.auth.use(guard).logout()
+        if (guard === 'api') {
+          await ctx.auth.use(guard).invalidateToken()
+        }
       }
     }
 
