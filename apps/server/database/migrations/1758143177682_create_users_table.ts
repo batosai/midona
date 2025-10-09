@@ -20,7 +20,7 @@ export default class extends BaseSchema {
       table.timestamp('password_changed_at')
       table.timestamp('discarded_at')
       table.timestamp('created_at').notNullable()
-      table.timestamp('updated_at')
+      table.timestamp('updated_at').notNullable()
     })
   }
 

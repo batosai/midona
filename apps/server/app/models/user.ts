@@ -40,7 +40,7 @@ export default class User extends compose(BaseModel, AuthFinder, UuidPrimaryKey,
   declare password: string
 
   @column()
-  @ApiProperty()
+  @ApiProperty({ required: false })
   declare disabled: boolean
 
   // @attachment({
@@ -50,20 +50,20 @@ export default class User extends compose(BaseModel, AuthFinder, UuidPrimaryKey,
   // declare avatar: Attachment | null
 
   @column.dateTime({ autoCreate: false })
-  @ApiProperty({ type: DateTime })
+  @ApiProperty({ type: DateTime, nullable: true, required: false })
   declare disabledOn: DateTime | null
 
   @column.dateTime({ autoCreate: false })
-  @ApiProperty({ type: DateTime })
-  declare lastLoginAt: DateTime
+  @ApiProperty({ type: DateTime, nullable: true, required: false })
+  declare lastLoginAt: DateTime | null
 
   @column.dateTime({ autoCreate: false })
-  @ApiProperty({ type: DateTime })
-  declare passwordChangedAt: DateTime
+  @ApiProperty({ type: DateTime, nullable: true, required: false })
+  declare passwordChangedAt: DateTime | null
 
   @column.dateTime({ autoCreate: false })
-  @ApiProperty({ type: DateTime })
-  declare discardedAt: DateTime
+  @ApiProperty({ type: DateTime, nullable: true, required: false })
+  declare discardedAt: DateTime | null
 
   // scopes
 
