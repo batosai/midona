@@ -14,20 +14,16 @@ router
     router
       .group(() => {
 
-        router
-        .group(() => {
-          router.resource('users', usersController)
-          router.get('users/me', () => {})
-          router.get('users/:id/tokens', () => {})
-        })
-        .use(
-          middleware.auth()
-        )
+        router.resource('users', usersController).apiOnly().use('*', middleware.auth()).as('users')
+        router.get('users/me', () => {}).use(middleware.auth()).as('users.me')
+        router.get('users/:id/tokens', () => {}).use(middleware.auth()).as('users.tokens')
 
       })
       .prefix('v1')
+      .as('v1')
   })
   .prefix('api')
+  .as('api')
 
 
 

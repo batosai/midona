@@ -28,10 +28,14 @@ export default class UsersController {
   @ApiOperation({ summary: 'User' })
   @ApiParam({ name: 'id' })
   @ApiResponse({ type: UserResponse })
-  async show({ params, bouncer }: HttpContext) {
+  async show({ params, response, bouncer }: HttpContext) {
     await bouncer.with(UserPolicy).authorize('manage')
 
     const user = await User.find(params.id)
+
+    if (!user) {
+      return response.notFound()
+    }
 
     return { user }
   }
