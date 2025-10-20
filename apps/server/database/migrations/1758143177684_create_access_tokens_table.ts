@@ -14,13 +14,13 @@ export default class extends BaseSchema {
         .onDelete('CASCADE')
 
       table.string('type').notNullable()
-      table.string('name').nullable()
+      table.string('name')
       table.string('hash').notNullable()
       table.text('abilities').notNullable()
       table.timestamp('created_at').notNullable()
       table.timestamp('updated_at').notNullable()
-      table.timestamp('last_used_at').nullable()
-      table.timestamp('expires_at').nullable()
+      table.timestamp('last_used_at')
+      table.timestamp('expires_at')
     })
   }
 
