@@ -25,6 +25,9 @@ export default class Term extends compose(
   @column()
   declare parentId: string | null
 
+  @column()
+  declare userId: string
+
 
   // scopes
 
