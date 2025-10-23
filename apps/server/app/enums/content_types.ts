@@ -5,6 +5,7 @@ enum ContentTypes {
   AUDIO = 'audio',
   PHOTO = 'photo',
   BOOK = 'book',
+  VIDEO_GAME = 'video_game',
   POST = 'post',
 }
 
