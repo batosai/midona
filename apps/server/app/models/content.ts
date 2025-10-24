@@ -9,6 +9,7 @@ import User from '#models/user'
 import Category from '#models/category'
 import Tag from '#models/tag'
 import File from '#models/file'
+import ContentTypes from '#enums/content_types'
 
 export default class Content extends compose(
   BaseModel,
@@ -26,6 +27,15 @@ export default class Content extends compose(
 
   @column()
   declare extra: Record<string, any>
+
+  @column()
+  declare contentType: ContentTypes
+
+  @column()
+  declare userId: string
+
+  @column()
+  declare termId: string
 
   // Relationships
 

@@ -20,3 +20,4 @@ openapi.registerRoutes().use([
 import '#start/routes/v1/auth_routes'
 import '#start/routes/v1/users_routes'
 import '#start/routes/v1/terms_routes'
+import '#start/routes/v1/contents_routes'

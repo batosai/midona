@@ -14,5 +14,6 @@
 
 export const policies = {
   UserPolicy: () => import('#policies/user_policy'),
-  TermPolicy: () => import('#policies/term_policy')
+  TermPolicy: () => import('#policies/term_policy'),
+  ContentPolicy: () => import('#policies/content_policy')
 }
