@@ -1,14 +1,13 @@
 📊 Résultats finaux
 
 **Tests Users** : 22 tests ✅
-**Tests Terms** : 20 tests ✅  
-**Tests Contents** : 20 tests ✅
+**Tests Terms** : 24 tests ✅  
+**Tests Contents** : 29 tests ✅
 **Tests Auth** : 6 tests ✅
 **Tests Mail** : 2 tests ✅
 **Tests Validators** : 8 tests ✅
-**Tests existants** : 9 tests ✅
 
-**Total** : 87 tests au total (tous passent ✅)
+**Total** : 91 tests au total (tous passent ✅)
 
 🧪 Tests complets pour UsersController
 
@@ -108,11 +107,14 @@ Tests de base :
 ✅ Suppression : Suppression des contents
 
 Tests de validation :
-✅ Champs requis : Vérification des champs obligatoires
+✅ Champs requis : Vérification des champs obligatoires (title, slug, contentType, userId)
 ✅ Format du slug : Validation du format des slugs
 ✅ ContentType valide : Vérification des valeurs d'enum
 ✅ Unicité du slug : Prévention des doublons
 ✅ Données extra : Support des métadonnées personnalisées
+✅ userId obligatoire : Validation que userId est requis pour création et mise à jour
+✅ Format userId : Validation du format UUID pour userId
+✅ Absence de termId : Confirmation que termId n'est plus requis
 
 Tests de sécurité :
 ✅ Authentification : Accès sans authentification refusé
@@ -125,12 +127,20 @@ Tests de types de contenu :
 ✅ Gestion des slugs avec underscores : Conversion automatique en tirets
 ✅ Données extra complexes : Support des objets JSON imbriqués
 
+Tests de validation userId :
+✅ Création sans userId : Vérification que userId est obligatoire à la création
+✅ Création avec userId invalide : Validation du format UUID
+✅ Mise à jour sans userId : Vérification que userId est obligatoire à la mise à jour
+✅ Mise à jour avec userId invalide : Validation du format UUID
+✅ Champs manquants : Test complet des champs obligatoires incluant userId
+
 3. Couverture des cas d'usage
 Scénarios normaux : Création, lecture, mise à jour, suppression
 Scénarios d'erreur : Données invalides, ressources inexistantes
 Scénarios de sécurité : Accès non autorisé, isolation des données
 Scénarios admin : Gestion globale des contents
 Scénarios de contenu : Support de tous les types de médias
+Scénarios de validation : Tests complets des règles de validation userId
 
 🧪 Tests existants (Auth, Mail, Validators)
 
