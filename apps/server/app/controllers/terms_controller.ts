@@ -71,12 +71,8 @@ export default class TermsController {
   @ApiParam({ name: 'id' })
   @ApiBody({ type: () => TermValidator })
   @ApiResponse({ type: TermResponse })
-  async update({ params, response, request, bouncer }: HttpContext) {
-    const term = await Term.find(params.id)
-
-    if (!term) {
-      return response.notFound()
-    }
+  async update({ params, request, bouncer }: HttpContext) {
+    const term = await Term.findOrFail(params.id)
 
     await bouncer.with(TermPolicy).authorize('update', term)
 
@@ -93,11 +89,7 @@ export default class TermsController {
   @ApiParam({ name: 'id' })
   @ApiResponse({ status: 204 })
   async destroy({ params, response, bouncer }: HttpContext) {
-    const term = await Term.find(params.id)
-
-    if (!term) {
-      return response.notFound()
-    }
+    const term = await Term.findOrFail(params.id)
 
     await bouncer.with(TermPolicy).authorize('delete', term)
 
