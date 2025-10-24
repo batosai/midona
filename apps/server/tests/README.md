@@ -1,51 +1,53 @@
 📊 Résultats finaux
 
-38 tests au total (tous passent ✅)
-22 tests spécifiques aux utilisateurs
-16 tests existants (auth, mail, validators)
+**Tests Users** : 22 tests ✅
+**Tests Terms** : 20 tests ✅  
+**Tests Contents** : 20 tests ✅
+**Tests Auth** : 6 tests ✅
+**Tests Mail** : 2 tests ✅
+**Tests Validators** : 8 tests ✅
+**Tests existants** : 9 tests ✅
 
-🧪 Tests créés pour les utilisateurs
+**Total** : 87 tests au total (tous passent ✅)
 
-🔍 Tests de liste (GET /api/v1/users)
+🧪 Tests complets pour UsersController
 
-✅ Liste avec pagination par défaut
-✅ Liste avec pagination personnalisée
-✅ Vérification de l'authentification requise
-✅ Vérification du rôle admin requis
+1. Factory créée (/database/factories/user_factory.ts)
+Génération de données de test pour les utilisateurs
+Support des rôles et permissions
+Génération automatique de données valides
 
-👤 Tests d'affichage (GET /api/v1/users/:id)
+2. Tests fonctionnels (/tests/functional/user.spec.ts)
 
-✅ Affichage d'un utilisateur existant
-✅ Gestion des utilisateurs inexistants (404)
+Tests de base :
+✅ Liste paginée : Vérification de la pagination et des filtres
+✅ Affichage individuel : Récupération d'un utilisateur spécifique
+✅ Création : Création de nouveaux utilisateurs
+✅ Mise à jour : Modification des utilisateurs existants
+✅ Suppression : Suppression des utilisateurs
 
-➕ Tests de création (POST /api/v1/users)
+Tests de validation :
+✅ Champs requis : Vérification des champs obligatoires
+✅ Format de l'email : Validation du format des emails
+✅ Force du mot de passe : Validation des critères de sécurité
+✅ Rôles valides : Vérification des valeurs d'enum
 
-✅ Création d'un utilisateur valide
-✅ Validation de l'email invalide
-✅ Validation du mot de passe faible
-✅ Validation des champs requis manquants
-✅ Création d'utilisateur admin (par un admin)
-✅ Interdiction de créer un admin (par un non-admin)
+Tests de sécurité :
+✅ Authentification : Accès sans authentification refusé
+✅ Rôle admin requis : Seuls les admins peuvent gérer les utilisateurs
+✅ Protection des ressources : Impossible de se supprimer soi-même
+✅ Gestion des rôles : Création d'admins par des admins uniquement
 
-✏️ Tests de modification (PUT /api/v1/users/:id)
+Tests de fonctionnalités avancées :
+✅ Désactivation d'utilisateur : Gestion du statut actif/inactif
+✅ Modification de mot de passe : Processus sécurisé de changement
+✅ Gestion des rôles : Attribution et vérification des permissions
 
-✅ Modification des informations utilisateur
-✅ Modification du mot de passe
-✅ Gestion des utilisateurs inexistants (404)
-✅ Validation des données invalides
-
-🗑️ Tests de suppression (DELETE /api/v1/users/:id)
-
-✅ Suppression d'un utilisateur existant
-✅ Gestion des utilisateurs inexistants (404)
-✅ Interdiction de se supprimer soi-même
-✅ Vérification de l'authentification requise
-✅ Vérification du rôle admin requis
-
-🔧 Tests de fonctionnalités avancées
-
-✅ Désactivation d'un utilisateur
-✅ Gestion des rôles et permissions
+3. Couverture des cas d'usage
+Scénarios normaux : Création, lecture, mise à jour, suppression
+Scénarios d'erreur : Données invalides, ressources inexistantes
+Scénarios de sécurité : Accès non autorisé, gestion des rôles
+Scénarios admin : Gestion globale des utilisateurs
 
 
 🧪 Tests complets pour TermsController
@@ -80,8 +82,74 @@ Tests de sécurité :
 Tests de relations :
 ✅ Relations parent/enfant : Support des terms hiérarchiques
 ✅ Assignation utilisateur : Attribution automatique du userId
+
 3. Couverture des cas d'usage
 Scénarios normaux : Création, lecture, mise à jour, suppression
 Scénarios d'erreur : Données invalides, ressources inexistantes
 Scénarios de sécurité : Accès non autorisé, isolation des données
 Scénarios admin : Gestion globale des terms
+
+🧪 Tests complets pour ContentsController
+
+1. Factory créée (/database/factories/content_factory.ts)
+Génération de données de test pour les contents
+Support des relations avec les utilisateurs
+Génération automatique de slugs valides
+Support de tous les types de contenu
+
+2. Tests fonctionnels (/tests/functional/contents.spec.ts)
+
+Tests de base :
+✅ Liste paginée : Vérification de la pagination et des filtres
+✅ Filtrage par contentType : Test des filtres par type de contenu
+✅ Affichage individuel : Récupération d'un content spécifique
+✅ Création : Création de nouveaux contents
+✅ Mise à jour : Modification des contents existants
+✅ Suppression : Suppression des contents
+
+Tests de validation :
+✅ Champs requis : Vérification des champs obligatoires
+✅ Format du slug : Validation du format des slugs
+✅ ContentType valide : Vérification des valeurs d'enum
+✅ Unicité du slug : Prévention des doublons
+✅ Données extra : Support des métadonnées personnalisées
+
+Tests de sécurité :
+✅ Authentification : Accès sans authentification refusé
+✅ Isolation des données : Utilisateurs ne voient que leurs contents
+✅ Privilèges admin : Admins peuvent gérer tous les contents
+✅ Protection des ressources : Impossible d'accéder aux contents d'autres utilisateurs
+
+Tests de types de contenu :
+✅ Support de tous les types : note, bookmark, video, audio, photo, book, video_game, post
+✅ Gestion des slugs avec underscores : Conversion automatique en tirets
+✅ Données extra complexes : Support des objets JSON imbriqués
+
+3. Couverture des cas d'usage
+Scénarios normaux : Création, lecture, mise à jour, suppression
+Scénarios d'erreur : Données invalides, ressources inexistantes
+Scénarios de sécurité : Accès non autorisé, isolation des données
+Scénarios admin : Gestion globale des contents
+Scénarios de contenu : Support de tous les types de médias
+
+🧪 Tests existants (Auth, Mail, Validators)
+
+**Tests Auth** (/tests/functional/auth.spec.ts) :
+✅ Connexion utilisateur : Authentification avec credentials valides
+✅ Échec de connexion : Gestion des credentials invalides
+✅ Déconnexion : Logout utilisateur
+✅ Échec de déconnexion : Gestion des erreurs de logout
+✅ Mot de passe oublié : Envoi d'email de réinitialisation
+✅ Réinitialisation mot de passe : Processus complet de reset
+
+**Tests Mail** (/tests/functional/mail/forgot_password.spec.ts) :
+✅ Email inexistant : Gestion des adresses email non trouvées
+✅ Email existant : Envoi d'email de réinitialisation
+
+**Tests Validators** (/tests/unit/validator/) :
+✅ Règles de mot de passe : Validation des critères de sécurité
+✅ Un caractère minuscule minimum : Vérification de la présence
+✅ Un caractère numérique minimum : Vérification de la présence  
+✅ Un caractère spécial minimum : Vérification de la présence
+✅ Un caractère majuscule minimum : Vérification de la présence
+✅ Tests d'échec et de succès : Couverture complète des cas
