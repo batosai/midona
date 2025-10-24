@@ -2,6 +2,7 @@ import type { BelongsTo, ManyToMany, HasOne } from '@adonisjs/lucid/types/relati
 
 import { compose } from '@adonisjs/core/helpers'
 import { BaseModel, column, belongsTo, manyToMany, hasOne } from '@adonisjs/lucid/orm'
+import { ApiProperty } from '@foadonis/openapi/decorators'
 
 import { UuidPrimaryKey } from '#models/mixins/uuid_primary_key'
 import { whithTimestamps } from '#models/mixins/with_timestamps'
@@ -17,24 +18,31 @@ export default class Content extends compose(
   whithTimestamps
 ) {
   @column()
+  @ApiProperty()
   declare title: string
 
   @column()
+  @ApiProperty()
   declare slug: string
 
   @column()
+  @ApiProperty()
   declare text: string
 
   @column()
+  @ApiProperty({ type: 'object', nullable: true })
   declare extra: Record<string, any>
 
   @column()
+  @ApiProperty({ type: String, enum: ContentTypes })
   declare contentType: ContentTypes
 
   @column()
+  @ApiProperty()
   declare userId: string
 
   @column()
+  @ApiProperty()
   declare termId: string
 
   // Relationships

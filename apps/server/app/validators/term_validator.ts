@@ -16,7 +16,7 @@ export const TermValidator = vine.withMetaData<{ record?: Term }>().compile(
       .unique(async (db, value, field) => {
         const query = db.from('terms').where('slug', value)
 
-        if (field.meta.record) {
+        if (field.meta?.record) {
           query.whereNot('id', field.meta.record.id)
         }
 

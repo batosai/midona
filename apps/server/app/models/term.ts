@@ -2,6 +2,7 @@ import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 
 import { compose } from '@adonisjs/core/helpers'
 import { BaseModel, column, scope, belongsTo } from '@adonisjs/lucid/orm'
+import { ApiProperty } from '@foadonis/openapi/decorators'
 
 import { UuidPrimaryKey } from '#models/mixins/uuid_primary_key'
 import { whithTimestamps } from '#models/mixins/with_timestamps'
@@ -14,18 +15,23 @@ export default class Term extends compose(
   whithTimestamps
 ) {
   @column()
+  @ApiProperty()
   declare name: string
 
   @column()
+  @ApiProperty()
   declare slug: string
 
   @column()
+  @ApiProperty({ enum: Taxonomies })
   declare taxonomy: Taxonomies
 
   @column()
+  @ApiProperty({ type: String, nullable: true })
   declare parentId: string | null
 
   @column()
+  @ApiProperty()
   declare userId: string
 
 

@@ -16,7 +16,7 @@ export const ContentValidator = vine.withMetaData<{ record?: Content }>().compil
       .unique(async (db, value, field) => {
         const query = db.from('contents').where('slug', value)
 
-        if (field.meta?.record?.id) {
+        if (field.meta?.record) {
           query.whereNot('id', field.meta.record.id)
         }
 
@@ -25,5 +25,7 @@ export const ContentValidator = vine.withMetaData<{ record?: Content }>().compil
     text: vine.string().trim().optional(),
     contentType: vine.enum(Object.values(ContentTypes)),
     extra: vine.record(vine.any()).optional(),
+    userId: vine.string().uuid(),
+    termId: vine.string().uuid(),
   })
 )

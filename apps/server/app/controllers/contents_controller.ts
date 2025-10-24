@@ -50,7 +50,7 @@ export default class ContentsController {
   }
 
   @ApiOperation({ summary: 'Create new content' })
-  @ApiBody({ type: () => ContentValidator })
+  // @ApiBody({ type: () => ContentValidator })
   @ApiResponse({ type: ContentResponse })
   async store({ request, auth, bouncer }: HttpContext) {
     await bouncer.with(ContentPolicy).authorize('create')
@@ -69,7 +69,7 @@ export default class ContentsController {
 
   @ApiOperation({ summary: 'Update content' })
   @ApiParam({ name: 'id' })
-  @ApiBody({ type: () => ContentValidator })
+  // @ApiBody({ type: () => ContentValidator })
   @ApiResponse({ type: ContentResponse })
   async update({ params, request, bouncer }: HttpContext) {
     const content = await Content.findOrFail(params.id)
