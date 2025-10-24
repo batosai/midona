@@ -156,6 +156,7 @@ test.group('Contents', (group) => {
       slug: 'test-note',
       text: 'This is a test note content',
       contentType: ContentTypes.NOTE,
+      userId: user.id,
     }
 
     const response = await client
@@ -188,6 +189,7 @@ test.group('Contents', (group) => {
       slug: 'test-content',
       text: 'This is a test content',
       contentType: 'invalid-type',
+      userId: user.id,
     }
 
     const response = await client
@@ -218,6 +220,7 @@ test.group('Contents', (group) => {
       slug: 'Invalid Slug!', // Invalid format
       text: 'This is a test content',
       contentType: ContentTypes.NOTE,
+      userId: user.id,
     }
 
     const response = await client
@@ -254,6 +257,7 @@ test.group('Contents', (group) => {
       slug: 'duplicate-slug', // Same slug
       text: 'This is another content',
       contentType: ContentTypes.NOTE,
+      userId: user.id,
     }
 
     const response = await client
@@ -281,7 +285,7 @@ test.group('Contents', (group) => {
 
     const contentData = {
       title: 'Test Content',
-      // missing slug and type
+      // missing slug, contentType, and userId
     }
 
     const response = await client
@@ -299,6 +303,69 @@ test.group('Contents', (group) => {
         },
         {
           field: 'contentType',
+        },
+        {
+          field: 'userId',
+        }
+      ]
+    })
+  })
+
+  test('should not create content without userId', async ({ client, route }) => {
+    const user = await UserFactory.merge({
+      role: Roles.USER,
+      password: 'Secret2025!',
+    }).create()
+
+    const contentData = {
+      title: 'Test Content',
+      slug: 'test-content',
+      contentType: ContentTypes.NOTE,
+      // missing userId
+    }
+
+    const response = await client
+      .post(route('api.v1.contents.store'))
+      .withGuard('api')
+      .loginAs(user)
+      .json(contentData)
+      .redirects(0)
+
+    response.assertStatus(422)
+    response.assertBodyContains({
+      errors: [
+        {
+          field: 'userId',
+        }
+      ]
+    })
+  })
+
+  test('should not create content with invalid userId format', async ({ client, route }) => {
+    const user = await UserFactory.merge({
+      role: Roles.USER,
+      password: 'Secret2025!',
+    }).create()
+
+    const contentData = {
+      title: 'Test Content',
+      slug: 'test-content',
+      contentType: ContentTypes.NOTE,
+      userId: 'invalid-uuid', // Invalid UUID format
+    }
+
+    const response = await client
+      .post(route('api.v1.contents.store'))
+      .withGuard('api')
+      .loginAs(user)
+      .json(contentData)
+      .redirects(0)
+
+    response.assertStatus(422)
+    response.assertBodyContains({
+      errors: [
+        {
+          field: 'userId',
         }
       ]
     })
@@ -317,6 +384,7 @@ test.group('Contents', (group) => {
       slug: 'updated-content',
       text: 'Updated content text',
       contentType: ContentTypes.BOOKMARK,
+      userId: user.id,
     }
 
     const response = await client
@@ -349,6 +417,7 @@ test.group('Contents', (group) => {
       slug: 'updated-content',
       text: 'Updated content text',
       contentType: ContentTypes.BOOKMARK,
+      userId: user.id,
     }
 
     const response = await client
@@ -359,6 +428,72 @@ test.group('Contents', (group) => {
       .redirects(0)
 
     response.assertStatus(404)
+  })
+
+  test('should not update content without userId', async ({ client, route }) => {
+    const user = await UserFactory.merge({
+      role: Roles.USER,
+      password: 'Secret2025!',
+    }).create()
+
+    const content = await ContentFactory.merge({ userId: user.id }).create()
+
+    const updateData = {
+      title: 'Updated Content',
+      slug: 'updated-content',
+      text: 'Updated content text',
+      contentType: ContentTypes.BOOKMARK,
+      // missing userId
+    }
+
+    const response = await client
+      .put(route('api.v1.contents.update', { id: content.id }))
+      .withGuard('api')
+      .loginAs(user)
+      .json(updateData)
+      .redirects(0)
+
+    response.assertStatus(422)
+    response.assertBodyContains({
+      errors: [
+        {
+          field: 'userId',
+        }
+      ]
+    })
+  })
+
+  test('should not update content with invalid userId format', async ({ client, route }) => {
+    const user = await UserFactory.merge({
+      role: Roles.USER,
+      password: 'Secret2025!',
+    }).create()
+
+    const content = await ContentFactory.merge({ userId: user.id }).create()
+
+    const updateData = {
+      title: 'Updated Content',
+      slug: 'updated-content',
+      text: 'Updated content text',
+      contentType: ContentTypes.BOOKMARK,
+      userId: 'invalid-uuid', // Invalid UUID format
+    }
+
+    const response = await client
+      .put(route('api.v1.contents.update', { id: content.id }))
+      .withGuard('api')
+      .loginAs(user)
+      .json(updateData)
+      .redirects(0)
+
+    response.assertStatus(422)
+    response.assertBodyContains({
+      errors: [
+        {
+          field: 'userId',
+        }
+      ]
+    })
   })
 
   test('should not update content with invalid data', async ({ client, route }) => {
@@ -373,6 +508,7 @@ test.group('Contents', (group) => {
       title: 'A', // Too short
       slug: 'Invalid Slug!', // Invalid format
       contentType: 'invalid-type', // Invalid type
+      userId: user.id,
     }
 
     const response = await client
@@ -568,6 +704,7 @@ test.group('Contents', (group) => {
       slug: 'admin-updated-content',
       text: 'This content was updated by admin',
       contentType: ContentTypes.BOOKMARK,
+      userId: user.id,
     }
 
     // Admin can update user's content
@@ -624,6 +761,7 @@ test.group('Contents', (group) => {
       slug: 'bookmark-content',
       text: 'This is a bookmark',
       contentType: ContentTypes.BOOKMARK,
+      userId: user.id,
       extra: {
         url: 'https://example.com',
         tags: ['web', 'bookmark'],
@@ -677,6 +815,7 @@ test.group('Contents', (group) => {
         slug: `test-${type.replace(/_/g, '-')}`,
         text: `This is a ${type}`,
         contentType: type,
+        userId: user.id,
       }
 
       const response = await client
