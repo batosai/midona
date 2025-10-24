@@ -26,6 +26,5 @@ export const ContentValidator = vine.withMetaData<{ record?: Content }>().compil
     contentType: vine.enum(Object.values(ContentTypes)),
     extra: vine.record(vine.any()).optional(),
     userId: vine.string().uuid(),
-    termId: vine.string().uuid(),
   })
 )
