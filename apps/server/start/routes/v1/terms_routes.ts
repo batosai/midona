@@ -3,7 +3,15 @@ import { middleware } from '#start/kernel'
 import TermsController from '#controllers/terms_controller'
 
 router
-  .group(() => {
-    router.resource('/terms', TermsController).apiOnly().use('*', middleware.auth()).as('terms')
-  })
-  .prefix('/api/v1')
+.group(() => {
+  router
+    .group(() => {
+
+      router.resource('/terms', TermsController).apiOnly().use('*', middleware.auth()).as('terms')
+
+    })
+    .prefix('v1')
+    .as('v1')
+})
+.prefix('api')
+.as('api')

@@ -1,8 +1,8 @@
-import factory from '@adonisjs/lucid/factories'
+import Factory from '@adonisjs/lucid/factories'
 import User from '#models/user'
 import Roles from '#enums/roles'
 
-export const UserFactory = factory
+export const UserFactory = Factory
   .define(User, async ({ faker }) => {
     return {
       lastname: faker.person.lastName(),
