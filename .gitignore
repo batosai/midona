@@ -48,3 +48,5 @@ lerna-debug.log*
 .cache
 
 .turbo
+
+uploads

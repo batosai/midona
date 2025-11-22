@@ -25,7 +25,7 @@ export default defineConfig({
   | will be scanned automatically from the "./commands" directory.
   |
   */
-  commands: [() => import('@adonisjs/core/commands'), () => import('@adonisjs/lucid/commands'), () => import('@jrmc/adonis-lucid-commands/commands'), () => import('@adonisjs/mail/commands'), () => import('@adonisjs/bouncer/commands')],
+  commands: [() => import('@adonisjs/core/commands'), () => import('@adonisjs/lucid/commands'), () => import('@jrmc/adonis-lucid-commands/commands'), () => import('@adonisjs/mail/commands'), () => import('@adonisjs/bouncer/commands'), () => import('@jrmc/adonis-attachment/commands')],
 
   /*
   |--------------------------------------------------------------------------
@@ -51,7 +51,9 @@ export default defineConfig({
     () => import('@adonisjs/mail/mail_provider'),
     () => import('@adonisjs/bouncer/bouncer_provider'),
     () => import('@adonisjs/core/providers/edge_provider'),
-    () => import('@foadonis/openapi/openapi_provider')
+    () => import('@foadonis/openapi/openapi_provider'),
+    () => import('@jrmc/adonis-attachment/attachment_provider'),
+    () => import('@adonisjs/drive/drive_provider')
   ],
 
   /*
