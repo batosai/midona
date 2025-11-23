@@ -12,6 +12,8 @@ import FileController from '#controllers/file_controller'
       router.post('/contents/:content_id/files', [FileController, 'upload']).use(middleware.auth()).as('contents.files.upload')
       router.post('/contents/:content_id/files/base64', [FileController, 'uploadFromBase64']).use(middleware.auth()).as('contents.files.uploadFromBase64')
       router.post('/contents/:content_id/files/url', [FileController, 'uploadFromUrl']).use(middleware.auth()).as('contents.files.uploadFromUrl')
+      router.delete('/contents/:content_id/files/:id', [FileController, 'destroy']).use(middleware.auth()).as('contents.files.destroy')
+      router.get('/contents/:content_id/files', [FileController, 'index']).use(middleware.auth()).as('contents.files.index')
     })
     .prefix('v1')
     .as('v1')

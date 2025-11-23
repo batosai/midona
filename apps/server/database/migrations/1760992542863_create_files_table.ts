@@ -13,6 +13,7 @@ export default class extends BaseSchema {
       table.json('file_data').notNullable()
 
       table.uuid('content_id').references('contents.id').onDelete('CASCADE')
+      table.uuid('user_id').notNullable().references('users.id').onDelete('CASCADE')
 
       table.timestamp('created_at')
       table.timestamp('updated_at')

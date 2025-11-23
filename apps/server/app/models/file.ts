@@ -8,6 +8,7 @@ import { attachment } from '@jrmc/adonis-attachment'
 import { UuidPrimaryKey } from '#models/mixins/uuid_primary_key'
 import { whithTimestamps } from '#models/mixins/with_timestamps'
 import Content from '#models/content'
+import User from '#models/user'
 
 export default class File extends compose(
   BaseModel,
@@ -28,6 +29,12 @@ export default class File extends compose(
 
   @column()
   declare contentId: string
+
+  @column()
+  declare userId: string
+
+  @belongsTo(() => User)
+  declare user: BelongsTo<typeof User>
 
   @belongsTo(() => Content)
   declare content: BelongsTo<typeof Content>
