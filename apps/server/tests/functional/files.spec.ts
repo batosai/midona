@@ -134,7 +134,7 @@ test.group('Files', (group) => {
       .withGuard('api')
       .loginAs(user)
       .json({
-        base64: base64Content,
+        file_data: base64Content,
         name: 'test.txt',
       })
       .redirects(0)
@@ -166,7 +166,7 @@ test.group('Files', (group) => {
       .withGuard('api')
       .loginAs(user)
       .json({
-        base64: base64Content,
+        file_data: base64Content,
       })
       .redirects(0)
 
@@ -192,7 +192,7 @@ test.group('Files', (group) => {
     const response = await client
       .post(route('api.v1.contents.files.uploadFromBase64', { content_id: content.id }))
       .json({
-        base64: base64Content,
+        file_data: base64Content,
         name: 'test.txt',
       })
       .redirects(0)
@@ -215,7 +215,7 @@ test.group('Files', (group) => {
       .withGuard('api')
       .loginAs(user)
       .json({
-        base64: base64Content,
+        file_data: base64Content,
         name: 'test.txt',
       })
       .redirects(0)
@@ -256,7 +256,7 @@ test.group('Files', (group) => {
       .withGuard('api')
       .loginAs(user)
       .json({
-        base64: '',
+        file_data: '',
         name: 'test.txt',
       })
       .redirects(0)

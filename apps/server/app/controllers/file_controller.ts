@@ -1,4 +1,5 @@
 import type { HttpContext } from '@adonisjs/core/http'
+import { ApiOperation, ApiResponse, ApiQuery, ApiParam, ApiBody } from '@foadonis/openapi/decorators'
 
 import Content from '#models/content'
 import File from '#models/file'
@@ -7,8 +8,24 @@ import { FileBase64Validator, FileUrlValidator } from '#validators/file_validato
 import ContentPolicy from '#policies/content_policy'
 import { createError } from '@adonisjs/core/exceptions'
 
+import PaginatedResponse from '#openapi/schemas/paginated_response'
+import Response from '#openapi/schemas/file_response'
+import {
+  FileUploadRequest,
+  FileBase64UploadRequest,
+  FileUrlUploadRequest,
+} from '#openapi/schemas/file_request'
+
+class FilesPaginatedResponse extends PaginatedResponse(File) {}
+class FileResponse extends Response() {}
+
 export default class FileController {
 
+  @ApiOperation({ summary: 'List files for a content' })
+  @ApiParam({ name: 'content_id', description: 'Content ID' })
+  @ApiQuery({ name: 'page', description: 'default: 1' })
+  @ApiQuery({ name: 'limit', description: 'default: 25' })
+  @ApiResponse({ type: FilesPaginatedResponse })
   async index({ request, params, auth, bouncer }: HttpContext) {
     const content = await Content.findOrFail(params.content_id)
     await bouncer.with(ContentPolicy).authorize('view', content)
@@ -26,6 +43,10 @@ export default class FileController {
     return query.paginate(page, limit)
   }
 
+  @ApiOperation({ summary: 'Upload a file to a content' })
+  @ApiParam({ name: 'content_id', description: 'Content ID' })
+  @ApiBody({ type: FileUploadRequest })
+  @ApiResponse({ type: FileResponse })
   async upload({ request, params, auth, bouncer }: HttpContext) {
     await bouncer.with(ContentPolicy).authorize('create')
 
@@ -49,6 +70,10 @@ export default class FileController {
     return { file }
   }
 
+  @ApiOperation({ summary: 'Upload a file from base64 to a content' })
+  @ApiParam({ name: 'content_id', description: 'Content ID' })
+  @ApiBody({ type: FileBase64UploadRequest })
+  @ApiResponse({ type: FileResponse })
   async uploadFromBase64({ request, params, auth, bouncer }: HttpContext) {
     await bouncer.with(ContentPolicy).authorize('create')
 
@@ -57,7 +82,7 @@ export default class FileController {
 
     const payload = await request.validateUsing(FileBase64Validator)
 
-    file.file_data = await attachmentManager.createFromBase64(payload.base64, payload.name)
+    file.file_data = await attachmentManager.createFromBase64(payload.file_data, payload.name)
     file.userId = auth.user?.id!
     await file.related('content').associate(content)
     await file.save()
@@ -65,6 +90,10 @@ export default class FileController {
     return { file }
   }
 
+  @ApiOperation({ summary: 'Upload a file from URL to a content' })
+  @ApiParam({ name: 'content_id', description: 'Content ID' })
+  @ApiBody({ type: FileUrlUploadRequest })
+  @ApiResponse({ type: FileResponse })
   async uploadFromUrl({ request, params, auth, bouncer }: HttpContext) {
     await bouncer.with(ContentPolicy).authorize('create')
 
@@ -82,6 +111,10 @@ export default class FileController {
     return { file }
   }
 
+  @ApiOperation({ summary: 'Delete a file' })
+  @ApiParam({ name: 'content_id', description: 'Content ID' })
+  @ApiParam({ name: 'id', description: 'File ID' })
+  @ApiResponse({ status: 204 })
   async destroy({ response, params, bouncer }: HttpContext) {
     const content = await Content.findOrFail(params.content_id)
     await bouncer.with(ContentPolicy).authorize('delete', content)

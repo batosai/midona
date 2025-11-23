@@ -8,7 +8,7 @@ export const FileValidator = vine.compile(
 
 export const FileBase64Validator = vine.compile(
   vine.object({
-    base64: vine.string().trim(),
+    file_data: vine.string().trim(),
     name: vine.string().optional(),
   })
 )
